@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/gabung.html",
+      "destination": "/terlibat.html",
+      "permanent": true
+    },
+    {
+      "source": "/tulis-berita.html",
+      "destination": "/dashboard.html",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/artikel.html",
+      "destination": "/api/article-page"
+    },
+    {
+      "source": "/sitemap-news.xml",
+      "destination": "/api/news-sitemap"
+    }
+  ]
+}

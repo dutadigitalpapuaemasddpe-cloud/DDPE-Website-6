@@ -1,0 +1,1014 @@
+{
+  "index.html": {
+    "title": "Duta Digital Papua Emas",
+    "intro": "Ruang belajar, berkarya, dan berkolaborasi bagi pemuda melalui teknologi digital. Menghubungkan literasi dan inovasi yang berangkat dari kebutuhan masyarakat.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Belajar hari ini. Berkarya untuk masa depan.",
+        "text": "Dua pilar utama\n\nDua ruang tumbuh yang saling melengkapi: kecakapan digital dan keberanian mengembangkan gagasan.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Duta Literasi Digital Papua Emas",
+            "text": "DLDPE\n\nMembangun kecakapan untuk menggunakan teknologi secara kritis, aman, dan bertanggung jawab.\n\nMengenali informasi dan berpikir kritis\n\nMenjaga privasi dan keamanan digital\n\nMembangun etika serta budaya digital",
+            "image": "assets/logo-pilar1-literasi.jpg",
+            "alt": "Logo DLDPE",
+            "button": "Kenali Pilar Literasi →",
+            "href": "program-dldpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Duta Inovasi Digital Papua Emas",
+            "text": "DIDPE\n\nMengubah rasa ingin tahu menjadi gagasan dan karya yang relevan dengan kebutuhan masyarakat.\n\nMemahami persoalan dan kebutuhan lokal\n\nMengembangkan gagasan serta prototipe\n\nBerkolaborasi dan belajar dari masukan",
+            "image": "assets/logo-pilar2-inovasi.jpg",
+            "alt": "Logo DIDPE",
+            "button": "Kenali Pilar Inovasi →",
+            "href": "program-didpe.html"
+          }
+        ]
+      }
+    ]
+  },
+  "tentang.html": {
+    "title": "Mengenal Duta Digital Papua Emas",
+    "intro": "Duta Digital Papua Emas tumbuh dari Mimika, Papua Tengah, sebagai ruang kolaborasi pemuda.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Ruang tumbuh yang digerakkan pemuda.",
+        "text": "Berangkat dari Mimika\n\nDuta Digital Papua Emas adalah organisasi yang digerakkan pemuda untuk belajar, berkarya, dan berkolaborasi melalui teknologi digital.\n\nArah kerjanya berangkat dari pengalaman dan kebutuhan di Mimika, Papua Tengah. DDPE mengelola arah, sistem kerja, dan tata kelola organisasi melalui dua pilar serta keterlibatan relawan pada program tertentu.\n\nMemperkuat kemampuan pemuda agar dapat belajar, berkarya, dan berkontribusi secara bermakna.",
+        "image": "assets/tim-ddpe-1.jpg",
+        "alt": "Pertemuan pemuda dan pengurus DDPE di Mimika",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Dua fokus yang saling melengkapi.",
+        "text": "Organisasi induk & dua pilar\n\nLiterasi dan inovasi memiliki fokus yang berbeda, tetapi bergerak di bawah satu organisasi induk. Pembagian ini menjaga kejelasan peran sekaligus membuka kolaborasi antarpilar.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Duta Literasi Digital Papua Emas",
+            "text": "Ruang belajar untuk memahami informasi, menjaga keamanan dan privasi, serta menggunakan teknologi secara kritis dan bertanggung jawab.",
+            "image": "assets/logo-pilar1-literasi.jpg",
+            "alt": "Logo DLDPE",
+            "button": "Jelajahi DLDPE →",
+            "href": "program-dldpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Duta Inovasi Digital Papua Emas",
+            "text": "Ruang untuk mengembangkan gagasan, karya, dan pendekatan digital yang berangkat dari kebutuhan masyarakat.",
+            "image": "assets/logo-pilar2-inovasi.jpg",
+            "alt": "Logo DIDPE",
+            "button": "Jelajahi DIDPE →",
+            "href": "program-didpe.html"
+          }
+        ]
+      },
+      {
+        "id": "section-3",
+        "title": "Prinsip yang membentuk langkah kami.",
+        "text": "Nilai kerja\n\nProgram sebelum seremoni Kegiatan perlu memiliki tujuan, penerima manfaat, dan alasan yang jelas sebelum pelaksanaannya diumumkan.\n\nKegiatan perlu memiliki tujuan, penerima manfaat, dan alasan yang jelas sebelum pelaksanaannya diumumkan.\n\nKualitas dan pembelajaran sebelum jumlah Keberhasilan dilihat dari proses, manfaat, dan hal yang dapat diperbaiki, bukan hanya banyaknya peserta atau kegiatan.\n\nKeberhasilan dilihat dari proses, manfaat, dan hal yang dapat diperbaiki, bukan hanya banyaknya peserta atau kegiatan.\n\nIntegritas dan tanggung jawab Setiap kontribusi dilakukan secara jujur, menghormati pihak yang terlibat, dan dievaluasi dengan terbuka.\n\nSetiap kontribusi dilakukan secara jujur, menghormati pihak yang terlibat, dan dievaluasi dengan terbuka.\n\nFondasi sebelum perluasan Sistem kerja, pembagian peran, dan kesiapan program diperkuat agar pengembangan dapat dilakukan secara bertahap.\n\nSistem kerja, pembagian peran, dan kesiapan program diperkuat agar pengembangan dapat dilakukan secara bertahap.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-4",
+        "title": "Mulai dari Mimika, bertumbuh bertahap.",
+        "text": "Konteks & jangkauan\n\nFase awal DDPE berfokus di Mimika sebagai tempat organisasi bertumbuh dan membangun pengalaman. Perluasan mempertimbangkan kesiapan tim, kebutuhan setempat, dan keberlanjutan kegiatan.\n\nCita-cita menjangkau wilayah yang lebih luas merupakan arah pengembangan jangka panjang. Hal ini bukan klaim bahwa program telah berjalan di seluruh Papua atau Indonesia.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-5",
+        "title": "Arah dan tata kelola.",
+        "text": "Kenali lebih dekat",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Visi, misi, dan nilai",
+            "text": "Arah bersama\n\nKenali landasan pembelajaran dan kontribusi DDPE.",
+            "image": "",
+            "alt": "",
+            "button": "Visi, misi, dan nilai",
+            "href": "visi-misi.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Struktur dan kepengurusan",
+            "text": "Organisasi\n\nPahami hubungan organisasi induk, pilar, dan program.",
+            "image": "",
+            "alt": "",
+            "button": "Struktur dan kepengurusan",
+            "href": "struktur.html"
+          }
+        ]
+      }
+    ]
+  },
+  "struktur.html": {
+    "title": "Struktur Organisasi DDPE",
+    "intro": "Satu organisasi induk, dua pilar pembelajaran, dan keterlibatan relawan sesuai kebutuhan program.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Hubungan peran dalam DDPE",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Duta Digital Papua Emas",
+            "text": "Organisasi induk\n\nArah, tata kelola, dan koordinasi lintas pilar.",
+            "image": "",
+            "alt": "",
+            "button": "Duta Digital Papua Emas",
+            "href": "pengurus-induk.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Pengurus DLDPE",
+            "text": "Pilar 01\n\nPembelajaran literasi digital yang kritis dan bertanggung jawab.",
+            "image": "",
+            "alt": "",
+            "button": "Pengurus DLDPE",
+            "href": "pengurus-dldpe.html"
+          },
+          {
+            "id": "card-3",
+            "title": "Pengurus DIDPE",
+            "text": "Pilar 02\n\nPengembangan gagasan dan inovasi yang memperhatikan kebutuhan.",
+            "image": "",
+            "alt": "",
+            "button": "Pengurus DIDPE",
+            "href": "pengurus-didpe.html"
+          }
+        ]
+      },
+      {
+        "id": "section-2",
+        "title": "Keterlibatan pada program",
+        "text": "Relawan membantu kebutuhan kegiatan tertentu sesuai ruang lingkup dan waktu yang disepakati. Kontribusi ini bersifat terkait program atau angkatan, sehingga tidak sama dengan jabatan pengurus tetap. Susunan pada halaman ini menunjukkan hubungan fungsi. Nama pengurus, jabatan individual, serta masa kepengurusan ditampilkan pada halaman masing-masing setelah data publik dikonfirmasi.",
+        "image": "",
+        "alt": "",
+        "button": "Kenali DDPE Volunteer →",
+        "href": "program-volunteer.html",
+        "cards": []
+      }
+    ]
+  },
+  "program.html": {
+    "title": "Pilar dan Program DDPE",
+    "intro": "Dua pilar pembelajaran, didukung program pengabdian dan ruang kontribusi relawan.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Dua pilar utama",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Duta Literasi Digital Papua Emas",
+            "text": "Pilar 01\n\nMemahami informasi dan menggunakan teknologi secara aman, kritis, produktif, dan bertanggung jawab.",
+            "image": "assets/logo-pilar1-literasi.jpg",
+            "alt": "",
+            "button": "Duta Literasi Digital Papua Emas",
+            "href": "program-dldpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Duta Inovasi Digital Papua Emas",
+            "text": "Pilar 02\n\nMengembangkan gagasan, karya, dan pendekatan digital yang berangkat dari kebutuhan masyarakat.",
+            "image": "assets/logo-pilar2-inovasi.jpg",
+            "alt": "",
+            "button": "Duta Inovasi Digital Papua Emas",
+            "href": "program-didpe.html"
+          }
+        ]
+      },
+      {
+        "id": "section-2",
+        "title": "Program dan ruang kontribusi",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Asa Mimika Expedition",
+            "text": "Program pengabdian\n\nPengabdian dan kolaborasi pemuda dengan memperhatikan kebutuhan serta konteks lokal.",
+            "image": "assets/survei_lok_timsesVolunteer.png",
+            "alt": "",
+            "button": "Asa Mimika Expedition",
+            "href": "program-amex.html"
+          },
+          {
+            "id": "card-2",
+            "title": "DDPE Volunteer",
+            "text": "Per program dan angkatan\n\nKontribusi relawan dengan ruang lingkup dan waktu sesuai kebutuhan kegiatan.",
+            "image": "assets/ddpe-03-web.jpg",
+            "alt": "",
+            "button": "DDPE Volunteer",
+            "href": "program-volunteer.html"
+          }
+        ]
+      },
+      {
+        "id": "section-3",
+        "title": "Menemukan ruang yang sesuai",
+        "text": "Pilar dan program memiliki peran yang berbeda. DLDPE dan DIDPE merupakan ruang belajar dan kontribusi di bawah organisasi induk. AMEX merupakan program pengabdian, sedangkan Volunteer menjadi jalur keterlibatan pada kegiatan atau angkatan tertentu. Pilih halaman detail untuk memahami fokus, bentuk partisipasi, dan informasi yang tersedia. Keberadaan program pada katalog ini tidak menunjukkan bahwa pendaftarannya sedang dibuka.",
+        "image": "",
+        "alt": "",
+        "button": "Lihat jalur keterlibatan →",
+        "href": "terlibat.html",
+        "cards": []
+      }
+    ]
+  },
+  "kegiatan.html": {
+    "title": "Kegiatan DDPE",
+    "intro": "Kenali proses belajar dan kolaborasi melalui agenda, dokumentasi lapangan, dan publikasi organisasi.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Dua cara mengikuti kegiatan",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Agenda mendatang",
+            "text": "Akan datang\n\nLihat tanggal yang tercatat dan rincian yang perlu diperiksa sebelum hadir.",
+            "image": "",
+            "alt": "",
+            "button": "Agenda mendatang",
+            "href": "agenda.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Arsip kegiatan",
+            "text": "Dokumentasi\n\nTelusuri foto dan publikasi tanpa mencampurnya dengan pengumuman kegiatan mendatang.",
+            "image": "",
+            "alt": "",
+            "button": "Arsip kegiatan",
+            "href": "kegiatan-terlaksana.html"
+          }
+        ]
+      },
+      {
+        "id": "section-2",
+        "title": "Dari konteks menuju kegiatan",
+        "text": "Kegiatan DDPE menghubungkan ruang belajar dengan pengalaman langsung dan kolaborasi. Dokumentasi membantu memperlihatkan konteks tempat organisasi bekerja serta proses yang mendahului sebuah program. Survei, persiapan, dan pelaksanaan memiliki makna yang berbeda; karena itu, keterangan pada setiap publikasi perlu dibaca bersama fotonya. Informasi dampak hanya dapat disampaikan ketika dasar pencatatannya tersedia.",
+        "image": "assets/survei_lok_timsesVolunteer.png",
+        "alt": "Dokumentasi survei tim Volunteer",
+        "button": "Kenali arah AMEX →",
+        "href": "program-amex.html",
+        "cards": []
+      }
+    ]
+  },
+  "berita.html": {
+    "title": "Berita dan cerita dari Papua.",
+    "intro": "Liputan kegiatan, perkembangan program, dan pembelajaran digital DDPE.",
+    "sections": []
+  },
+  "terlibat.html": {
+    "title": "Temukan Ruang Kontribusi",
+    "intro": "Pelajari pilihan jalur terlebih dahulu, lalu periksa kesempatan yang tersedia pada halaman pendaftaran masing-masing.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Pilih tujuan keterlibatan",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Pendaftaran DLDPE",
+            "text": "Duta · Literasi\n\nUntuk minat belajar dan berbagi tentang informasi, keamanan, privasi, dan penggunaan teknologi.",
+            "image": "",
+            "alt": "",
+            "button": "Pendaftaran DLDPE",
+            "href": "pendaftaran-dldpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Pendaftaran DIDPE",
+            "text": "Duta · Inovasi\n\nUntuk minat mengamati kebutuhan, mengembangkan gagasan, dan belajar melalui karya.",
+            "image": "",
+            "alt": "",
+            "button": "Pendaftaran DIDPE",
+            "href": "pendaftaran-didpe.html"
+          },
+          {
+            "id": "card-3",
+            "title": "Pendaftaran Volunteer",
+            "text": "Per program\n\nUntuk kontribusi sesuai ruang lingkup dan waktu yang ditentukan pada suatu kegiatan.",
+            "image": "",
+            "alt": "",
+            "button": "Pendaftaran Volunteer",
+            "href": "pendaftaran-volunteer.html"
+          }
+        ]
+      },
+      {
+        "id": "section-2",
+        "title": "Informasi sebelum mendaftar",
+        "text": "Kesempatan keterlibatan mengikuti kebutuhan pilar, program, dan angkatan yang sedang disiapkan. Setiap pengumuman perlu menjelaskan ruang lingkup, persyaratan, jadwal, serta cara mendaftar.\n\nHalaman pendaftaran masing-masing jalur memeriksa status dari sistem dan menampilkan formulir untuk kesempatan yang tersedia. Status belum dapat diverifikasi tidak sama dengan pendaftaran dibuka atau ditutup. Baca rincian sebelum mengirimkan data dan simpan nomor referensi setelah server mengonfirmasi pengiriman.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Berkolaborasi sebagai organisasi",
+        "text": "Kemitraan menjadi jalur untuk membicarakan tujuan bersama dan bentuk dukungan. Sampaikan konteks organisasi, gagasan, serta kebutuhan yang ingin dibahas melalui formulir resmi. Tim DDPE akan meninjau minat tersebut sebelum menentukan langkah selanjutnya.",
+        "image": "",
+        "alt": "",
+        "button": "Ajukan minat kemitraan →",
+        "href": "kemitraan.html",
+        "cards": []
+      }
+    ]
+  },
+  "kemitraan.html": {
+    "title": "Mulai percakapan kerja sama.",
+    "intro": "Gunakan halaman ini untuk memperkenalkan organisasi Anda dan menjelaskan gagasan kolaborasi yang ingin dibahas bersama Duta Digital Papua Emas. Informasi tentang tujuan, kebutuhan, pihak yang akan terlibat, dan bentuk kontribusi yang diharapkan membantu tim memahami apakah gagasan tersebut sesuai untuk ditinjau lebih lanjut.",
+    "sections": []
+  },
+  "kontak.html": {
+    "title": "Hubungi tim DDPE.",
+    "intro": "Gunakan kanal yang paling sesuai dengan tujuan pesan Anda. Email resmi dapat digunakan untuk pertanyaan umum, halaman konsultasi untuk mengusulkan pembicaraan lebih terarah, dan formulir kemitraan untuk memperkenalkan gagasan kerja sama organisasi.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Email resmi",
+        "text": "Pertanyaan umum\n\nSampaikan pertanyaan mengenai organisasi atau informasi yang tersedia di situs melalui alamat email resmi berikut. Sertakan konteks secukupnya agar tim dapat memahami topik yang ingin ditanyakan.",
+        "image": "",
+        "alt": "",
+        "button": "dutadigitalpapuaemasddpe@gmail.com",
+        "href": "mailto:dutadigitalpapuaemasddpe@gmail.com",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Ingin membicarakan kebutuhan tertentu?",
+        "text": "Konsultasi dan koordinasi\n\nUntuk menjelaskan kebutuhan, tujuan pembicaraan, dan kemungkinan langkah lanjutan secara lebih terarah, kunjungi halaman konsultasi. Permintaan akan dibahas terlebih dahulu dan tidak otomatis menjadi jadwal atau persetujuan pendampingan.",
+        "image": "",
+        "alt": "",
+        "button": "Buka halaman konsultasi →",
+        "href": "konsultasi.html",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Ajukan gagasan kerja sama",
+        "text": "Kemitraan\n\nOrganisasi atau komunitas dapat menggunakan formulir kemitraan untuk menjelaskan tujuan dan bentuk kolaborasi yang ingin ditinjau. Pengiriman baru dikonfirmasi setelah informasi tersimpan di server, dan penyampaian minat bukan persetujuan kemitraan.",
+        "image": "",
+        "alt": "",
+        "button": "Formulir minat kemitraan →",
+        "href": "kemitraan.html",
+        "cards": []
+      }
+    ]
+  },
+  "konsultasi.html": {
+    "title": "Mulai percakapan yang berangkat dari kebutuhan.",
+    "intro": "DDPE membuka jalur komunikasi bagi sekolah, komunitas, organisasi, mitra, dan masyarakat yang ingin bertanya atau menjajaki pembicaraan seputar literasi digital, inovasi digital, pengembangan pemuda, program DDPE, maupun kemungkinan kerja sama.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Topik yang dapat disampaikan",
+        "text": "Ruang pembicaraan\n\nJelaskan hal yang sedang dihadapi atau ingin dikembangkan. Sebagai contoh, pembicaraan dapat mencakup kebutuhan literasi dan pemanfaatan teknologi digital yang aman, gagasan karya atau solusi digital, penguatan kegiatan kepemudaan, pemahaman mengenai pilar dan program DDPE, atau penjajakan kolaborasi dengan sekolah, komunitas, dan organisasi.\n\nTopik tersebut menjadi titik awal untuk memahami kebutuhan, bukan daftar layanan yang dijamin tersedia. Bentuk diskusi, pihak yang perlu dilibatkan, dan kemungkinan langkah berikutnya akan bergantung pada konteks serta kapasitas DDPE dan pihak terkait.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Informasi yang membantu tim memahami permintaan",
+        "text": "Sebelum menghubungi\n\nDalam email, ceritakan secara ringkas siapa yang menghubungi, latar belakang atau kebutuhan yang ingin dibicarakan, pihak yang akan terlibat, wilayah kegiatan, serta hasil atau bentuk pembicaraan yang diharapkan. Jika ada waktu tertentu yang menjadi pertimbangan, sampaikan sebagai usulan agar dapat dibahas bersama.\n\nTim DDPE akan meninjau isi pesan dan, apabila memungkinkan untuk ditindaklanjuti, membalas melalui email untuk meminta penjelasan tambahan atau membicarakan langkah selanjutnya. Waktu respons dan jadwal tidak dapat dipastikan sebelum ada komunikasi langsung. Mohon kirimkan informasi seperlunya dan hindari menyertakan kata sandi, nomor identitas, atau data pribadi sensitif.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Kirim permintaan melalui email",
+        "text": "Kanal resmi\n\nGunakan email resmi DDPE untuk menyampaikan pertanyaan atau mengusulkan percakapan. Cantumkan subjek yang jelas, misalnya “Permintaan Konsultasi DDPE”, agar maksud pesan mudah dikenali oleh tim.\n\nEmail akan dibuka melalui aplikasi surat elektronik pada perangkat Anda. Halaman ini tidak menyimpan atau mengirimkan formulir konsultasi.",
+        "image": "",
+        "alt": "",
+        "button": "Tulis email kepada DDPE →",
+        "href": "mailto:dutadigitalpapuaemasddpe@gmail.com?subject=Permintaan%20Konsultasi%20DDPE",
+        "cards": []
+      }
+    ]
+  },
+  "mitra.html": {
+    "title": "Mitra resmi DDPE",
+    "intro": "Mitra resmi DDPE adalah organisasi dan komunitas yang mendukung ekosistem pemuda, literasi, dan inovasi digital di Papua.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Ekosistem mitra DDPE",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Kolaborasi dimulai dari tujuan yang jelas",
+        "text": "Membangun percakapan bersama\n\nDDPE menghubungkan pembelajaran digital dengan ruang kontribusi pemuda. Organisasi dan komunitas yang ingin menjajaki kolaborasi dapat menyampaikan konteks, tujuan, dan bentuk dukungan yang ingin dibicarakan.\n\nPercakapan awal membantu kedua pihak memahami kesesuaian kebutuhan serta kapasitas sebelum menentukan langkah bersama. Daftar mitra pada halaman ini mengikuti informasi yang dipublikasikan DDPE; kehadiran nama organisasi tidak berarti seluruh program dilaksanakan bersama atau bahwa suatu bentuk dukungan berlaku untuk setiap kegiatan.",
+        "image": "",
+        "alt": "",
+        "button": "Sampaikan minat kemitraan →",
+        "href": "kemitraan.html",
+        "cards": []
+      }
+    ]
+  },
+  "privasi.html": {
+    "title": "Kebijakan privasi DDPE",
+    "intro": "Draf untuk ditinjau dan disetujui pengelola sebelum formulir dipublikasikan.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Data yang diminta",
+        "text": "Formulir pendaftaran meminta nama, email, nomor WhatsApp, kabupaten/kota dan provinsi domisili, usia, aktivitas, minat, motivasi, ketersediaan, serta keterampilan dan pengalaman opsional. Formulir kemitraan meminta nama organisasi, nama kontak, email, WhatsApp, jenis kolaborasi, dan pesan. Formulir awal tidak meminta KTP, NIK, rekening, alamat lengkap, atau dokumen identitas.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Tujuan, notifikasi, dan akses",
+        "text": "Data dipakai untuk memproses pendaftaran yang dipilih. Setelah pendaftaran tersimpan, notifikasi email kepada dutadigitalpapuaemasddpe@gmail.com berisi nomor referensi dan data dasar: nama, email, WhatsApp, kabupaten/kota, provinsi, usia, aktivitas, serta kesempatan yang dipilih. Jawaban minat, motivasi, ketersediaan, keterampilan, dan pengalaman tidak disertakan dalam email; informasi itu hanya tersedia bagi peninjau berwenang di dashboard.\n\nData pendaftar disimpan di Supabase dan hanya boleh dibaca petugas yang diberi izin sesuai tugas dan cakupannya. Data tidak ditampilkan di halaman publik dan tidak boleh disalin ke log publik.",
+        "image": "",
+        "alt": "",
+        "button": "dutadigitalpapuaemasddpe@gmail.com",
+        "href": "mailto:dutadigitalpapuaemasddpe@gmail.com",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Dasar dan masa penyimpanan",
+        "text": "Pengiriman formulir memerlukan persetujuan pemrosesan data. Jangka waktu penyimpanan dan prosedur penghapusan belum ditetapkan dalam proyek lokal ini dan harus ditentukan oleh pengelola sebelum formulir dibuka di produksi.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-4",
+        "title": "Permintaan terkait data",
+        "text": "Pengelola harus menetapkan alamat atau petugas yang dapat menerima permintaan akses, koreksi, dan penghapusan data sebelum dokumen ini disahkan. Kontak organisasi yang tersedia saat ini: dutadigitalpapuaemasddpe@gmail.com .",
+        "image": "",
+        "alt": "",
+        "button": "dutadigitalpapuaemasddpe@gmail.com",
+        "href": "mailto:dutadigitalpapuaemasddpe@gmail.com",
+        "cards": []
+      },
+      {
+        "id": "section-5",
+        "title": "Keamanan dan perubahan",
+        "text": "DDPE menerapkan pembatasan akses pada aplikasi dan database sesuai konfigurasi yang tersedia. Isi kebijakan ini perlu ditinjau berkala dan diperbarui saat alur atau penggunaan data berubah. Versi ini belum menjadi bukti persetujuan kebijakan oleh pengelola.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      }
+    ]
+  },
+  "agenda.html": {
+    "title": "Agenda Mendatang",
+    "intro": "Rujukan jadwal dan informasi persiapan kegiatan DDPE.",
+    "sections": [
+      {
+        "id": "section-2",
+        "title": "Persiapkan rencana dengan informasi yang tepat.",
+        "text": "Sebelum hadir\n\nPastikan Anda membaca rincian kegiatan, bukan hanya tanggal pada agenda. Jadwal tidak otomatis menyatakan kegiatan terbuka untuk umum atau menerima relawan.\n\nPeriksa ketentuan peserta Rujuk informasi pengelola mengenai keikutsertaan, kebutuhan persiapan, dan cara konfirmasi.\n\nRujuk informasi pengelola mengenai keikutsertaan, kebutuhan persiapan, dan cara konfirmasi.\n\nPastikan titik lokasi Nama wilayah belum menggantikan rincian lokasi kegiatan. Konfirmasikan sebelum merencanakan perjalanan.\n\nNama wilayah belum menggantikan rincian lokasi kegiatan. Konfirmasikan sebelum merencanakan perjalanan.\n\nIkuti pembaruan pengelola Periksa perubahan yang disahkan pengelola sebelum membuat komitmen perjalanan atau kehadiran.\n\nPeriksa perubahan yang disahkan pengelola sebelum membuat komitmen perjalanan atau kehadiran.\n\nTanyakan informasi yang belum tersedia Hubungi DDPE untuk pertanyaan umum tanpa mengirimkan data sensitif.\n\nHubungi DDPE untuk pertanyaan umum tanpa mengirimkan data sensitif.",
+        "image": "",
+        "alt": "",
+        "button": "Tanyakan informasi kegiatan →",
+        "href": "kontak.html",
+        "cards": []
+      }
+    ]
+  },
+  "media.html": {
+    "title": "Media & Dokumentasi DDPE",
+    "intro": "Telusuri dokumentasi organisasi, survei, dan cerita kegiatan melalui publikasi DDPE.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Dokumentasi yang tersedia",
+        "text": "",
+        "image": "assets/ddpe-03-web.jpg",
+        "alt": "Kebersamaan anggota DDPE",
+        "button": "",
+        "href": "assets/ddpe-03-web.jpg",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Membaca dokumentasi dengan konteks",
+        "text": "Foto-foto ini merupakan dokumentasi yang tersedia dalam arsip DDPE. Dokumentasi survei dan persiapan dibedakan dari pelaksanaan program secara keseluruhan. Tanggal, nama kegiatan, hasil, serta pihak yang terlibat perlu mengikuti artikel atau catatan resmi yang menyertai publikasi. Karena rincian seluruh album belum tersedia, halaman ini tidak menyusun urutan kejadian atau mengklaim jumlah peserta dan dampak. Buka berita terbit untuk membaca cerita kegiatan yang telah disampaikan melalui redaksi.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      }
+    ]
+  },
+  "kegiatan-terlaksana.html": {
+    "title": "Arsip Kegiatan dan Dokumentasi",
+    "intro": "Telusuri dokumentasi organisasi, survei, dan cerita kegiatan melalui publikasi DDPE.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Dokumentasi yang tersedia",
+        "text": "",
+        "image": "assets/ddpe-03-web.jpg",
+        "alt": "Kebersamaan anggota DDPE",
+        "button": "",
+        "href": "assets/ddpe-03-web.jpg",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Membaca dokumentasi dengan konteks",
+        "text": "Foto-foto ini merupakan dokumentasi yang tersedia dalam arsip DDPE. Dokumentasi survei dan persiapan dibedakan dari pelaksanaan program secara keseluruhan. Tanggal, nama kegiatan, hasil, serta pihak yang terlibat perlu mengikuti artikel atau catatan resmi yang menyertai publikasi. Karena rincian seluruh album belum tersedia, halaman ini tidak menyusun urutan kejadian atau mengklaim jumlah peserta dan dampak. Buka berita terbit untuk membaca cerita kegiatan yang telah disampaikan melalui redaksi.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      }
+    ]
+  },
+  "visi-misi.html": {
+    "title": "Visi, Misi, dan Nilai",
+    "intro": "Arah bersama untuk membangun kecakapan digital dan kontribusi pemuda Papua yang bertanggung jawab.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Visi dan misi DDPE",
+        "text": "Arah DDPE · 01\n\nTerwujudnya generasi muda Papua yang berdaya, cakap digital, dan berintegritas untuk berkontribusi bagi kemajuan masyarakat menuju Indonesia Emas 2045.\n\nArah DDPE · 02\n\nMencerdaskan dan memberdayakan sumber daya manusia muda, berangkat dari Papua, agar menggunakan teknologi digital secara bertanggung jawab dan produktif menuju Indonesia Emas 2045.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Nilai dalam bekerja",
+        "text": "Program sebelum seremoni: kegiatan perlu memiliki tujuan, penerima manfaat, dan alasan yang jelas sebelum pelaksanaannya diumumkan.\n\nKualitas dan pembelajaran sebelum jumlah: keberhasilan tidak hanya dilihat dari banyaknya peserta atau kegiatan, tetapi juga dari proses, manfaat, dan hal yang dapat diperbaiki.\n\nIntegritas dan tanggung jawab: setiap kontribusi perlu dilakukan secara jujur, menghormati pihak yang terlibat, dan dievaluasi dengan terbuka.\n\nMembangun fondasi sebelum memperluas jangkauan: sistem kerja, pembagian peran, dan kesiapan program perlu diperkuat agar pengembangan dapat dilakukan secara bertahap.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Menghubungkan kecakapan dengan kontribusi",
+        "text": "Arah DDPE menghubungkan kemampuan pemuda memahami teknologi dengan kesempatan untuk belajar, berkarya, dan berkontribusi. Literasi digital memberikan dasar untuk menilai informasi, menjaga privasi, dan mengambil keputusan secara bertanggung jawab.\n\nInovasi digital memperluas ruang itu melalui pengembangan gagasan yang mempertimbangkan kebutuhan masyarakat. Kedua fokus tersebut perlu berjalan dengan integritas serta pembelajaran yang berkelanjutan. Tujuan ini merupakan arah organisasi, bukan klaim hasil yang sudah dicapai atau ukuran dampak yang telah dihitung.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      }
+    ]
+  },
+  "program-dldpe.html": {
+    "title": "Duta Literasi Digital Papua Emas",
+    "intro": "Duta Literasi Digital Papua Emas (DLDPE) berfokus pada kemampuan generasi muda untuk memahami informasi dan menggunakan teknologi secara aman, kritis, produktif, serta bertanggung jawab.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Mengenal DLDPE",
+        "text": "Duta Literasi Digital Papua Emas (DLDPE) berfokus pada kemampuan generasi muda untuk memahami informasi dan menggunakan teknologi secara aman, kritis, produktif, serta bertanggung jawab. Literasi digital tidak berhenti pada keterampilan mengoperasikan perangkat; seseorang juga perlu menilai sumber informasi, memahami konteks, dan mempertimbangkan dampak tindakannya di ruang digital.\n\nRuang belajarnya mencakup pengenalan disinformasi, perlindungan privasi, keamanan akun, jejak digital, serta pemanfaatan teknologi dan kecerdasan artifisial dengan pertimbangan etika. Pengetahuan tersebut dapat menjadi bekal bagi Duta untuk berbagi pemahaman dan mendorong kebiasaan digital yang lebih sehat di lingkungan belajar maupun komunitas.\n\nMemeriksa informasi dan mengenali ciri konten yang menyesatkan sebelum membagikannya.\n\nMemahami cara menjaga data pribadi, keamanan akun, dan jejak digital.\n\nMemilih serta menggunakan teknologi dan kecerdasan artifisial secara kritis dan bertanggung jawab.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Literasi yang dekat dengan kehidupan sehari-hari",
+        "text": "Informasi digital hadir dalam percakapan, pembelajaran, pekerjaan, dan keputusan sehari-hari. Kemampuan mengaksesnya belum selalu diikuti kemampuan menilai apakah sebuah pesan dapat dipercaya.\n\nKarena itu, literasi digital perlu menghubungkan keterampilan teknis dengan kebiasaan memeriksa sumber, membaca konteks, serta mempertimbangkan akibat sebelum membagikan informasi. Dalam arah DLDPE, kecakapan ini menjadi bekal agar pemuda dapat menggunakan ruang digital secara lebih sadar dan membantu lingkungan di sekitarnya memahami pilihan yang mereka hadapi.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Tiga ruang pembelajaran",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Membaca dengan kritis",
+            "text": "01 · Informasi\n\nMenelusuri sumber asli, membedakan pendapat dan bukti, serta mengenali informasi yang kehilangan konteks.",
+            "image": "",
+            "alt": "",
+            "button": "Membaca dengan kritis",
+            "href": "pendaftaran-dldpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Menjaga diri dan orang lain",
+            "text": "02 · Keamanan\n\nMemahami privasi, keamanan akun, persetujuan membagikan data, dan konsekuensi jejak digital.",
+            "image": "",
+            "alt": "",
+            "button": "Menjaga diri dan orang lain",
+            "href": "pendaftaran-dldpe.html"
+          },
+          {
+            "id": "card-3",
+            "title": "Menggunakan teknologi secara bertanggung jawab",
+            "text": "03 · Pemanfaatan\n\nMenilai manfaat serta keterbatasan teknologi, termasuk kecerdasan artifisial, sebelum menggunakannya.",
+            "image": "",
+            "alt": "",
+            "button": "Menggunakan teknologi secara bertanggung jawab",
+            "href": "pendaftaran-dldpe.html"
+          }
+        ]
+      },
+      {
+        "id": "section-4",
+        "title": "Dari memahami menuju berbagi",
+        "text": "Kenali situasi Mulai dari pertanyaan yang ditemui dalam kehidupan digital: sumber informasi, keamanan akun, atau pemanfaatan alat belajar.\n\nMulai dari pertanyaan yang ditemui dalam kehidupan digital: sumber informasi, keamanan akun, atau pemanfaatan alat belajar.\n\nPeriksa dan diskusikan Bandingkan informasi, pertimbangkan konteks, dan diskusikan alasan di balik pilihan yang diambil.\n\nBandingkan informasi, pertimbangkan konteks, dan diskusikan alasan di balik pilihan yang diambil.\n\nTerapkan dan refleksikan Gunakan pengetahuan dalam kebiasaan sehari-hari, lalu bagikan pembelajaran sesuai kebutuhan lingkungan. Ini merupakan gambaran pendekatan, bukan jadwal pelatihan yang telah ditetapkan.\n\nGunakan pengetahuan dalam kebiasaan sehari-hari, lalu bagikan pembelajaran sesuai kebutuhan lingkungan. Ini merupakan gambaran pendekatan, bukan jadwal pelatihan yang telah ditetapkan.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-5",
+        "title": "Sasaran dan bentuk partisipasi",
+        "text": "DLDPE menjadi ruang kontribusi pemuda yang tertarik pada kecakapan digital dan pembelajaran bersama. Kontribusi tidak harus dimulai dari keahlian teknis tingkat lanjut; ketelitian membaca informasi, kemauan belajar, dan tanggung jawab dalam berkomunikasi merupakan bagian penting dari arah pilar.\n\nBentuk kegiatan serta ketentuan peserta mengikuti pengumuman resmi setiap rekrutmen. Halaman ini menjelaskan fokus pembelajaran, sehingga tidak menggantikan informasi usia, domisili, jadwal, atau komitmen yang ditetapkan pada kesempatan tertentu.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-6",
+        "title": "Jelajahi dokumentasi DDPE",
+        "text": "Dokumentasi organisasi tersedia pada arsip kegiatan. Foto yang belum memiliki atribusi pilar tidak dinyatakan sebagai kegiatan khusus DLDPE.",
+        "image": "",
+        "alt": "",
+        "button": "Buka dokumentasi kegiatan →",
+        "href": "kegiatan-terlaksana.html",
+        "cards": []
+      },
+      {
+        "id": "section-7",
+        "title": "Lanjutkan penelusuran",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Kepengurusan DLDPE",
+            "text": "Tata kelola\n\nKenali fungsi dan hubungan kerja pilar dengan organisasi induk.",
+            "image": "",
+            "alt": "",
+            "button": "Kepengurusan DLDPE",
+            "href": "pengurus-dldpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Pendaftaran DLDPE",
+            "text": "Keterlibatan\n\nBaca alur dan periksa kesempatan yang tersedia dari sistem rekrutmen.",
+            "image": "",
+            "alt": "",
+            "button": "Pendaftaran DLDPE",
+            "href": "pendaftaran-dldpe.html"
+          }
+        ]
+      }
+    ]
+  },
+  "program-didpe.html": {
+    "title": "Duta Inovasi Digital Papua Emas",
+    "intro": "Duta Inovasi Digital Papua Emas (DIDPE) mendorong pemuda mengembangkan gagasan, karya, prototipe, dan pendekatan digital yang berangkat dari kebutuhan masyarakat serta konteks Papua.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Mengenal DIDPE",
+        "text": "Duta Inovasi Digital Papua Emas (DIDPE) mendorong pemuda mengembangkan gagasan, karya, prototipe, dan pendekatan digital yang berangkat dari kebutuhan masyarakat serta konteks Papua. Teknologi dipandang sebagai salah satu pilihan untuk membantu menjawab persoalan, bukan tujuan yang harus digunakan pada setiap keadaan.\n\nProses inovasi dapat dimulai dengan mengamati situasi, mendengarkan pengalaman pihak yang menghadapi persoalan, merumuskan kebutuhan secara jelas, lalu menyusun dan mencoba gagasan yang sesuai dengan kemampuan serta sumber daya yang tersedia. Kolaborasi dan pembelajaran dari proses uji coba membantu peserta menilai apa yang bermanfaat, apa yang perlu diperbaiki, dan kapan sebuah solusi perlu disesuaikan.\n\nMengenali kebutuhan dan mengubahnya menjadi pertanyaan atau masalah yang dapat dipahami bersama.\n\nMengembangkan ide menjadi karya digital, prototipe, atau pendekatan sederhana untuk diuji.\n\nBekerja sama, menerima masukan, dan memperbaiki gagasan berdasarkan pembelajaran dari prosesnya.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Persoalan yang jelas mendahului pilihan teknologi",
+        "text": "Inovasi digital berangkat dari pemahaman tentang kebutuhan, bukan sekadar keinginan menggunakan perangkat baru. Sebuah gagasan perlu menjelaskan siapa yang menghadapi persoalan, bagaimana persoalan itu terjadi, dan keterbatasan apa yang perlu dipertimbangkan.\n\nArah DIDPE menempatkan konteks Papua sebagai bagian dari proses tersebut. Akses, kemampuan pengguna, sumber daya, serta keberlanjutan pemakaian menjadi pertimbangan ketika menilai apakah sebuah pendekatan digital layak dicoba. Hal ini memungkinkan proses belajar tetap relevan meskipun karya dimulai dalam bentuk yang sederhana.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Siklus pengembangan gagasan",
+        "text": "Amati kebutuhan Dengarkan pengalaman pihak yang menghadapi persoalan. Pisahkan kebutuhan pengguna dari asumsi tim.\n\nDengarkan pengalaman pihak yang menghadapi persoalan. Pisahkan kebutuhan pengguna dari asumsi tim.\n\nRumuskan gagasan Tentukan persoalan yang ingin dijawab dan manfaat yang diharapkan sebelum memilih alat atau platform.\n\nTentukan persoalan yang ingin dijawab dan manfaat yang diharapkan sebelum memilih alat atau platform.\n\nBuat dan uji Wujudkan gagasan sebagai karya atau prototipe sederhana. Gunakan masukan untuk memeriksa kegunaan dan keterbatasannya.\n\nWujudkan gagasan sebagai karya atau prototipe sederhana. Gunakan masukan untuk memeriksa kegunaan dan keterbatasannya.\n\nPerbaiki bersama Catat hasil pembelajaran dan sesuaikan pendekatan. Siklus ini menjelaskan arah belajar, bukan klaim adanya proyek yang telah selesai.\n\nCatat hasil pembelajaran dan sesuaikan pendekatan. Siklus ini menjelaskan arah belajar, bukan klaim adanya proyek yang telah selesai.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-4",
+        "title": "Ruang eksplorasi dan kolaborasi",
+        "text": "Gagasan, karya digital, dan prototipe menjadi bentuk eksplorasi yang sesuai dengan arah DIDPE. Ruang ini dapat mempertemukan pemahaman masalah, kemampuan menyusun informasi, keterampilan membuat karya, serta komunikasi untuk memperoleh masukan.\n\nPembagian kontribusi bergantung pada kebutuhan kegiatan dan kemampuan peserta. Tidak semua persoalan memerlukan aplikasi baru; penyederhanaan proses atau penyajian informasi yang lebih mudah dipahami juga dapat menjadi gagasan untuk dipelajari. Rincian proyek dan hasil karya akan ditautkan ketika dokumentasinya tersedia.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-5",
+        "title": "Sasaran dan bentuk partisipasi",
+        "text": "DIDPE ditujukan sebagai ruang belajar dan kontribusi pemuda yang tertarik mengembangkan gagasan dengan mempertimbangkan kebutuhan masyarakat. Minat pada teknologi dapat dipadukan dengan kemampuan mendengarkan, memahami konteks, menyusun informasi, dan bekerja bersama.\n\nPengembangan kapasitas berlangsung melalui proses belajar serta masukan yang relevan dengan kegiatan. Persyaratan peserta, pilihan peran, waktu, dan keluaran yang diharapkan harus dibaca pada pengumuman rekrutmen; uraian pilar ini tidak menyatakan bahwa suatu proyek atau angkatan sedang dibuka.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-6",
+        "title": "Jelajahi dokumentasi DDPE",
+        "text": "Dokumentasi organisasi tersedia pada arsip kegiatan. Foto yang belum memiliki atribusi pilar tidak dinyatakan sebagai kegiatan khusus DIDPE.",
+        "image": "",
+        "alt": "",
+        "button": "Buka dokumentasi kegiatan →",
+        "href": "kegiatan-terlaksana.html",
+        "cards": []
+      },
+      {
+        "id": "section-7",
+        "title": "Lanjutkan penelusuran",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Kepengurusan DIDPE",
+            "text": "Tata kelola\n\nKenali fungsi dan hubungan kerja pilar dengan organisasi induk.",
+            "image": "",
+            "alt": "",
+            "button": "Kepengurusan DIDPE",
+            "href": "pengurus-didpe.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Pendaftaran DIDPE",
+            "text": "Keterlibatan\n\nBaca alur dan periksa kesempatan yang tersedia dari sistem rekrutmen.",
+            "image": "",
+            "alt": "",
+            "button": "Pendaftaran DIDPE",
+            "href": "pendaftaran-didpe.html"
+          }
+        ]
+      }
+    ]
+  },
+  "program-amex.html": {
+    "title": "Asa Mimika Expedition",
+    "intro": "Program pengabdian dan kolaborasi pemuda di bawah Duta Digital Papua Emas, berangkat dari kebutuhan dan konteks masyarakat.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Pengabdian yang berangkat dari konteks",
+        "text": "Asa Mimika Expedition (AMEX) adalah program ekspedisi pengabdian dan kolaborasi pemuda yang dikelola oleh Duta Digital Papua Emas. AMEX bukan organisasi atau badan hukum yang berdiri sendiri, melainkan salah satu cara DDPE mengajak generasi muda belajar bersama, membangun kepedulian, dan mengambil bagian dalam kegiatan yang bermanfaat bagi masyarakat.\n\nGagasan AMEX berangkat dari keyakinan bahwa teknologi akan lebih bermakna ketika digunakan untuk menjawab kebutuhan nyata. Karena itu, pengabdian tidak dipahami hanya sebagai kunjungan atau kegiatan seremonial. Prosesnya perlu diawali dengan memahami konteks setempat, mendengarkan pihak yang akan terlibat, merancang kegiatan yang sesuai kemampuan tim, dan menutupnya dengan refleksi atas hal yang telah dipelajari serta dapat ditindaklanjuti.",
+        "image": "assets/nmp-dokumentasi-3-web.jpg",
+        "alt": "Asa Mimika Expedition — dokumentasi DDPE",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Tujuan dan arah kegiatan",
+        "text": "AMEX dapat menghubungkan semangat pengabdian dengan dua ruang belajar utama DDPE, yaitu literasi digital dan inovasi digital. Literasi digital mencakup kemampuan menggunakan teknologi secara kritis, aman, produktif, dan bertanggung jawab. Inovasi digital mendorong peserta untuk melihat persoalan, menyusun gagasan, bekerja sama, serta mengembangkan pendekatan atau karya yang relevan dengan kebutuhan yang telah dipahami.\n\nBentuk kegiatan tidak ditetapkan sebagai paket yang selalu sama. Materi, metode, mitra, dan hasil yang diharapkan perlu menyesuaikan kondisi masyarakat, tujuan pelaksanaan, ketersediaan sumber daya, serta kesepakatan dengan pihak yang berkolaborasi. Dengan cara ini, AMEX dapat berkembang tanpa kehilangan arah pengabdian dan penghormatan terhadap konteks lokal.\n\nBerangkat dari kebutuhan: gagasan kegiatan perlu memiliki alasan yang jelas dan tidak mengasumsikan kebutuhan masyarakat tanpa proses komunikasi.\n\nKolaboratif: pemuda, komunitas, lembaga, dan mitra dapat mengambil peran sesuai kapasitas serta kesepakatan bersama.\n\nBertanggung jawab: penggunaan teknologi, dokumentasi, komunikasi, dan pengelolaan kegiatan perlu memperhatikan etika, keselamatan, serta privasi pihak yang terlibat.\n\nBerorientasi pada pembelajaran: proses dan refleksi menjadi bagian penting, bukan hanya jumlah kegiatan atau publikasi yang dihasilkan.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-3",
+        "title": "Mimika dan dokumentasi persiapan",
+        "text": "Dokumentasi yang tersedia di proyek mencakup survei dan kebersamaan di Naena Muktipura. Materi ini memberi konteks tentang proses mengenali lapangan; foto survei tidak berarti seluruh rangkaian AMEX telah terlaksana. Sasaran dan rincian kegiatan perlu mengikuti hasil komunikasi serta kesepakatan dengan pihak setempat.\n\nAMEX dijadwalkan pada 14–15 November 2026. Rincian lokasi pelaksanaan, susunan acara, ketentuan peserta, dan kebutuhan relawan belum dipublikasikan lengkap pada halaman ini. Periksa pengumuman resmi atau hubungi tim sebelum menyusun rencana kehadiran.",
+        "image": "assets/survei_lok_timsesVolunteer.png",
+        "alt": "Dokumentasi survei tim Volunteer",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-4",
+        "title": "Memahami proses sebelum mengambil peran",
+        "text": "Pemahaman konteks Komunikasi dan survei membantu tim memahami kebutuhan serta sumber daya setempat.\n\nKomunikasi dan survei membantu tim memahami kebutuhan serta sumber daya setempat.\n\nPersiapan bersama Bentuk kegiatan, pembagian tanggung jawab, dan kebutuhan dukungan perlu disepakati sebelum pelaksanaan.\n\nBentuk kegiatan, pembagian tanggung jawab, dan kebutuhan dukungan perlu disepakati sebelum pelaksanaan.\n\nPelaksanaan dan refleksi Pelaksanaan mengikuti informasi resmi. Dokumentasi dan evaluasi diperlukan untuk menilai proses serta tindak lanjut; tahap ini bukan keterangan bahwa kegiatan telah selesai.\n\nPelaksanaan mengikuti informasi resmi. Dokumentasi dan evaluasi diperlukan untuk menilai proses serta tindak lanjut; tahap ini bukan keterangan bahwa kegiatan telah selesai.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-5",
+        "title": "Dari ruang persiapan",
+        "text": "",
+        "image": "assets/survei_lok_timsesVolunteer.png",
+        "alt": "Dokumentasi survei lokasi",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-6",
+        "title": "Kontribusi yang sesuai kebutuhan",
+        "text": "Keterlibatan dalam AMEX dapat dibicarakan melalui jalur relawan atau kemitraan, sesuai kebutuhan yang ditetapkan pengelola. Sebelum mengambil peran, pahami ruang lingkup kegiatan, waktu, tanggung jawab, dan dukungan yang tersedia. Penyampaian minat tidak otomatis menjadi penerimaan peserta atau persetujuan kerja sama. Status rekrutmen relawan umum DDPE juga tidak berarti rekrutmen AMEX sedang dibuka; pastikan judul dan rincian kesempatan secara khusus menyebut program yang ingin diikuti.",
+        "image": "",
+        "alt": "",
+        "button": "Periksa kesempatan relawan →",
+        "href": "pendaftaran-volunteer.html",
+        "cards": []
+      },
+      {
+        "id": "section-7",
+        "title": "Pertanyaan tentang AMEX",
+        "text": "Tidak. AMEX adalah program pengabdian dan kolaborasi di bawah DDPE.\n\nHalaman ini tidak mengumumkan pembukaan. Baca kesempatan relawan yang tersedia dan pastikan rincian pengumumannya menyebut AMEX.\n\nAMEX dijadwalkan pada 14–15 November 2026. Rincian acara, titik lokasi, dan ketentuan peserta perlu merujuk pengumuman resmi DDPE.\n\nGunakan formulir kemitraan untuk menjelaskan konteks, tujuan, dan bentuk dukungan yang ingin dibicarakan.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      }
+    ]
+  },
+  "program-volunteer.html": {
+    "title": "DDPE Volunteer",
+    "intro": "Temukan ruang kontribusi yang sesuai kemampuan, kebutuhan program, dan komitmen waktu Anda.",
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "Kontribusi pada program, dengan peran yang jelas",
+        "text": "DDPE Volunteer adalah jalur keterlibatan relawan untuk mendukung program atau angkatan tertentu. Berbeda dari keanggotaan pilar dan kepengurusan tetap, keterlibatan relawan mengikuti ruang lingkup kegiatan dan waktu yang disepakati.\n\nHal ini membantu calon peserta memahami apa yang akan dikerjakan, berapa lama komitmennya, dan kepada siapa koordinasi dilakukan. Informasi tersebut harus dibaca pada pengumuman yang relevan sebelum memutuskan untuk mendaftar. Halaman ini memberi gambaran jalur relawan; ketersediaan kesempatan diperiksa melalui sistem rekrutmen.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-2",
+        "title": "Menyesuaikan kemampuan dengan kebutuhan",
+        "text": "",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "title": "Mendukung kesiapan kegiatan",
+            "text": "Persiapan\n\nKebutuhan koordinasi dan persiapan mengikuti pembagian peran dalam pengumuman program.",
+            "image": "",
+            "alt": "",
+            "button": "Mendukung kesiapan kegiatan",
+            "href": "pendaftaran-volunteer.html"
+          },
+          {
+            "id": "card-2",
+            "title": "Belajar melalui kontribusi",
+            "text": "Pelaksanaan\n\nPahami lingkup tugas, komunikasi tim, dan ketentuan kegiatan sebelum berpartisipasi.",
+            "image": "",
+            "alt": "",
+            "button": "Belajar melalui kontribusi",
+            "href": "pendaftaran-volunteer.html"
+          },
+          {
+            "id": "card-3",
+            "title": "Mencatat pembelajaran",
+            "text": "Refleksi\n\nDokumentasi dan masukan perlu menghormati privasi serta mengikuti arahan pengelola.",
+            "image": "",
+            "alt": "",
+            "button": "Mencatat pembelajaran",
+            "href": "pendaftaran-volunteer.html"
+          }
+        ]
+      },
+      {
+        "id": "section-3",
+        "title": "Sebelum menjadi relawan",
+        "text": "Kenali program Baca tujuan, lokasi, waktu, dan kebutuhan peran. Jangan menyamakan kesempatan umum dengan pendaftaran AMEX.\n\nBaca tujuan, lokasi, waktu, dan kebutuhan peran. Jangan menyamakan kesempatan umum dengan pendaftaran AMEX.\n\nPeriksa kesempatan Pastikan rekrutmen tercantum di sistem dan baca persyaratan angkatannya.\n\nPastikan rekrutmen tercantum di sistem dan baca persyaratan angkatannya.\n\nIsi formulir resmi Gunakan tombol pendaftaran untuk kesempatan yang terbuka. Simpan nomor referensi setelah pengiriman berhasil.\n\nGunakan tombol pendaftaran untuk kesempatan yang terbuka. Simpan nomor referensi setelah pengiriman berhasil.\n\nIkuti informasi lanjutan Pengiriman formulir adalah penyampaian minat dan belum merupakan pengumuman diterima.\n\nPengiriman formulir adalah penyampaian minat dan belum merupakan pengumuman diterima.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-4",
+        "title": "Status pendaftaran",
+        "text": "Memeriksa status rekrutmen…",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      },
+      {
+        "id": "section-5",
+        "title": "Pertanyaan relawan",
+        "text": "Tidak. Jalur ini terkait kebutuhan program atau angkatan tertentu.\n\nKetentuan mengikuti rincian kesempatan. Jangan menganggap semua program memiliki persyaratan yang sama.\n\nCoba kembali ketika layanan dapat diakses, atau hubungi kontak DDPE untuk informasi umum. Jangan mengirim data pendaftaran melalui kanal pengganti.",
+        "image": "",
+        "alt": "",
+        "button": "",
+        "href": "",
+        "cards": []
+      }
+    ]
+  }
+}

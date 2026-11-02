@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /tulis-berita.html
+Disallow: /dashboard.html
+Disallow: /daftar.html
+Disallow: /api/
+Allow: /api/article-image
+
+Sitemap: https://www.ddpe.my.id/sitemap.xml
+Sitemap: https://www.ddpe.my.id/sitemap-news.xml

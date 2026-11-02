@@ -1,0 +1,1 @@
+{"name":"ddpe-portal","version":"7.0.0","private":true,"scripts":{"test":"node --test test/*.test.js"},"dependencies":{"parse5":"7.3.0"}}
