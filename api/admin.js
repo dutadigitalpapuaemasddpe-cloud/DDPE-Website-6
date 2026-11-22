@@ -11,6 +11,8 @@ const EDITABLE_SITE_PAGES = new Set([
   "mitra.html", "privasi.html", "agenda.html", "media.html", "kegiatan-terlaksana.html", "visi-misi.html", "program-dldpe.html", "program-didpe.html", "program-amex.html", "program-volunteer.html"
 ]);
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function plain(value, minimum, maximum) {
   if (typeof value !== "string") return null;
   const normalized = value.trim();
@@ -263,7 +265,8 @@ async function submitArticle(input, user, grants) {
 
 async function publishArticle(input, user, grants) {
   if (!hasPermission(grants, "publisher")) return { status: 403, body: { error: "forbidden" } };
-  if (typeof input.id !== "string" || input.id.length > 128) return { status: 400, body: { error: "invalid_article_id" } };
+  if (typeof input.id !== "string" || !UUID.test(input.id)) return { status: 400, body: { error: "invalid_article_id" } };
+  if (input.revision_id && (typeof input.revision_id !== "string" || !UUID.test(input.revision_id))) return { status: 400, body: { error: "invalid_revision_id" } };
   const result = await rpc("publish_ddpe_article", {
     p_article_id: input.id,
     p_revision_id: input.revision_id || null,
@@ -421,20 +424,24 @@ module.exports = async function admin(req, res) {
 
     return send(res, 400, { error: "unknown_action" });
   } catch (error) {
-    if (/cms_conflict/i.test(String(error.code || error.message))) return send(res,409,{error:"cms_conflict"});
+    const reason = [error.code, error.dbMessage, error.message].filter(Boolean).join(" ");
+    if (/cms_conflict/i.test(reason)) return send(res,409,{error:"cms_conflict"});
     if (error.code === "23505") return send(res,409,{error:"slug_already_exists"});
     if (error.message === "payload_too_large") return send(res,413,{error:"payload_too_large"});
     if (error.message === "server_not_configured") return send(res, 503, { error: "admin_service_not_configured" });
-    if (/quota_reached/i.test(String(error.code || error.message))) return send(res, 409, { error: "quota_reached" });
-    if (/last_access_manager/i.test(String(error.code || error.message))) return send(res, 409, { error: "last_access_manager" });
-    if (/age_requirement_unconfirmed/i.test(String(error.code || error.message))) return send(res, 409, { error: "age_requirement_unconfirmed" });
-    if (/guardian_flow_unavailable/i.test(String(error.code || error.message))) return send(res, 409, { error: "guardian_flow_unavailable" });
-    if (/revision_not_submitted/i.test(String(error.code || error.message))) return send(res, 409, { error: "revision_not_submitted" });
-    if (/article_not_submitted/i.test(String(error.code || error.message))) return send(res, 409, { error: "article_not_submitted" });
-    if (/article_not_found/i.test(String(error.code || error.message))) return send(res, 404, { error: "article_not_found" });
-    if (/decision_final/i.test(String(error.code || error.message))) return send(res, 409, { error: "decision_final" });
-    if (/partnership_not_found/i.test(String(error.code || error.message))) return send(res, 404, { error: "partnership_not_found" });
-    if (/not_found_or_forbidden/i.test(String(error.code || error.message))) return send(res, 404, { error: "application_not_found" });
+    if (/quota_reached/i.test(reason)) return send(res, 409, { error: "quota_reached" });
+    if (/last_access_manager/i.test(reason)) return send(res, 409, { error: "last_access_manager" });
+    if (/age_requirement_unconfirmed/i.test(reason)) return send(res, 409, { error: "age_requirement_unconfirmed" });
+    if (/guardian_flow_unavailable/i.test(reason)) return send(res, 409, { error: "guardian_flow_unavailable" });
+    if (/revision_not_submitted/i.test(reason)) return send(res, 409, { error: "revision_not_submitted" });
+    if (/article_not_submitted/i.test(reason)) return send(res, 409, { error: "article_not_submitted" });
+    if (/article_not_found/i.test(reason)) return send(res, 404, { error: "article_not_found" });
+    if (/decision_final/i.test(reason)) return send(res, 409, { error: "decision_final" });
+    if (/partnership_not_found/i.test(reason)) return send(res, 404, { error: "partnership_not_found" });
+    if (/not_found_or_forbidden/i.test(reason)) return send(res, 404, { error: "application_not_found" });
+    if (/publisher_required/i.test(reason)) return send(res, 403, { error: "forbidden" });
+    // Log only the database status/code (no payload or secrets) so failures are traceable in Vercel logs.
+    console.error("admin_request_failed", JSON.stringify({ status: error.status || null, code: error.code || error.message || null }));
     return send(res, 503, { error: "admin_request_failed" });
   }
 };

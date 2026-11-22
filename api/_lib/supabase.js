@@ -70,6 +70,8 @@ async function rest(path, options) {
     const error = new Error("database_request_failed");
     error.status = response.status;
     error.code = result && (result.code || result.message);
+    // RPC exceptions arrive as code P0001 with the reason in message (e.g. article_not_submitted).
+    error.dbMessage = result && typeof result.message === "string" ? result.message : "";
     throw error;
   }
   return result;
