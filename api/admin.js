@@ -300,7 +300,9 @@ module.exports = async function admin(req, res) {
       }
       if(req.query && req.query.view === "comments") {
         if(!hasPermission(grants,"publisher"))return send(res,403,{error:"forbidden"});
-        return send(res,200,{comments:await rest("cms_comments?select=id,article_id,name,body,status,created_at&order=created_at.desc&limit=100")});
+        // Public article pages write to article_comments (js/article-engagement.js), so moderate that table.
+        const rows=await rest("article_comments?select=id,article_id,user_name,comment_text,status,created_at&order=created_at.desc&limit=100");
+        return send(res,200,{comments:rows.map(r=>({id:r.id,article_id:r.article_id,name:r.user_name,body:r.comment_text,status:r.status,created_at:r.created_at}))});
       }
       if (req.query && req.query.view === "articles") return await getArticles(grants, res);
       if (req.query && req.query.view === "site_content") return await getSiteContent(grants, res);
@@ -351,7 +353,8 @@ module.exports = async function admin(req, res) {
       else if(input.action === "moderate_comment") {
         if(!hasPermission(grants,"publisher"))return send(res,403,{error:"forbidden"});
         if(!["approved","rejected"].includes(input.status) || !/^[0-9a-f-]{36}$/.test(input.id || ""))return send(res,400,{error:"invalid_comment"});
-        await rest("cms_comments?id=eq."+encodeURIComponent(input.id),{method:"PATCH",body:{status:input.status}});
+        const moderated=await rest("article_comments?id=eq."+encodeURIComponent(input.id),{method:"PATCH",body:{status:input.status}});
+        if(!moderated || !moderated.length)return send(res,404,{error:"comment_not_found"});
         await audit(user.id,"comment_moderated","comment",input.id,{status:input.status});
         result={status:200,body:{saved:true}};
       }

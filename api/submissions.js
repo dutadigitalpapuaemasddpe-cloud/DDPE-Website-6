@@ -105,7 +105,7 @@ module.exports = async function submissions(req, res) {
       return send(res, 400, { error: "invalid_submission" });
     }
   } catch (error) {
-    const message = String(error.code || error.message || "");
+    const message = [error.code, error.dbMessage, error.message].filter(Boolean).join(" ");
     if (/rate_limited/i.test(message)) return send(res, 429, { error: "too_many_attempts" }, { "Retry-After": "60" });
     if (/recruitment_closed/i.test(message)) return send(res, 409, { error: "recruitment_closed" });
     if (/age_requirement_unconfirmed/i.test(message)) return send(res, 409, { error: "age_requirement_unconfirmed" });

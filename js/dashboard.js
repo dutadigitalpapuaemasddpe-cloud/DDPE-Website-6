@@ -339,7 +339,7 @@
       if (recruitment) details.appendChild(node("p", recruitment.title));
       details.appendChild(node("p", row.regency + ", " + row.province + " · " + row.activity + " · usia " + row.age + " · " + row.status));
       details.appendChild(node("p", row.email + " · " + row.whatsapp));
-      var notificationStatus = { not_sent: "Belum terkirim / email belum dikonfigurasi", prepared: "Status pengiriman perlu diperiksa", sent: "Notifikasi email terkirim" }[row.notification_status] || "Status email tidak diketahui";
+      var notificationStatus = { not_sent: "Belum terkirim / email belum dikonfigurasi", not_configured: "Belum terkirim / email belum dikonfigurasi", prepared: "Status pengiriman perlu diperiksa", queued: "Status pengiriman perlu diperiksa", failed: "Notifikasi email gagal terkirim", sent: "Notifikasi email terkirim" }[row.notification_status] || "Status email tidak diketahui";
       details.appendChild(node("p", notificationStatus));
       details.appendChild(node("p", "Minat: " + row.interests));
       details.appendChild(node("p", "Motivasi: " + row.motivation));
@@ -400,7 +400,7 @@
       details.appendChild(note);
       var actions = node("div", null, "site-admin-actions");
       ["reviewing", "closed"].forEach(function (status) {
-        if (row.status === "closed") return;
+        if (row.status === "closed" || row.status === "archived") return;
         var button = node("button", status === "reviewing" ? "Tandai ditinjau" : "Tutup", status === "closed" ? "site-button site-button-outline" : "site-button site-button-primary");
         button.type = "button";
         button.addEventListener("click", async function () {
