@@ -1,0 +1,281 @@
+/* Ruang Pengurus — "Tinta & Emas". Seluruh aturan dibatasi pada body.dashboard-body
+   agar situs publik tidak terpengaruh. Dimuat setelah site.css dan cms.css. */
+
+.dashboard-body {
+  --d-paper: #faf8f4;
+  --d-white: #ffffff;
+  --d-ink: #16203a;
+  --d-ink-2: #1f2b4a;
+  --d-muted: #5b6577;
+  --d-line: #dcd6ca;
+  --d-purple: #3a2a6b;
+  --d-gold: #b8892d;
+  --d-gold-light: #dcb457;
+  --d-gold-text: #8a6414;
+  --d-error: #8e2f29;
+  --d-success: #235b47;
+  --d-head: 64px;
+  --d-side: 240px;
+  --d-serif: "Lora", Georgia, "Times New Roman", serif;
+  --d-sans: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  background: var(--d-paper);
+  color: var(--d-ink);
+  font-family: var(--d-sans);
+}
+
+.dashboard-body [hidden] { display: none !important; }
+
+/* ---------- Header tipis ---------- */
+.dashboard-body .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--d-head);
+  background: var(--d-white);
+  border-bottom: 1px solid var(--d-line);
+}
+.dashboard-body .site-nav-wrap {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  width: calc(100% - 48px);
+}
+.dashboard-body .site-brand img { width: 40px; height: 40px; }
+.dashboard-body .site-brand strong { color: var(--d-ink); font-family: var(--d-serif); font-size: 16px; }
+.dashboard-body .site-brand small { color: var(--d-muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.dashboard-body .site-header .site-text-link { color: var(--d-ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--d-gold); }
+.dashboard-body .site-header .site-text-link:hover { color: var(--d-purple); }
+
+/* ---------- Kerangka ---------- */
+.dashboard-body .site-dashboard { width: 100%; max-width: none; padding: 0; margin: 0; }
+.dash-app {
+  display: grid;
+  grid-template-columns: var(--d-side) minmax(0, 1fr);
+  min-height: calc(100vh - var(--d-head));
+}
+.dash-main { min-width: 0; padding: 40px 48px 80px; }
+.dash-main > * { max-width: 1160px; }
+
+/* ---------- Sidebar ---------- */
+.dash-sidebar {
+  position: sticky;
+  top: var(--d-head);
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--d-head));
+  overflow-y: auto;
+  background: var(--d-ink);
+  color: #dfe2ec;
+}
+.dash-nav { flex: 1; padding: 28px 0 16px; }
+.dash-group { margin-bottom: 28px; }
+.dash-group:not(:has(button:not([hidden]))) { display: none; }
+.dash-group-label {
+  margin: 0 0 8px;
+  padding: 0 24px;
+  color: var(--d-gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.dashboard-body .site-dashboard .dash-nav button {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 24px 10px 21px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #dfe2ec;
+  font: 500 15px/1.35 var(--d-sans);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.dashboard-body .site-dashboard .dash-nav button:hover { background: rgb(255 255 255 / 7%); color: #fff; }
+.dashboard-body .site-dashboard .dash-nav button.is-active {
+  background: rgb(255 255 255 / 10%);
+  border-left-color: var(--d-gold-light);
+  color: #fff;
+  font-weight: 700;
+}
+.dashboard-body .site-dashboard .dash-nav button:focus-visible,
+.dashboard-body .site-dashboard .dash-account button:focus-visible { outline: 2px solid var(--d-gold-light); outline-offset: -2px; }
+
+.dash-account { padding: 18px 24px 24px; border-top: 1px solid rgb(255 255 255 / 14%); }
+.dash-account p { margin: 0; }
+.dash-account-label { color: #aab1c6; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+#account-email { margin: 4px 0 14px; color: #fff; font-size: 13px; overflow-wrap: anywhere; }
+.dashboard-body .site-dashboard .dash-account button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgb(255 255 255 / 40%);
+  border-radius: 2px;
+  background: transparent;
+  color: #fff;
+  font: 600 14px var(--d-sans);
+  cursor: pointer;
+}
+.dashboard-body .site-dashboard .dash-account button:hover { border-color: var(--d-gold-light); color: var(--d-gold-light); }
+
+.dash-scrim { display: none; }
+.dash-menu-toggle { display: none !important; }
+
+/* ---------- Judul halaman ---------- */
+.dashboard-body .site-dashboard-heading { display: block; padding: 0 0 24px; border-bottom: 1px solid var(--d-line); }
+.dashboard-body .site-dashboard-heading .eyebrow { margin: 0 0 8px; color: var(--d-gold-text); font-size: 12px; letter-spacing: .14em; }
+.dashboard-body .site-dashboard h1 { margin: 0; color: var(--d-ink); font: 600 clamp(1.7rem, 2.6vw, 2.25rem)/1.15 var(--d-serif); }
+
+.dashboard-body .site-dashboard-message { margin-top: 20px; min-height: 0; padding: 10px 14px; border-left: 3px solid var(--d-line); background: var(--d-white); color: var(--d-muted); font-size: 14px; }
+.dashboard-body .site-dashboard-message:empty { display: none; }
+.dashboard-body .site-dashboard-message[data-state="error"] { border-left-color: var(--d-error); color: var(--d-error); background: #fbf0ee; }
+.dashboard-body .site-dashboard-message[data-state="success"] { border-left-color: var(--d-success); color: var(--d-success); background: #eef6f1; }
+
+/* ---------- Panel modul ---------- */
+.dashboard-body .site-dashboard-panel { padding: 32px 0 0; }
+.dashboard-body .site-dashboard-panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--d-line); }
+.dashboard-body .site-dashboard-panel-head h2,
+.dashboard-body .site-dashboard-panel > h2 { margin: 0; color: var(--d-ink); font: 600 1.65rem/1.25 var(--d-serif); }
+.dashboard-body .site-dashboard-panel-head p { max-width: 62ch; margin: 8px 0 0; color: var(--d-muted); font-size: 15px; line-height: 1.55; }
+.dashboard-body .site-dashboard-panel > h2 + button { margin: 14px 0 22px; }
+.dashboard-body .site-dashboard-columns h3 { margin: 0 0 14px; color: var(--d-ink); font: 600 1.15rem/1.3 var(--d-serif); }
+.dashboard-body .site-dashboard-columns h3:not(:first-child) { margin-top: 32px; }
+.dashboard-body .site-dashboard .site-dashboard-columns { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+
+/* ---------- Form ---------- */
+.dashboard-body .site-dashboard-form,
+.dashboard-body .site-dashboard-columns > form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 28px; border: 1px solid var(--d-line); border-radius: 0; background: var(--d-white); }
+.dashboard-body .site-form label { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 7px; color: var(--d-ink); font-size: 14px; font-weight: 600; }
+.dashboard-body .site-dashboard input,
+.dashboard-body .site-dashboard textarea,
+.dashboard-body .site-dashboard select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #bdb6a8;
+  border-radius: 2px;
+  background: var(--d-white);
+  color: var(--d-ink);
+  font: 400 15px/1.5 var(--d-sans);
+}
+.dashboard-body .site-dashboard input[type="checkbox"],
+.dashboard-body .site-dashboard input[type="radio"],
+.dashboard-body .site-dashboard input[type="file"] { width: auto; min-height: 0; padding: 6px 0; border: 0; background: transparent; }
+.dashboard-body .site-dashboard textarea { resize: vertical; }
+.dashboard-body .site-dashboard input:focus,
+.dashboard-body .site-dashboard textarea:focus,
+.dashboard-body .site-dashboard select:focus { border-color: var(--d-purple); outline: 2px solid rgb(58 42 107 / 25%); outline-offset: 1px; }
+.dashboard-body .site-dashboard :focus-visible { outline: 2px solid var(--d-purple); outline-offset: 2px; }
+.dashboard-body .site-form-feedback { margin: 0; color: var(--d-muted); font-size: 14px; }
+.dashboard-body .site-form-feedback[data-state="error"] { color: var(--d-error); }
+.dashboard-body .site-form-feedback[data-state="success"] { color: var(--d-success); font-weight: 600; }
+.dashboard-body #seo-counter { color: var(--d-muted); font-size: 13px; }
+
+/* ---------- Tombol ---------- */
+.dashboard-body .site-dashboard button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--d-ink);
+  border-radius: 2px;
+  background: var(--d-white);
+  color: var(--d-ink);
+  font: 600 14px/1 var(--d-sans);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.dashboard-body .site-dashboard button:hover { background: var(--d-ink); color: #fff; }
+.dashboard-body .site-dashboard button[type="submit"],
+.dashboard-body .site-dashboard #publish-now,
+.dashboard-body .site-dashboard .site-button-primary { border-color: var(--d-gold); background: var(--d-gold); color: var(--d-ink) !important; }
+.dashboard-body .site-dashboard button[type="submit"]:hover,
+.dashboard-body .site-dashboard #publish-now:hover,
+.dashboard-body .site-dashboard .site-button-primary:hover { border-color: var(--d-ink); background: var(--d-ink); color: #fff !important; transform: none; }
+.dashboard-body .site-dashboard button:disabled { opacity: .55; cursor: wait; }
+.dashboard-body .site-dashboard .site-dashboard-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.dashboard-body .dash-menu-toggle { display: none; }
+
+/* ---------- Editor & bagian lain ---------- */
+.dashboard-body .cms-toolbar { gap: 6px; padding: 8px; border: 1px solid #bdb6a8; border-radius: 2px 2px 0 0; background: var(--d-paper); }
+.dashboard-body .cms-toolbar button { min-height: 36px; padding: 0 12px; font-size: 13px; }
+.dashboard-body .cms-editor { border: 1px solid #bdb6a8; border-radius: 0 0 2px 2px; background: var(--d-white); font-family: var(--d-serif); font-size: 17px; line-height: 1.75; }
+.dashboard-body .cms-section-editor { border: 1px solid var(--d-line); border-radius: 0; background: var(--d-paper); }
+.dashboard-body .cms-section-editor fieldset { border-radius: 0; border-color: var(--d-line); }
+.dashboard-body .site-image-dropzone { padding: 16px; border: 1px dashed #bdb6a8; background: var(--d-paper); }
+.dashboard-body .site-image-preview { max-width: 100%; height: auto; border-radius: 0; }
+.dashboard-body .site-site-copy-preview { padding: 28px; border: 1px solid var(--d-line); border-top: 3px solid var(--d-gold); border-radius: 0; background: var(--d-white); }
+.dashboard-body .site-site-copy-preview h3 { color: var(--d-ink); font: 600 1.5rem/1.25 var(--d-serif); }
+.dashboard-body .site-site-copy-preview .eyebrow { color: var(--d-gold-text); }
+.dashboard-body .site-application-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; padding: 20px; border: 1px solid var(--d-line); background: var(--d-white); }
+.dashboard-body .site-application-filters label { display: grid; gap: 7px; font-size: 13px; font-weight: 600; }
+
+/* ---------- Daftar data ---------- */
+.dashboard-body .site-admin-list { display: grid; gap: 0; }
+.dashboard-body .site-dashboard .site-admin-item,
+.dashboard-body .site-admin-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin: 0; padding: 18px 4px; border: 0; border-bottom: 1px solid var(--d-line); border-radius: 0; background: transparent; overflow-wrap: anywhere; }
+.dashboard-body .site-admin-item:first-child { border-top: 1px solid var(--d-line); }
+.dashboard-body .site-admin-item strong { color: var(--d-ink); font-size: 15px; }
+.dashboard-body .site-admin-item p,
+.dashboard-body .site-admin-item small,
+.dashboard-body .site-admin-list > p { color: var(--d-muted); font-size: 14px; }
+.dashboard-body .site-admin-item button { min-height: 38px; padding: 0 14px; }
+
+/* ---------- Dialog pratinjau ---------- */
+.dashboard-body #article-preview { border: 1px solid var(--d-line); border-radius: 0; background: var(--d-white); }
+
+/* ---------- Login ---------- */
+.dashboard-body .site-login-panel { width: min(460px, calc(100% - 40px)); margin: 8vh auto; padding: 36px; border: 1px solid var(--d-line); border-top: 3px solid var(--d-gold); border-radius: 0; background: var(--d-white); }
+.dashboard-body .site-login-panel .eyebrow { color: var(--d-gold-text); letter-spacing: .14em; }
+.dashboard-body .site-login-panel h1 { margin: 0 0 12px; font: 600 1.9rem/1.2 var(--d-serif); }
+.dashboard-body .site-login-panel .site-form { display: grid; gap: 18px; }
+
+/* ---------- Tablet ke bawah ---------- */
+@media (max-width: 1100px) {
+  .dash-main { padding: 32px 28px 64px; }
+  .dashboard-body .site-dashboard .site-dashboard-columns { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+
+/* ---------- Mobile: sidebar menjadi menu buka/tutup ---------- */
+@media (max-width: 900px) {
+  .dashboard-body { --d-head: 60px; }
+  .dashboard-body .site-nav-wrap { width: calc(100% - 32px); }
+  .dashboard-body .site-brand small { display: none; }
+  .dash-app { display: block; }
+  .dash-main { padding: 20px 16px 56px; }
+  .dash-sidebar {
+    position: fixed;
+    z-index: 60;
+    top: var(--d-head);
+    bottom: 0;
+    left: 0;
+    width: min(300px, 86vw);
+    height: auto;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition: transform 220ms ease, visibility 0s linear 220ms;
+  }
+  .dash-sidebar.is-open { visibility: visible; transform: none; transition: transform 220ms ease; }
+  .dash-scrim { position: fixed; z-index: 55; inset: var(--d-head) 0 0 0; background: rgb(22 32 58 / 55%); }
+  .dash-scrim.is-visible { display: block; }
+  body.dash-menu-open { overflow: hidden; }
+  .dashboard-body .dash-menu-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    margin: 0 0 18px;
+    border-color: var(--d-ink);
+  }
+  .dashboard-body .site-dashboard-heading { padding-bottom: 18px; }
+  .dashboard-body .site-dashboard-panel-head { flex-direction: column; gap: 14px; }
+  .dashboard-body .site-dashboard-form,
+  .dashboard-body .site-dashboard-columns > form { padding: 20px 16px; }
+  .dashboard-body .site-dashboard .site-dashboard-actions button { flex: 1 1 140px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-sidebar, .dashboard-body .site-dashboard .dash-nav button, .dashboard-body .site-dashboard button { transition: none; }
+}

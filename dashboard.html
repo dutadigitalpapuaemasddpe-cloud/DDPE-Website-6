@@ -9,8 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600;700&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
 <link rel="stylesheet" href="css/cms.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
 </head>
-<body class="site-home">
+<body class="site-home dashboard-body">
   <a class="skip-link" href="#dashboard-content">Lewati ke konten</a>
   <header class="site-header"><div class="site-container site-nav-wrap"><a class="site-brand" href="index.html"><img src="assets/ddpe_logo_web.png" alt="" width="46" height="46" /><span><strong>Duta Digital</strong><small>Ruang pengurus</small></span></a><a class="site-text-link" href="index.html">Kembali ke situs <span aria-hidden="true">↗</span></a></div></header>
   <main id="dashboard-content" class="site-container site-dashboard">
@@ -25,20 +26,38 @@
       </form>
     </section>
 
-    <section id="dashboard-app" hidden>
-      <div class="site-dashboard-heading"><div><p class="eyebrow">Ruang kerja pengurus</p><h1>Pengelolaan DDPE</h1><p id="account-email"></p></div><button type="button" class="site-button site-button-outline" id="sign-out">Keluar</button></div>
+    <section id="dashboard-app" class="dash-app" hidden>
+      <aside class="dash-sidebar" id="dash-sidebar" aria-label="Navigasi ruang pengurus">
+        <nav class="dash-nav" id="dashboard-tabs" aria-label="Modul dashboard">
+          <div class="dash-group" role="group" aria-labelledby="dash-group-konten">
+            <p class="dash-group-label" id="dash-group-konten">Konten</p>
+            <button type="button" data-view="articles" data-permission="content_editor,publisher">Ruang redaksi</button>
+            <button type="button" data-view="events" data-permission="content_editor">Kegiatan &amp; agenda</button>
+            <button type="button" data-view="site_content" data-permission="content_editor">Konten halaman</button>
+            <button type="button" data-view="comments" data-permission="publisher">Moderasi komentar</button>
+          </div>
+          <div class="dash-group" role="group" aria-labelledby="dash-group-orang">
+            <p class="dash-group-label" id="dash-group-orang">Orang</p>
+            <button type="button" data-view="leadership" data-permission="content_editor">Kelola Kepengurusan</button>
+            <button type="button" data-view="recruitments" data-permission="content_editor,publisher">Rekrutmen</button>
+            <button type="button" data-view="applications" data-permission="application_reviewer">Pendaftar</button>
+            <button type="button" data-view="partnerships" data-permission="partnership_reviewer">Kemitraan</button>
+          </div>
+          <div class="dash-group" role="group" aria-labelledby="dash-group-sistem">
+            <p class="dash-group-label" id="dash-group-sistem">Sistem</p>
+            <button type="button" data-view="permissions" data-permission="access_manager">Akses</button>
+          </div>
+        </nav>
+        <div class="dash-account">
+          <p class="dash-account-label">Masuk sebagai</p>
+          <p id="account-email"></p>
+          <button type="button" id="sign-out">Keluar</button>
+        </div>
+      </aside>
+      <div class="dash-scrim" id="dash-scrim"></div>
+      <div class="dash-main">
+      <div class="site-dashboard-heading dash-topbar"><button type="button" class="dash-menu-toggle" aria-controls="dash-sidebar" aria-expanded="false">Menu modul</button><div><p class="eyebrow">Ruang kerja pengurus</p><h1>Pengelolaan DDPE</h1></div></div>
       <div id="dashboard-alert" class="site-dashboard-message" role="status" aria-live="polite"></div>
-      <nav class="site-dashboard-tabs" id="dashboard-tabs" aria-label="Modul dashboard">
-        <button type="button" data-view="articles" data-permission="content_editor,publisher">Ruang redaksi</button>
-<button type="button" data-view="leadership" data-permission="content_editor">Kelola Kepengurusan</button>
-<button type="button" data-view="events" data-permission="content_editor">Kegiatan &amp; agenda</button>
-        <button type="button" data-view="site_content" data-permission="content_editor">Konten halaman</button>
-<button type="button" data-view="comments" data-permission="publisher">Moderasi komentar</button>
-        <button type="button" data-view="recruitments" data-permission="content_editor,publisher">Rekrutmen</button>
-        <button type="button" data-view="applications" data-permission="application_reviewer">Pendaftar</button>
-        <button type="button" data-view="partnerships" data-permission="partnership_reviewer">Kemitraan</button>
-        <button type="button" data-view="permissions" data-permission="access_manager">Akses</button>
-      </nav>
       <section class="site-dashboard-panel" data-panel="articles" hidden>
         <header class="site-dashboard-panel-head"><div><h2>Berita dan revisi</h2><p>Draf diajukan untuk ditinjau penerbit. Artikel terbit diubah sebagai revisi.</p></div><button type="button" class="site-button site-button-outline" data-refresh="articles">Muat ulang</button></header>
         <div class="site-dashboard-columns">
@@ -150,10 +169,12 @@
           <div><h3>Izin dalam cakupan Anda</h3><div id="permission-list" class="site-admin-list"></div></div>
         </div>
       </section>
+      </div>
     </section>
   </main>
 <dialog id="article-preview"><form method="dialog"><button>Tutup preview</button></form><iframe title="Pratinjau artikel" sandbox=""></iframe></dialog>
 <script src="js/editorial.js"></script>
+  <script src="js/dashboard-shell.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/dashboard.js" defer></script>
 </body>
