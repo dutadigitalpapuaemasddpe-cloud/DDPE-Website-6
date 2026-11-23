@@ -1,6 +1,7 @@
 "use strict";
 
 const { rest, send } = require("./_lib/supabase");
+const { effectiveMinAge } = require("./_lib/age");
 
 module.exports = async function publicRecruitments(req, res) {
   if (req.method !== "GET") return send(res, 405, { error: "method_not_allowed" }, { Allow: "GET" });
@@ -13,9 +14,10 @@ module.exports = async function publicRecruitments(req, res) {
     // always sees zero rows. Read server-side with a fixed filter (open only) and a public field list.
     const rows = await rest(query);
     const now = Date.now();
-    const recruitments = (Array.isArray(rows) ? rows : []).filter((row) =>
-      row.minimum_age >= 18 && (!row.opens_at || Date.parse(row.opens_at) <= now) && (!row.closes_at || Date.parse(row.closes_at) > now)
-    );
+    // minimum_age yang dikirim ke publik adalah batas efektif (minimal batas program: DLDPE/DIDPE 14, AMEX 16).
+    const recruitments = (Array.isArray(rows) ? rows : [])
+      .filter((row) => effectiveMinAge(row) !== null && (!row.opens_at || Date.parse(row.opens_at) <= now) && (!row.closes_at || Date.parse(row.closes_at) > now))
+      .map((row) => ({ ...row, minimum_age: effectiveMinAge(row) }));
     return send(res, 200, { recruitments });
   } catch (_error) {
     return send(res, 503, { error: "recruitment_service_unavailable" });

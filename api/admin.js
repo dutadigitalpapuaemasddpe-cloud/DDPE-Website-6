@@ -3,6 +3,7 @@
 const { authenticate, config, hasPermission, permissions, readJson, rest, rpc, sameOrigin, send } = require("./_lib/supabase");
 
 const leadership = require("./_lib/leadership");
+const { programMinAge } = require("./_lib/age");
 const editorial = require("../js/editorial");
 const cms = require("./_lib/cms");
 const EDITABLE_SITE_PAGES = new Set([
@@ -60,7 +61,7 @@ async function getApplications(user, grants, res, format) {
   const permission = format === "csv" ? "application_exporter" : "application_reviewer";
   if (!hasPermission(grants, permission)) return send(res, 403, { error: "forbidden" });
   const ids = await recruitmentScopeIds(grants, permission);
-  const query = "applications?select=id,reference_code,recruitment_id,recruitment:recruitments(id,title,kind,pillar_id,program_id),full_name,email,whatsapp,regency,province,age,activity,interests,motivation,availability,skills,experience,status,internal_note,notification_status,created_at,updated_at,reviewed_at,reviewed_by&order=created_at.desc&limit=1000" +
+  const query = "applications?select=id,reference_code,recruitment_id,recruitment:recruitments(id,title,kind,pillar_id,program_id),full_name,email,whatsapp,regency,province,age,activity,interests,motivation,availability,skills,experience,status,internal_note,notification_status,birth_date,is_minor,guardian_name,guardian_relationship,guardian_whatsapp,guardian_email,guardian_consent,guardian_consent_at,created_at,updated_at,reviewed_at,reviewed_by&order=created_at.desc&limit=1000" +
     (ids === null ? "" : ids.length ? "&recruitment_id=in.(" + ids.join(",") + ")" : "&id=eq.00000000-0000-0000-0000-000000000000");
   const rows = await rest(query);
 
@@ -370,33 +371,53 @@ module.exports = async function admin(req, res) {
         const programId = plain(input.program_id || "", 0, 100) || null;
         const pillarId = plain(input.pillar_id || "", 0, 100) || null;
         const quota = input.accepted_quota === "" || input.accepted_quota === null || input.accepted_quota === undefined ? null : Number(input.accepted_quota);
-        const minimumAge = input.minimum_age === "" || input.minimum_age === null || input.minimum_age === undefined ? null : Number(input.minimum_age);
+        let minimumAge = input.minimum_age === "" || input.minimum_age === null || input.minimum_age === undefined ? null : Number(input.minimum_age);
         if (!kind || !title || !scope || !requirements || (kind === "ambassador" && !pillarId) ||
           (kind === "volunteer" && !programId && !pillarId) || (quota !== null && (!Number.isInteger(quota) || quota < 0)) ||
           (minimumAge !== null && (!Number.isInteger(minimumAge) || minimumAge < 1 || minimumAge > 120))) {
           return send(res, 400, { error: "check_recruitment_fields" });
         }
+        // Batas usia program: DLDPE 14, DIDPE 14, Relawan AMEX 16. Kosong = memakai batas program; tidak boleh lebih rendah.
+        const ageFloor = programMinAge({ kind, pillar_id: pillarId, program_id: programId });
+        if (minimumAge === null) minimumAge = ageFloor;
+        if (minimumAge < ageFloor) return send(res, 400, { error: "check_recruitment_age", minimum: ageFloor });
+        const opensAt = input.opens_at ? Date.parse(input.opens_at) : null;
+        const closesAt = input.closes_at ? Date.parse(input.closes_at) : null;
+        if ((opensAt !== null && Number.isNaN(opensAt)) || (closesAt !== null && Number.isNaN(closesAt)) ||
+          (opensAt !== null && closesAt !== null && closesAt <= opensAt)) {
+          return send(res, 400, { error: "check_recruitment_dates" });
+        }
         const fields = {
           kind, title, scope, requirements, program_id: programId, pillar_id: pillarId,
-          opens_at: input.opens_at || null, closes_at: input.closes_at || null,
+          opens_at: opensAt === null ? null : new Date(opensAt).toISOString(), closes_at: closesAt === null ? null : new Date(closesAt).toISOString(),
           accepted_quota: quota, minimum_age: minimumAge, guardian_review_required: true,
-          result_instructions: plain(input.result_instructions || "", 0, 1000) || "", status: "closed", updated_by: user.id, updated_at: new Date().toISOString()
+          result_instructions: plain(input.result_instructions || "", 0, 1000) || "", updated_by: user.id, updated_at: new Date().toISOString()
         };
-        const saved = input.id
-          ? await rest("recruitments?id=eq." + encodeURIComponent(input.id), { method: "PATCH", body: fields })
-          : await rest("recruitments", { method: "POST", body: { ...fields, status: "draft" } });
+        let saved;
+        if (input.id) {
+          // Menyimpan tidak mengubah status. Periode yang sedang terbuka tetap harus memenuhi syarat pembukaan.
+          const currentRows = await rest("recruitments?id=eq." + encodeURIComponent(input.id) + "&select=id,status");
+          const current = currentRows && currentRows[0];
+          if (!current) return send(res, 404, { error: "recruitment_not_found" });
+          if (current.status === "open") {
+            if (closesAt !== null && closesAt <= Date.now()) return send(res, 409, { error: "recruitment_outside_window" });
+          }
+          saved = await rest("recruitments?id=eq." + encodeURIComponent(input.id), { method: "PATCH", body: fields });
+        } else {
+          saved = await rest("recruitments", { method: "POST", body: { ...fields, status: "draft" } });
+        }
         const recruitment = saved && saved[0];
         if (!recruitment) return send(res, 404, { error: "recruitment_not_found" });
         await audit(user.id, input.id ? "recruitment_updated" : "recruitment_created", "recruitment", recruitment.id, { status: recruitment.status });
         return send(res, input.id ? 200 : 201, { recruitment });
       }
       else if (input.action === "publish_recruitment") {
-        const rows = await rest("recruitments?id=eq." + encodeURIComponent(input.id) + "&select=id,status,opens_at,closes_at,minimum_age,program_id,pillar_id");
+        const rows = await rest("recruitments?id=eq." + encodeURIComponent(input.id) + "&select=id,status,kind,opens_at,closes_at,minimum_age,program_id,pillar_id");
         const recruitment = rows && rows[0];
         if (!recruitment) return send(res, 404, { error: "recruitment_not_found" });
         if (!hasRecruitmentPermission(grants, "publisher", recruitment)) return send(res, 403, { error: "forbidden" });
         if (!recruitment.minimum_age) return send(res, 409, { error: "age_requirement_unconfirmed" });
-        if (recruitment.minimum_age < 18) return send(res, 409, { error: "guardian_flow_unavailable" });
+        if (recruitment.minimum_age < programMinAge(recruitment)) return send(res, 409, { error: "age_requirement_below_program" });
         const now = Date.now();
         if ((recruitment.opens_at && Date.parse(recruitment.opens_at) > now) || (recruitment.closes_at && Date.parse(recruitment.closes_at) <= now)) {
           return send(res, 409, { error: "recruitment_outside_window" });
@@ -435,7 +456,7 @@ module.exports = async function admin(req, res) {
     if (/quota_reached/i.test(reason)) return send(res, 409, { error: "quota_reached" });
     if (/last_access_manager/i.test(reason)) return send(res, 409, { error: "last_access_manager" });
     if (/age_requirement_unconfirmed/i.test(reason)) return send(res, 409, { error: "age_requirement_unconfirmed" });
-    if (/guardian_flow_unavailable/i.test(reason)) return send(res, 409, { error: "guardian_flow_unavailable" });
+    if (/guardian_consent_required/i.test(reason)) return send(res, 409, { error: "guardian_consent_required" });
     if (/revision_not_submitted/i.test(reason)) return send(res, 409, { error: "revision_not_submitted" });
     if (/article_not_submitted/i.test(reason)) return send(res, 409, { error: "article_not_submitted" });
     if (/article_not_found/i.test(reason)) return send(res, 404, { error: "article_not_found" });

@@ -104,7 +104,7 @@ test("application remains saved when the email provider is not configured", asyn
         whatsapp: "+6281234567890",
         regency: "Mimika",
         province: "Papua Tengah",
-        age: 20,
+        birth_date: (() => { const [y, m, d] = require("../api/_lib/age").witToday().split("-").map(Number); return new Date(Date.UTC(y - 20, m - 1, m === 2 && d === 29 ? 28 : d)).toISOString().slice(0, 10); })(),
         activity: "mahasiswa",
         interests: "Literasi digital",
         motivation: "Saya ingin belajar literasi digital.",

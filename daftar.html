@@ -422,8 +422,9 @@
        <input autocomplete="address-level1" maxlength="100" name="province" required=""/>
       </label>
       <label>
-       Usia
-       <input inputmode="numeric" max="120" min="1" name="age" required="" type="number"/>
+       Tanggal lahir
+       <input name="birth_date" required="" type="date" min="1900-01-01" id="birth-date" autocomplete="bday"/>
+       <small id="age-hint">Usia dihitung dari tanggal lahir pada hari pendaftaran (WIT).</small>
       </label>
       <label>
        Aktivitas saat ini
@@ -466,10 +467,43 @@
        <textarea maxlength="3000" name="experience" rows="2"></textarea>
       </label>
      </div>
+     <fieldset class="site-guardian" id="guardian-section" hidden="">
+      <legend>Persetujuan orang tua / wali</legend>
+      <p class="site-form-notice">Peserta di bawah 18 tahun wajib mendapat persetujuan orang tua atau wali. Isi data wali yang dapat dihubungi tim DDPE untuk memverifikasi persetujuan.</p>
+      <div class="site-form-grid">
+       <label>
+        Nama orang tua / wali
+        <input autocomplete="off" maxlength="120" name="guardian_name"/>
+       </label>
+       <label>
+        Hubungan dengan peserta
+        <select name="guardian_relationship">
+         <option value="">Pilih hubungan</option>
+         <option value="ayah">Ayah</option>
+         <option value="ibu">Ibu</option>
+         <option value="wali">Wali lainnya</option>
+        </select>
+       </label>
+       <label>
+        WhatsApp orang tua / wali
+        <input autocomplete="off" inputmode="tel" maxlength="32" name="guardian_whatsapp" type="tel"/>
+       </label>
+       <label>
+        Email orang tua / wali (opsional)
+        <input autocomplete="off" maxlength="254" name="guardian_email" type="email"/>
+       </label>
+      </div>
+      <label class="site-checkbox">
+       <input name="guardian_consent" type="checkbox"/>
+       <span>
+        Saya adalah orang tua/wali peserta dan menyetujui peserta mengikuti kegiatan ini serta pemrosesan data peserta dan data kontak saya untuk verifikasi persetujuan. Data ini hanya dilihat peninjau berizin, tidak dikirim lewat email notifikasi, dan tidak diekspor.
+       </span>
+      </label>
+     </fieldset>
      <label class="site-checkbox">
       <input name="data_consent" required="" type="checkbox"/>
       <span>
-       Saya menyetujui data dasar pendaftaran (nama, kontak, domisili, usia, dan referensi) diproses untuk rekrutmen serta diringkas dalam notifikasi email kepada pengelola DDPE sesuai kebijakan privasi.
+       Saya menyetujui data dasar pendaftaran (nama, kontak, domisili, tanggal lahir, dan referensi) diproses untuk rekrutmen serta diringkas dalam notifikasi email kepada pengelola DDPE sesuai kebijakan privasi.
       </span>
      </label>
      <label class="site-checkbox">

@@ -72,7 +72,12 @@
         forbidden: "Akun tidak memiliki izin untuk tindakan ini.",
         recruitment_outside_window: "Jadwal pembukaan belum dimulai atau sudah berakhir.",
         age_requirement_unconfirmed: "Isi batas usia resmi terlebih dahulu sebelum membuka pendaftaran.",
-        guardian_flow_unavailable: "Pendaftaran peserta di bawah 18 tahun belum dapat dibuka sebelum alur persetujuan wali tersedia.",
+        check_recruitment_age: "Usia minimum di bawah batas program (DLDPE/DIDPE 14 tahun, AMEX 16 tahun).",
+        age_requirement_below_program: "Usia minimum periode ini di bawah batas program. Edit dan perbaiki sebelum membuka.",
+        guardian_consent_required: "Peserta di bawah 18 tahun tidak dapat diterima tanpa catatan persetujuan orang tua/wali.",
+        check_recruitment_fields: "Periksa judul, deskripsi, syarat, program, kuota, dan batas usia.",
+        check_recruitment_dates: "Tanggal tidak valid atau waktu tutup tidak setelah waktu mulai.",
+        recruitment_not_found: "Periode pendaftaran tidak ditemukan.",
         article_not_submitted: "Ajukan draf terlebih dahulu sebelum diterbitkan.",
         revision_not_submitted: "Ajukan revisi terlebih dahulu sebelum diterbitkan."
       };
@@ -241,58 +246,161 @@
     if (!revisions.childElementCount) revisions.appendChild(node("p", "Belum ada revisi."));
   }
 
+  var WIT_OFFSET_MS = 9 * 3600 * 1000;
+  var recruitmentFeedback = document.getElementById("recruitment-feedback");
+  var recruitmentState = document.getElementById("recruitment-state");
+  var recruitmentTrack = document.getElementById("recruitment-track");
+  var recruitmentTracks = {
+    dldpe: { kind: "ambassador", pillar_id: "dldpe", program_id: "", min_age: 14 },
+    didpe: { kind: "ambassador", pillar_id: "didpe", program_id: "", min_age: 14 },
+    amex: { kind: "volunteer", pillar_id: "", program_id: "amex", min_age: 16 }
+  };
+  var CUSTOM_MIN_AGE = 14;
+
+  function trackMinAge() {
+    var preset = recruitmentTracks[recruitmentTrack.value];
+    return preset ? preset.min_age : CUSTOM_MIN_AGE;
+  }
+
+  function toWitInput(iso) {
+    if (!iso) return "";
+    var time = Date.parse(iso);
+    return Number.isNaN(time) ? "" : new Date(time + WIT_OFFSET_MS).toISOString().slice(0, 16);
+  }
+
+  function formatWit(iso) {
+    return iso ? new Date(iso).toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Jayapura" }) + " WIT" : "";
+  }
+
+  function recruitmentStatus(row) {
+    var now = Date.now();
+    var starts = row.opens_at ? Date.parse(row.opens_at) : null;
+    var ends = row.closes_at ? Date.parse(row.closes_at) : null;
+    if (row.status === "open") {
+      if (starts !== null && starts > now) return { label: "Terjadwal", live: false, note: "Status Terbuka, tetapi belum mulai. Tampil di publik pada " + formatWit(row.opens_at) + "." };
+      if (ends !== null && ends <= now) return { label: "Berakhir", live: false, note: "Jadwal sudah lewat. Pendaftaran baru ditolak server." };
+      return { label: "Terbuka", live: true, note: "Tampil di publik dan menerima pendaftaran." };
+    }
+    if (row.status === "closed") return { label: "Ditutup", live: false, note: "Tidak tampil di publik. Pendaftaran baru ditolak server." };
+    return { label: "Draf", live: false, note: "Belum dibuka. Tidak tampil di publik." };
+  }
+
+  function setTrackFromRow(row) {
+    var track = "custom";
+    if (row.kind === "ambassador" && row.pillar_id === "dldpe" && !row.program_id) track = "dldpe";
+    else if (row.kind === "ambassador" && row.pillar_id === "didpe" && !row.program_id) track = "didpe";
+    else if (row.kind === "volunteer" && row.program_id === "amex" && !row.pillar_id) track = "amex";
+    recruitmentTrack.value = track;
+  }
+
+  function applyTrack(forceDefault) {
+    var preset = recruitmentTracks[recruitmentTrack.value];
+    if (!preset) return;
+    recruitmentForm.elements.kind.value = preset.kind;
+    recruitmentForm.elements.pillar_id.value = preset.pillar_id;
+    recruitmentForm.elements.program_id.value = preset.program_id;
+    var minAge = recruitmentForm.elements.minimum_age;
+    minAge.min = preset.min_age;
+    if (!minAge.value || Number(minAge.value) < preset.min_age || forceDefault) minAge.value = preset.min_age;
+  }
+
+  function describeRecruitment(row) {
+    if (!row) return "Periode baru: tersimpan sebagai draf dan belum tampil di publik.";
+    var state = recruitmentStatus(row);
+    return "Status: " + state.label + ". " + state.note;
+  }
+
+  function resetRecruitmentForm() {
+    recruitmentForm.reset();
+    recruitmentForm.elements.id.value = "";
+    recruitmentTrack.value = "dldpe";
+    applyTrack(true);
+    recruitmentState.textContent = describeRecruitment(null);
+    setMessage(recruitmentFeedback, "");
+  }
+
+  function fillRecruitment(row) {
+    recruitmentForm.elements.id.value = row.id;
+    recruitmentForm.elements.kind.value = row.kind;
+    recruitmentForm.elements.title.value = row.title;
+    recruitmentForm.elements.pillar_id.value = row.pillar_id || "";
+    recruitmentForm.elements.program_id.value = row.program_id || "";
+    recruitmentForm.elements.scope.value = row.scope || "";
+    recruitmentForm.elements.requirements.value = row.requirements || "";
+    recruitmentForm.elements.opens_at.value = toWitInput(row.opens_at);
+    recruitmentForm.elements.closes_at.value = toWitInput(row.closes_at);
+    recruitmentForm.elements.accepted_quota.value = row.accepted_quota === null ? "" : row.accepted_quota;
+    recruitmentForm.elements.minimum_age.value = row.minimum_age === null ? "" : row.minimum_age;
+    recruitmentForm.elements.result_instructions.value = row.result_instructions || "";
+    setTrackFromRow(row);
+    recruitmentForm.elements.minimum_age.min = trackMinAge();
+    recruitmentState.textContent = describeRecruitment(row);
+    setMessage(recruitmentFeedback, "Periode dimuat ke formulir. Ubah lalu pilih Simpan.");
+    recruitmentForm.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function recruitmentAction(button, action, row, confirmText, busyText, doneText) {
+    if (!window.confirm(confirmText)) return;
+    var label = button.textContent;
+    button.disabled = true;
+    button.textContent = busyText;
+    setMessage(recruitmentFeedback, busyText);
+    try {
+      await adminRequest("/api/admin", { method: "POST", body: { action: action, id: row.id } });
+      await refreshView("recruitments");
+      setMessage(recruitmentFeedback, doneText + " “" + row.title + "”.", "success");
+    } catch (error) {
+      button.disabled = false;
+      button.textContent = label;
+      setMessage(recruitmentFeedback, error.message, "error");
+    }
+  }
+
   function renderRecruitments(rows) {
     var list = document.getElementById("recruitment-list");
     list.replaceChildren();
     (rows || []).forEach(function (row) {
-      var item = node("article", null, "site-admin-item");
+      var state = recruitmentStatus(row);
+      var item = node("article", null, "site-admin-item recruitment-item");
       var details = node("div");
-      details.appendChild(node("strong", row.title));
-      details.appendChild(node("p", row.kind + " · " + row.status + " · usia minimum: " + (row.minimum_age === null ? "belum ditentukan" : row.minimum_age) + " · kuota diterima: " + (row.accepted_quota === null ? "tidak ditetapkan" : row.accepted_quota)));
+      var heading = node("strong", row.title);
+      details.appendChild(heading);
+      details.appendChild(node("span", state.label, "recruitment-badge recruitment-badge-" + (state.live ? "open" : row.status === "closed" || state.label === "Berakhir" ? "closed" : "draft")));
+      details.appendChild(node("p", state.note));
+      var schedule = row.opens_at || row.closes_at
+        ? "Jadwal: " + (row.opens_at ? formatWit(row.opens_at) : "segera") + " – " + (row.closes_at ? formatWit(row.closes_at) : "tanpa batas")
+        : "Jadwal belum ditetapkan";
+      details.appendChild(node("p", (row.kind === "volunteer" ? "Relawan" : "Duta") + " · " + schedule + " · usia minimum: " + (row.minimum_age === null ? "belum ditentukan" : row.minimum_age) + " · kuota: " + (row.accepted_quota === null ? "tidak ditetapkan" : row.accepted_quota)));
       item.appendChild(details);
+      var actions = node("div", null, "recruitment-actions");
       var edit = node("button", "Edit", "site-button site-button-outline");
       edit.type = "button";
-      edit.addEventListener("click", function () {
-        recruitmentForm.elements.id.value = row.id;
-        recruitmentForm.elements.kind.value = row.kind;
-        recruitmentForm.elements.title.value = row.title;
-        recruitmentForm.elements.pillar_id.value = row.pillar_id || "";
-        recruitmentForm.elements.program_id.value = row.program_id || "";
-        recruitmentForm.elements.scope.value = row.scope || "";
-        recruitmentForm.elements.requirements.value = row.requirements || "";
-        recruitmentForm.elements.opens_at.value = row.opens_at ? row.opens_at.slice(0, 16) : "";
-        recruitmentForm.elements.closes_at.value = row.closes_at ? row.closes_at.slice(0, 16) : "";
-        recruitmentForm.elements.accepted_quota.value = row.accepted_quota === null ? "" : row.accepted_quota;
-        recruitmentForm.elements.minimum_age.value = row.minimum_age === null ? "" : row.minimum_age;
-        recruitmentForm.elements.result_instructions.value = row.result_instructions || "";
-      });
-      item.appendChild(edit);
+      edit.addEventListener("click", function () { fillRecruitment(row); });
+      actions.appendChild(edit);
       if (row.status !== "open" && has("publisher")) {
         var open = node("button", "Buka", "site-button site-button-primary");
         open.type = "button";
-        open.addEventListener("click", async function () {
-          try {
-            await adminRequest("/api/admin", { method: "POST", body: { action: "publish_recruitment", id: row.id } });
-            await refreshView("recruitments");
-          } catch (error) { setMessage(alert, error.message, "error"); }
+        open.addEventListener("click", function () {
+          recruitmentAction(open, "publish_recruitment", row,
+            "Buka pendaftaran “" + row.title + "”? Formulir langsung tampil di situs publik sesuai jadwal.",
+            "Membuka…", "Pendaftaran dibuka:");
         });
-        item.appendChild(open);
+        actions.appendChild(open);
       }
       if (row.status === "open" && has("publisher")) {
         var close = node("button", "Tutup", "site-button site-button-outline");
         close.type = "button";
-        close.addEventListener("click", async function () {
-          if (!window.confirm("Tutup pendaftaran angkatan ini sekarang?")) return;
-          try {
-            await adminRequest("/api/admin", { method: "POST", body: { action: "close_recruitment", id: row.id } });
-            await refreshView("recruitments");
-          } catch (error) { setMessage(alert, error.message, "error"); }
+        close.addEventListener("click", function () {
+          recruitmentAction(close, "close_recruitment", row,
+            "Tutup pendaftaran “" + row.title + "” sekarang? Pendaftaran baru akan ditolak.",
+            "Menutup…", "Pendaftaran ditutup:");
         });
-        item.appendChild(close);
+        actions.appendChild(close);
       }
+      item.appendChild(actions);
       list.appendChild(item);
     });
-    if (!list.childElementCount) list.appendChild(node("p", "Belum ada angkatan."));
+    if (!list.childElementCount) list.appendChild(node("p", "Belum ada periode pendaftaran."));
   }
 
   function renderApplications(rows) {
@@ -339,6 +447,11 @@
       if (recruitment) details.appendChild(node("p", recruitment.title));
       details.appendChild(node("p", row.regency + ", " + row.province + " · " + row.activity + " · usia " + row.age + " · " + row.status));
       details.appendChild(node("p", row.email + " · " + row.whatsapp));
+      if (row.birth_date) details.appendChild(node("p", "Tanggal lahir: " + row.birth_date + " (usia dihitung saat mendaftar)"));
+      if (row.is_minor) {
+        var guardianRelation = { ayah: "Ayah", ibu: "Ibu", wali: "Wali" }[row.guardian_relationship] || "Wali";
+        details.appendChild(node("p", "Di bawah 18 tahun. " + guardianRelation + ": " + (row.guardian_name || "-") + " · " + (row.guardian_whatsapp || "-") + (row.guardian_email ? " · " + row.guardian_email : "") + (row.guardian_consent ? " · persetujuan tercatat" : " · persetujuan BELUM tercatat"), "application-guardian"));
+      }
       var notificationStatus = { not_sent: "Belum terkirim / email belum dikonfigurasi", not_configured: "Belum terkirim / email belum dikonfigurasi", prepared: "Status pengiriman perlu diperiksa", queued: "Status pengiriman perlu diperiksa", failed: "Notifikasi email gagal terkirim", sent: "Notifikasi email terkirim" }[row.notification_status] || "Status email tidak diketahui";
       details.appendChild(node("p", notificationStatus));
       details.appendChild(node("p", "Minat: " + row.interests));
@@ -659,24 +772,38 @@
     setSelectedImage(event.dataTransfer && event.dataTransfer.files[0]);
   });
 
+  recruitmentTrack.addEventListener("change", function () { applyTrack(true); });
   recruitmentForm.addEventListener("submit", async function (event) {
     event.preventDefault();
+    var saveButton = document.getElementById("save-recruitment");
     if (!recruitmentForm.reportValidity()) return;
     var data = new FormData(recruitmentForm);
     var body = Object.fromEntries(data.entries());
+    var opens = body.opens_at ? Date.parse(body.opens_at + ":00+09:00") : null;
+    var closes = body.closes_at ? Date.parse(body.closes_at + ":00+09:00") : null;
+    if (opens !== null && Number.isNaN(opens) || closes !== null && Number.isNaN(closes)) return setMessage(recruitmentFeedback, "Format tanggal tidak valid.", "error");
+    if (opens !== null && closes !== null && closes <= opens) return setMessage(recruitmentFeedback, "Waktu tutup harus setelah waktu mulai.", "error");
+    if (!body.minimum_age) body.minimum_age = trackMinAge();
+    if (Number(body.minimum_age) < trackMinAge()) return setMessage(recruitmentFeedback, "Usia minimum untuk program ini tidak boleh di bawah " + trackMinAge() + " tahun.", "error");
     body.action = "save_recruitment";
     body.guardian_review_required = true;
-    ["opens_at", "closes_at"].forEach(function (field) {
-      body[field] = body[field] ? new Date(body[field] + ":00+09:00").toISOString() : null;
-    });
+    body.opens_at = opens === null ? null : new Date(opens).toISOString();
+    body.closes_at = closes === null ? null : new Date(closes).toISOString();
+    saveButton.disabled = true;
+    var idle = saveButton.textContent;
+    saveButton.textContent = "Menyimpan…";
     try {
-      await adminRequest("/api/admin", { method: "POST", body });
-      setMessage(document.getElementById("recruitment-feedback"), "Angkatan tersimpan tertutup. Penerbit dapat membuka setelah tanggal dan syarat diverifikasi.", "success");
+      var result = await adminRequest("/api/admin", { method: "POST", body });
+      var saved = result && result.recruitment;
+      setMessage(recruitmentFeedback, "Periode tersimpan" + (saved ? " (status: " + recruitmentStatus(saved).label + ")" : "") + ". Gunakan Buka atau Tutup pada daftar untuk mengubah status.", "success");
+      if (saved) { recruitmentForm.elements.id.value = saved.id; recruitmentState.textContent = describeRecruitment(saved); }
       await refreshView("recruitments");
-    } catch (error) { setMessage(document.getElementById("recruitment-feedback"), error.message, "error"); }
+    } catch (error) { setMessage(recruitmentFeedback, error.message, "error"); }
+    finally { saveButton.disabled = false; saveButton.textContent = idle; }
   });
 
-  document.getElementById("new-recruitment").addEventListener("click", function () { recruitmentForm.reset(); recruitmentForm.elements.id.value = ""; });
+  document.getElementById("new-recruitment").addEventListener("click", resetRecruitmentForm);
+  applyTrack(false);
 
   siteContentForm.elements.page_key.addEventListener("change", loadSiteContentForm);
   siteContentForm.elements.title.addEventListener("input", updateSiteContentPreview);

@@ -276,6 +276,31 @@
   .dashboard-body .site-dashboard .site-dashboard-actions button { flex: 1 1 140px; }
 }
 
+/* ---------- Modul Rekrutmen ---------- */
+.dashboard-body .recruitment-state { margin: 0; padding: 12px 14px; border-left: 3px solid var(--d-gold); background: var(--d-paper); color: var(--d-ink); font-size: 14px; line-height: 1.5; }
+.dashboard-body .recruitment-dates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.dashboard-body .recruitment-advanced { padding: 12px 14px; border: 1px solid var(--d-line); background: var(--d-paper); }
+.dashboard-body .recruitment-advanced summary { cursor: pointer; color: var(--d-muted); font-size: 14px; font-weight: 600; }
+.dashboard-body .recruitment-advanced[open] summary { margin-bottom: 14px; }
+.dashboard-body .recruitment-advanced label + label { margin-top: 14px; }
+.dashboard-body .recruitment-item { align-items: flex-start; }
+.dashboard-body .recruitment-item > div:first-child { flex: 1 1 260px; min-width: 0; }
+.dashboard-body .recruitment-item p { margin: 6px 0 0; }
+.dashboard-body .recruitment-badge { display: inline-block; margin-left: 10px; padding: 2px 8px; border: 1px solid currentColor; border-radius: 2px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; vertical-align: middle; }
+.dashboard-body .recruitment-badge-open { color: var(--d-success); }
+.dashboard-body .recruitment-badge-draft { color: var(--d-muted); }
+.dashboard-body .recruitment-badge-closed { color: var(--d-error); }
+.dashboard-body .recruitment-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 900px) {
+  .dashboard-body .recruitment-dates { grid-template-columns: minmax(0, 1fr); }
+  .dashboard-body .recruitment-actions { width: 100%; }
+  .dashboard-body .recruitment-actions button { flex: 1 1 100px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .dash-sidebar, .dashboard-body .site-dashboard .dash-nav button, .dashboard-body .site-dashboard button { transition: none; }
 }
+
+/* ---------- Usia & wali ---------- */
+.dashboard-body .recruitment-hint { color: var(--d-muted); font-size: 13px; font-weight: 400; }
+.dashboard-body .application-guardian { padding: 8px 12px; border-left: 3px solid var(--d-gold); background: var(--d-paper); color: var(--d-ink); }

@@ -21,7 +21,7 @@ async function sendApplicationNotice(reference, recruitmentTitle, application) {
     "Email: " + plainText(application.email),
     "WhatsApp: " + plainText(application.whatsapp),
     "Domisili: " + plainText(application.regency) + ", " + plainText(application.province),
-    "Usia: " + String(application.age),
+    "Usia: " + String(application.age) + (application.age < 18 ? " (di bawah 18 tahun; data wali dan persetujuan hanya tersedia di dashboard)" : ""),
     "Aktivitas: " + plainText(application.activity),
     "",
     "Jawaban motivasi, minat, dan pengalaman tetap tersedia di dashboard pengurus.",

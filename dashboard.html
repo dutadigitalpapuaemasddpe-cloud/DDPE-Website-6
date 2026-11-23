@@ -114,26 +114,35 @@
 <section class="site-dashboard-panel" data-panel="events" hidden><header class="site-dashboard-panel-head"><h2>Kegiatan &amp; agenda</h2><button type="button" data-refresh="events">Muat ulang</button></header><div class="site-dashboard-columns"><form id="event-form" class="site-form"><input name="id" type="hidden"><input name="version" type="hidden"><label>Judul<input name="title" maxlength="180" required></label><label>Tanggal &amp; waktu (WIT)<input name="date" type="datetime-local" required></label><label>Lokasi<input name="location" maxlength="200" required></label><label>Status<select name="status"><option value="upcoming">Akan datang</option><option value="completed">Terlaksana</option></select></label><label>Deskripsi<textarea name="text" maxlength="5000" rows="5"></textarea></label><label>URL poster / dokumentasi<input name="image" maxlength="1200"></label><label>Keterangan / alt foto<input name="alt" maxlength="220"></label><label>Unggah poster<input name="upload" type="file" accept="image/jpeg,image/png,image/webp"></label><label>Teks tombol<input name="button" maxlength="80"></label><label>Link tombol<input name="href" maxlength="1200"></label><div class="site-dashboard-actions"><button type="submit">Simpan kegiatan</button><button type="button" id="new-event">Kegiatan baru</button></div><p id="event-feedback" role="status"></p></form><div id="event-list" class="site-admin-list"></div></div></section>
 <section class="site-dashboard-panel" data-panel="comments" hidden><h2>Moderasi komentar</h2><button type="button" data-refresh="comments">Muat ulang</button><div id="comment-list" class="site-admin-list"></div></section>
       <section class="site-dashboard-panel" data-panel="recruitments" hidden>
-        <header class="site-dashboard-panel-head"><div><h2>Rekrutmen dan angkatan</h2><p>Semua angkatan baru tersimpan sebagai draf/tertutup. Penerbit membuka status secara terpisah.</p></div><button type="button" class="site-button site-button-outline" data-refresh="recruitments">Muat ulang</button></header>
+        <header class="site-dashboard-panel-head"><div><h2>Rekrutmen dan angkatan</h2><p>Atur periode pendaftaran DLDPE, DIDPE, dan relawan AMEX. Formulir publik hanya tampil saat status Terbuka dan jadwal berlaku; server menolak pendaftaran baru di luar itu.</p></div><button type="button" class="site-button site-button-outline" data-refresh="recruitments">Muat ulang</button></header>
         <div class="site-dashboard-columns">
           <form class="site-form site-dashboard-form" id="recruitment-form" novalidate>
             <input type="hidden" name="id" />
-            <label>Jenis kesempatan<select name="kind" required><option value="ambassador">Duta</option><option value="volunteer">Relawan program</option></select></label>
-            <label>Judul angkatan<input name="title" minlength="4" maxlength="180" required /></label>
-            <label>Pilar<input name="pillar_id" placeholder="dldpe atau didpe" maxlength="100" /></label>
-            <label>ID program (untuk relawan)<input name="program_id" maxlength="100" /></label>
-            <label>Cakupan<textarea name="scope" rows="3" maxlength="500" required></textarea></label>
+            <p class="recruitment-state" id="recruitment-state" role="status" aria-live="polite">Periode baru: tersimpan sebagai draf dan belum tampil di publik.</p>
+            <label>Program pendaftaran<select id="recruitment-track"><option value="dldpe">Duta Literasi Digital (DLDPE)</option><option value="didpe">Duta Inovasi Digital (DIDPE)</option><option value="amex">Relawan AMEX</option><option value="custom">Lainnya (atur manual)</option></select></label>
+            <label>Judul periode<input name="title" minlength="4" maxlength="180" required placeholder="Contoh: Pendaftaran Duta DLDPE Angkatan II" /></label>
+            <label>Deskripsi<textarea name="scope" rows="3" maxlength="500" required placeholder="Ringkasan kesempatan yang tampil di formulir publik"></textarea></label>
             <label>Syarat yang telah disetujui<textarea name="requirements" rows="4" maxlength="4000" required></textarea></label>
-            <label>Mulai (WIT)<input name="opens_at" type="datetime-local" /></label>
-            <label>Tutup (WIT)<input name="closes_at" type="datetime-local" /></label>
-            <label>Kuota peserta diterima<input name="accepted_quota" type="number" min="0" step="1" /></label>
-            <label>Batas usia resmi yang disetujui<input name="minimum_age" type="number" min="1" max="120" step="1" /></label>
+            <div class="recruitment-dates">
+              <label>Mulai (WIT)<input name="opens_at" type="datetime-local" /></label>
+              <label>Tutup (WIT)<input name="closes_at" type="datetime-local" /></label>
+            </div>
+            <div class="recruitment-dates">
+              <label>Kuota peserta diterima<input name="accepted_quota" type="number" min="0" step="1" /></label>
+              <label>Usia minimum peserta<input name="minimum_age" type="number" min="14" max="120" step="1" id="recruitment-min-age" /><small class="recruitment-hint" id="recruitment-age-hint">DLDPE dan DIDPE 14 tahun, Relawan AMEX 16 tahun.</small></label>
+            </div>
             <label>Petunjuk hasil<textarea name="result_instructions" rows="2" maxlength="1000"></textarea></label>
-            <p class="site-form-feedback">Isi sesuai syarat resmi, jangan menebak. Batas di bawah 18 tahun tidak dapat dibuka sebelum alur persetujuan wali tersedia.</p>
-            <div class="site-dashboard-actions"><button type="submit" class="site-button site-button-primary">Simpan tertutup</button><button type="button" class="site-button site-button-outline" id="new-recruitment">Angkatan baru</button></div>
+            <details class="recruitment-advanced">
+              <summary>Pengaturan teknis (terisi otomatis dari program)</summary>
+              <label>Jenis kesempatan<select name="kind" required><option value="ambassador">Duta</option><option value="volunteer">Relawan program</option></select></label>
+              <label>Pilar<input name="pillar_id" placeholder="dldpe atau didpe" maxlength="100" /></label>
+              <label>ID program (untuk relawan)<input name="program_id" maxlength="100" /></label>
+            </details>
+            <p class="site-form-feedback">Usia dihitung dari tanggal lahir pendaftar pada hari mendaftar (WIT). Peserta di bawah 18 tahun otomatis diminta data dan persetujuan orang tua/wali; server menolak usia di bawah batas program. Menyimpan tidak mengubah status; gunakan Buka atau Tutup pada daftar.</p>
+            <div class="site-dashboard-actions"><button type="submit" class="site-button site-button-primary" id="save-recruitment">Simpan</button><button type="button" class="site-button site-button-outline" id="new-recruitment">Periode baru</button></div>
             <p class="site-form-feedback" id="recruitment-feedback" role="status" aria-live="polite"></p>
           </form>
-          <div><h3>Angkatan tersimpan</h3><div id="recruitment-list" class="site-admin-list"></div></div>
+          <div><h3>Periode tersimpan</h3><div id="recruitment-list" class="site-admin-list"></div></div>
         </div>
       </section>
 

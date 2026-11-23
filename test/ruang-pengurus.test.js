@@ -20,7 +20,7 @@ test("public recruitments are read server-side (anon key is blocked by RLS witho
   global.fetch = async (url, init) => {
     keys.push(init.headers.apikey);
     assert.match(url, /recruitments\?select=.*&status=eq\.open/);
-    return json(200, [{ id: "a", minimum_age: 18, opens_at: null, closes_at: null }, { id: "b", minimum_age: 16 }]);
+    return json(200, [{ id: "a", kind: "ambassador", pillar_id: "dldpe", minimum_age: 14, opens_at: null, closes_at: null }, { id: "b", kind: "ambassador", pillar_id: "dldpe", minimum_age: null }]);
   };
   try {
     const res = response();
