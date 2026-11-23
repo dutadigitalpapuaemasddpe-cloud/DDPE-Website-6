@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "ddpe.my.id" }],
+      "destination": "https://www.ddpe.my.id/$1",
+      "permanent": true
+    },
+    {
       "source": "/gabung.html",
       "destination": "/terlibat.html",
       "permanent": true
