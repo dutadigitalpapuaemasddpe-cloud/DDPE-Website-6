@@ -135,22 +135,41 @@
       </section>
 
       <section class="site-dashboard-panel" data-panel="site_content" hidden>
-        <header class="site-dashboard-panel-head"><div><h2>Konten halaman &amp; kartu program</h2><p>Kelola judul, section, foto, kartu, dan tombol tanpa kode. Perubahan terlihat publik setelah disimpan.</p></div><button type="button" class="site-button site-button-outline" data-refresh="site_content">Muat ulang</button></header>
-        <div class="site-dashboard-columns">
-          <form class="site-form site-dashboard-form" id="site-content-form" novalidate>
-            <label>Halaman<select name="page_key" id="site-content-page" required>
-              <option value="index.html">Beranda</option><option value="tentang.html">Tentang DDPE</option><option value="struktur.html">Struktur</option><option value="program.html">Pilar dan program</option><option value="kegiatan.html">Kegiatan</option><option value="berita.html">Berita</option><option value="terlibat.html">Terlibat</option><option value="kemitraan.html">Kemitraan</option><option value="kontak.html">Kontak</option><option value="konsultasi.html">Konsultasi</option><option value="mitra.html">Mitra</option><option value="privasi.html">Privasi</option><option value="agenda.html">Agenda</option><option value="media.html">Media</option><option value="kegiatan-terlaksana.html">Kegiatan Terlaksana</option><option value="visi-misi.html">Visi Misi</option><option value="program-dldpe.html">Program Dldpe</option><option value="program-didpe.html">Program Didpe</option><option value="program-amex.html">Program Amex</option><option value="program-volunteer.html">Program Volunteer</option>
-            </select></label>
-            <label>Judul<input name="title" minlength="4" maxlength="120" required /></label>
-            <label>Pengantar<textarea name="intro" rows="5" minlength="20" maxlength="700" required></textarea></label>
-            <p class="site-form-feedback">Berita, artikel, rekrutmen, dan data dinamis tetap diatur pada modul masing-masing. Simpan hanya informasi yang sudah diverifikasi.</p>
-            <div id="cms-sections"></div><button type="button" id="add-section">Tambah section</button><button type="submit" class="site-button site-button-primary">Simpan perubahan <span aria-hidden="true">→</span></button>
-            <p class="site-form-feedback" id="site-content-feedback" role="status" aria-live="polite"></p>
-          </form>
-          <aside class="site-site-copy-preview" aria-live="polite">
-            <p class="eyebrow">Pratinjau salinan</p><h3 id="site-content-preview-title">Judul halaman</h3><p id="site-content-preview-intro">Pengantar halaman akan terlihat di sini.</p><a id="site-content-preview-link" class="site-text-link" href="index.html" target="_blank" rel="noopener">Buka halaman <span aria-hidden="true">↗</span></a>
-          </aside>
-        </div>
+        <header class="site-dashboard-panel-head"><div><h2>Konten Halaman</h2><p>Ubah teks, gambar, tombol, dan kartu halaman situs tanpa kode. Pilih halaman, pilih bagian, lalu edit. Perubahan baru tampil di situs publik setelah Anda menekan Terbitkan.</p></div><button type="button" class="site-button site-button-outline" data-refresh="site_content">Muat ulang</button></header>
+        <form class="cms-studio" id="site-content-form" novalidate>
+          <div class="cms-step cms-pick">
+            <label><span class="cms-step-no">1</span> Pilih halaman
+              <select name="page_key" id="site-content-page" required>
+                <optgroup label="Halaman utama"><option value="index.html">Beranda</option><option value="tentang.html">Tentang DDPE</option><option value="visi-misi.html">Visi &amp; Misi</option><option value="struktur.html">Struktur (dikelola di Kepengurusan)</option></optgroup>
+                <optgroup label="Pilar dan program"><option value="program.html">Pilar dan program</option><option value="program-dldpe.html">Program DLDPE</option><option value="program-didpe.html">Program DIDPE</option><option value="program-amex.html">Program AMEX</option><option value="program-volunteer.html">Program Relawan</option></optgroup>
+                <optgroup label="Kegiatan dan berita"><option value="kegiatan.html">Kegiatan</option><option value="agenda.html">Agenda</option><option value="kegiatan-terlaksana.html">Kegiatan Terlaksana</option><option value="media.html">Media</option><option value="berita.html">Berita</option></optgroup>
+                <optgroup label="Terlibat dan kontak"><option value="terlibat.html">Terlibat</option><option value="kemitraan.html">Kemitraan</option><option value="mitra.html">Mitra</option><option value="konsultasi.html">Konsultasi</option><option value="kontak.html">Kontak</option></optgroup>
+                <optgroup label="Lainnya"><option value="privasi.html">Privasi</option></optgroup>
+              </select>
+            </label>
+            <p class="cms-page-info" id="cms-page-info" role="status" aria-live="polite">Memuat halaman…</p>
+            <p class="cms-page-warning" id="cms-page-warning" hidden></p>
+            <a id="site-content-preview-link" class="site-text-link" href="index.html" target="_blank" rel="noopener">Buka halaman publik <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="cms-workspace">
+            <nav class="cms-outline" aria-label="Bagian halaman">
+              <p class="cms-outline-title"><span class="cms-step-no">2</span> Pilih bagian</p>
+              <ul id="cms-outline" class="cms-outline-list"></ul>
+              <button type="button" id="add-section">Tambah section</button>
+            </nav>
+            <div class="cms-editor-pane" id="cms-sections" aria-live="polite"></div>
+          </div>
+          <div class="cms-publishbar">
+            <div class="cms-publish-state"><p id="cms-dirty" role="status" aria-live="polite">Belum ada perubahan.</p><p class="site-form-feedback" id="site-content-feedback" role="status" aria-live="polite"></p></div>
+            <div class="site-dashboard-actions">
+              <button type="button" id="cms-reset" class="site-button site-button-outline">Batalkan perubahan</button>
+              <button type="button" id="cms-defaults" class="site-button site-button-outline">Pakai konten bawaan</button>
+              <button type="button" id="cms-preview" class="site-button site-button-outline">Pratinjau</button>
+              <button type="submit" id="cms-publish" class="site-button site-button-primary">Terbitkan perubahan</button>
+            </div>
+          </div>
+        </form>
+        <dialog id="cms-preview-dialog" class="cms-preview-dialog"><form method="dialog"><button>Tutup pratinjau</button></form><iframe title="Pratinjau konten halaman" sandbox="allow-same-origin"></iframe></dialog>
       </section>
 
 <section class="site-dashboard-panel" data-panel="leadership" hidden><header class="site-dashboard-panel-head"><div><h2>Kelola Kepengurusan</h2><p>Kelola personel, jabatan, foto, dan masa bakti tiga unit DDPE.</p></div><button type="button" data-refresh="leadership">Muat ulang</button></header><div class="site-dashboard-columns"><form id="leadership-form" class="site-form"><input type="hidden" name="id"><label>Unit<select name="unit"><option value="induk">Pengurus Induk</option><option value="dldpe">DLDPE · Pilar 1</option><option value="didpe">DIDPE · Pilar 2</option></select></label><label>Nama lengkap<input name="name" maxlength="120" required></label><label>Jabatan<input name="role" maxlength="160" required></label><label>Hierarki<select name="level"><option value="1">Level 1 · Pimpinan</option><option value="2" selected>Level 2 · Tim</option></select></label><label>Status posisi<select name="status"><option value="active">Terisi</option><option value="selection">Dalam Tahap Pemilihan</option><option value="open">Terbuka</option></select></label><label>Tahun awal masa bakti<input name="period_start" type="number" value="2026" min="2000" max="2200" required></label><label>Tahun akhir masa bakti<input name="period_end" type="number" value="2028" min="2000" max="2200" required></label><label>Urutan tampilan<input name="order" type="number" min="0" max="10000" value="1" required></label><label>Ringkasan peran<textarea name="summary" maxlength="700" rows="3"></textarea></label><label>URL foto profil<input name="photo" maxlength="1200"></label><label>Keterangan / alt foto<input name="alt" maxlength="220"></label><label>Unggah foto profil<input name="upload" type="file" accept="image/jpeg,image/png,image/webp"></label><img id="leadership-photo-preview" alt="Pratinjau foto profil" width="160" height="200" hidden style="width:160px;height:200px;object-fit:cover;object-position:center 20%;border-radius:8px"><div class="site-dashboard-actions"><button type="submit">Simpan pengurus</button><button type="button" id="new-leader">Tambah baru</button></div><p id="leadership-feedback" role="status" aria-live="polite"></p></form><div id="leadership-list" class="site-admin-list"></div></div></section>
@@ -229,5 +248,6 @@
   <script src="js/dashboard-shell.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/dashboard.js" defer></script>
+  <script src="js/dashboard-content.js" defer></script>
 </body>
 </html>

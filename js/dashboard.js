@@ -15,12 +15,7 @@
   var articleForm = document.getElementById("article-form");
   var recruitmentForm = document.getElementById("recruitment-form");
   var permissionForm = document.getElementById("permission-form");
-  var siteContentForm = document.getElementById("site-content-form");
-  var siteContentPages = {};
   var selectedImage = null;
-  var cmsSections = [];
-  var cmsDefaults = {};
-  var pageVersion = null;
   var editor = document.getElementById("article-editor");
   var previewUrl = "";
 
@@ -123,32 +118,6 @@
       }
       list.appendChild(item);
     });
-  }
-
-  function updateSiteContentPreview() {
-    var title = siteContentForm.elements.title.value.trim();
-    var intro = siteContentForm.elements.intro.value.trim();
-    var pageKey = siteContentForm.elements.page_key.value;
-    document.getElementById("site-content-preview-title").textContent = title || "Judul halaman";
-    document.getElementById("site-content-preview-intro").textContent = intro || "Pengantar halaman akan terlihat di sini.";
-    document.getElementById("site-content-preview-link").href = pageKey;
-  }
-
-  async function loadSiteContentForm() {
-    var pageKey=siteContentForm.elements.page_key.value;
-    if(!Object.keys(cmsDefaults).length){const r=await fetch('/data/cms-defaults.json');if(!r.ok)throw Error('Konten awal belum dapat dimuat.');cmsDefaults=await r.json();}
-    if(pageKey!==siteContentForm.elements.page_key.value)return;
-    const base=cmsDefaults[pageKey] || {title:'',intro:'',sections:[]},saved=siteContentPages[pageKey] || {};
-    siteContentForm.elements.title.value=saved.title || base.title;
-    siteContentForm.elements.intro.value=saved.intro || base.intro;
-    pageVersion=saved.version || null;
-    cmsSections=structuredClone(Array.isArray(saved.sections)?saved.sections:base.sections);
-    renderSections();updateSiteContentPreview();
-  }
-
-  async function renderSiteContent(result) {
-    siteContentPages = result.pages || {};
-    await loadSiteContentForm();
   }
 
   async function renderPermissionsView() {
@@ -580,7 +549,7 @@
       if (view === "events") renderEvents((await adminRequest("/api/admin?view=events")).events);
       if (view === "comments") renderComments((await adminRequest("/api/admin?view=comments")).comments);
       if (view === "articles") renderArticles(await adminRequest("/api/admin?view=articles"));
-      if (view === "site_content") await renderSiteContent(await adminRequest("/api/admin?view=site_content"));
+      if (view === "site_content") await window.DDPEContent.render(await adminRequest("/api/admin?view=site_content"));
       if (view === "recruitments") renderRecruitments((await adminRequest("/api/admin?view=recruitments")).recruitments);
       if (view === "applications") renderApplications((await adminRequest("/api/admin?view=applications")).applications);
       if (view === "partnerships") renderPartnerships((await adminRequest("/api/admin?view=partnerships")).inquiries);
@@ -611,7 +580,7 @@
       currentView="";
       document.querySelectorAll("[data-panel]").forEach(p=>p.hidden=true);
       document.querySelectorAll(".site-admin-list").forEach(p=>p.replaceChildren());
-      articleForm.reset();editor.replaceChildren();cmsSections=[];siteContentPages={};
+      articleForm.reset();editor.replaceChildren();if(window.DDPEContent)window.DDPEContent.reset();
       app.hidden = true;
       login.hidden = false;
       permissionRows = [];
@@ -916,29 +885,6 @@
   document.getElementById("new-recruitment").addEventListener("click", resetRecruitmentForm);
   applyTrack(false);
 
-  siteContentForm.elements.page_key.addEventListener("change", loadSiteContentForm);
-  siteContentForm.elements.title.addEventListener("input", updateSiteContentPreview);
-  siteContentForm.elements.intro.addEventListener("input", updateSiteContentPreview);
-  siteContentForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    if (!siteContentForm.reportValidity()) return;
-    var button = siteContentForm.querySelector('button[type="submit"]');
-    button.disabled = true;
-    setMessage(document.getElementById("site-content-feedback"), "Menyimpan salinan halaman…");
-    try {
-      var data = new FormData(siteContentForm);
-      var page = data.get("page_key");
-      var result = await adminRequest("/api/admin", {
-        method: "POST",
-        body: { action: "save_site_content", page_key: page, title: data.get("title"), intro: data.get("intro"), sections: cmsSections, version: pageVersion }
-      });
-      siteContentPages=(await adminRequest("/api/admin?view=site_content")).pages; pageVersion=siteContentPages[page].version;
-      setMessage(document.getElementById("site-content-feedback"), result.saved ? "Perubahan tersimpan dan sudah dipublikasikan." : "Perubahan belum tersimpan.", result.saved ? "success" : "error");
-    } catch (error) {
-      setMessage(document.getElementById("site-content-feedback"), error.message, "error");
-    } finally { button.disabled = false; }
-  });
-
   permissionForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     if (!permissionForm.reportValidity()) return;
@@ -1041,25 +987,6 @@
   };
   function button(label,fn){const b=node('button',label);b.type='button';b.onclick=fn;return b;}
   function field(parent,label,value,change,multiline){const wrap=node('label',label),input=node(multiline?'textarea':'input');input.value=value || '';input.maxLength=multiline?5000:1200;input.oninput=()=>change(input.value);wrap.append(input);parent.append(wrap);return input;}
-  function editCard(parent,card){
-    field(parent,'Judul',card.title,v=>card.title=v).maxLength=180;
-    field(parent,'Teks',card.text,v=>card.text=v,true);
-    const image=field(parent,'URL gambar',card.image,v=>card.image=v);
-    field(parent,'Keterangan / alt gambar',card.alt,v=>card.alt=v).maxLength=220;
-    const label=node('label','Unggah gambar'),input=node('input');input.type='file';input.accept='image/jpeg,image/png,image/webp';label.append(input);parent.append(label);
-    input.onchange=async()=>{input.disabled=true;try{const result=await uploadImage(input.files[0],card.alt);card.image=result.url;image.value=result.url;setMessage(document.getElementById('site-content-feedback'),'Gambar diunggah. Simpan perubahan halaman.');}catch(err){setMessage(document.getElementById('site-content-feedback'),err.message,'error');}finally{input.disabled=false;}};
-    field(parent,'Teks tombol',card.button,v=>card.button=v).maxLength=80;field(parent,'Link tombol',card.href,v=>card.href=v);
-  }
-  function emptyCard(){return {id:'c-'+crypto.randomUUID(),title:'Judul baru',text:'',image:'',alt:'',button:'',href:''};}
-  function renderSections(){
-    const host=document.getElementById('cms-sections');host.replaceChildren();
-    cmsSections.forEach((section,i)=>{const wrap=node('details',null,'cms-section-editor');const summary=node('summary',section.title || 'Section '+(i+1));wrap.append(summary);editCard(wrap,section);
-      const actions=node('div',null,'site-dashboard-actions');actions.append(button('Hapus section',()=>{if(confirm('Hapus section ini dari halaman setelah disimpan?')){cmsSections.splice(i,1);renderSections();}}));wrap.append(actions);
-      section.cards.forEach((card,j)=>{const box=node('fieldset'),legend=node('legend','Kartu '+(j+1));box.append(legend);editCard(box,card);box.append(button('Hapus kartu',()=>{section.cards.splice(j,1);renderSections();}));wrap.append(box);});
-      wrap.append(button('Tambah kartu',()=>{if(section.cards.length>=20)return;section.cards.push(emptyCard());renderSections();}));host.append(wrap);
-    });
-  }
-  document.getElementById('add-section').onclick=()=>{if(cmsSections.length>=30)return;cmsSections.push({...emptyCard(),cards:[]});renderSections();};
   const eventForm=document.getElementById('event-form');
   function resetEvent(){eventForm.reset();eventForm.elements.id.value='';eventForm.elements.version.value='';}
   document.getElementById('new-event').onclick=resetEvent;
@@ -1093,5 +1020,7 @@
     }catch(err){setMessage(leadershipFeedback,err.message,'error');}finally{submit.disabled=false;}
   };
 
+  // Jembatan untuk modul yang dipisah (js/dashboard-content.js).
+  window.DDPEDashboard = { request: adminRequest, uploadImage: uploadImage, has: has, node: node, setMessage: setMessage };
   initializeAuth();
 })();
