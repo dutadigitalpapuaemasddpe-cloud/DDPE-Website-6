@@ -78,6 +78,9 @@
         check_recruitment_fields: "Periksa judul, deskripsi, syarat, program, kuota, dan batas usia.",
         check_recruitment_dates: "Tanggal tidak valid atau waktu tutup tidak setelah waktu mulai.",
         recruitment_not_found: "Periode pendaftaran tidak ditemukan.",
+        article_not_draft: "Artikel ini bukan draf lagi (mungkin sudah diajukan atau diterbitkan). Muat ulang daftar lalu coba lagi.",
+        media_reference_invalid: "Foto sampul tidak cocok dengan unggahan. Unggah ulang foto sampul.",
+        revision_not_found: "Revisi tidak ditemukan atau sudah diproses. Muat ulang daftar.",
         article_not_submitted: "Ajukan draf terlebih dahulu sebelum diterbitkan.",
         revision_not_submitted: "Ajukan revisi terlebih dahulu sebelum diterbitkan."
       };
@@ -153,6 +156,31 @@
     renderPermissions(result.permissions || []);
   }
 
+  var ARTICLE_STATUS = { draft: "Draf", submitted: "Menunggu review", published: "Terbit", archived: "Diarsipkan", rejected: "Ditolak" };
+  var articleStateLine = document.getElementById("article-state");
+
+  function articleStatusLabel(status) { return ARTICLE_STATUS[status] || status || "Draf"; }
+
+  // Tombol aksi mengikuti izin dan status artikel yang sedang dibuka.
+  function syncArticleButtons() {
+    var status = articleForm.dataset.status || "";
+    var submit = document.getElementById("submit-article");
+    var blocked = status === "submitted" || status === "archived";
+    submit.disabled = blocked;
+    submit.title = status === "submitted" ? "Sudah diajukan dan menunggu penerbit." : status === "archived" ? "Artikel diarsipkan." : "";
+  }
+
+  function setArticleState(text, status) {
+    articleForm.dataset.status = status || "";
+    articleStateLine.textContent = text;
+    syncArticleButtons();
+  }
+
+  function showCoverPreview(url) {
+    var preview = document.getElementById("article-image-preview");
+    if (url) { preview.src = url; preview.hidden = false; } else { preview.hidden = true; }
+  }
+
   function fillArticle(row, revision) {
     articleForm.elements.id.value = revision ? row.article_id : row.id || "";
     articleForm.elements.revision_id.value = revision ? row.id : "";
@@ -168,11 +196,24 @@
     ["author","author_bio","cover_caption","meta_description"].forEach(k=>articleForm.elements[k].value=row[k] || "");
     articleForm.elements.tags.value=(row.tags || []).join(", ");
     articleForm.elements.slug.dataset.manual="true";
-    selectedImage=null; document.getElementById("article-image").value="";document.getElementById("article-image-preview").hidden=true;
+    selectedImage=null; document.getElementById("article-image").value="";
+    showCoverPreview(row.cover_url || "");
     document.getElementById("seo-counter").textContent=(row.meta_description || "").length+" karakter · sasaran 120–160";
     articleForm.dataset.revisionArticle = revision ? row.article_id : "";
-    setMessage(document.getElementById("article-feedback"), revision ? "Revisi dimuat. Simpan atau ajukan perubahan." : "Draf dimuat ke formulir.");
+    setArticleState((revision ? "Mengedit revisi" : row.status === "published" ? "Mengedit artikel terbit (disimpan sebagai revisi)" : "Mengedit") + ": " + (row.title || "tanpa judul") + " · " + articleStatusLabel(row.status), row.status);
+    setMessage(document.getElementById("article-feedback"), revision ? "Revisi dimuat. Simpan atau ajukan perubahan." : row.status === "published" ? "Perubahan pada artikel terbit disimpan sebagai revisi dan tidak tampil publik sebelum diterbitkan." : row.status === "submitted" ? "Artikel ini sedang menunggu review. Menyimpan akan mengembalikannya menjadi Draf; ajukan ulang setelahnya." : row.status === "archived" ? "Artikel ini diarsipkan. Menyimpan akan menjadikannya Draf (belum tampil publik)." : "Draf dimuat ke formulir.");
+    var main = articleForm.closest(".redaksi-main");
+    if (main && !main.hidden) articleForm.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  function articleButton(label, className, handler) {
+    var button = node("button", label, "site-button " + className);
+    button.type = "button";
+    button.addEventListener("click", handler);
+    return button;
+  }
+
+  async function reloadArticles() { renderArticles(await adminRequest("/api/admin?view=articles")); }
 
   function renderArticles(result) {
     var list = document.getElementById("article-list");
@@ -180,69 +221,71 @@
     list.replaceChildren();
     revisions.replaceChildren();
     (result.articles || []).forEach(function (article) {
-      var item = node("article", null, "site-admin-item");
-      var meta = node("div");
+      var item = node("article", null, "site-admin-item redaksi-item");
+      var meta = node("div", null, "redaksi-item-main");
       meta.appendChild(node("strong", article.title));
-      meta.appendChild(node("p", article.status + (article.legacy_id ? " · ID lama: " + article.legacy_id : "")));
+      meta.appendChild(node("span", articleStatusLabel(article.status), "redaksi-badge redaksi-badge-" + article.status));
+      if (article.legacy_id) meta.appendChild(node("p", "ID lama: " + article.legacy_id));
       item.appendChild(meta);
-      var edit = node("button", article.status === "published" ? "Buat revisi" : "Edit draf", "site-button site-button-outline");
-      edit.type = "button";
-      edit.addEventListener("click", function () { fillArticle(article, false); });
-      item.appendChild(edit);
-      if(has("publisher") && article.status!=="archived"){
-        var archive=node("button","Arsipkan","site-button site-button-outline");archive.type="button";
-        archive.onclick=async function(){if(!confirm("Arsipkan berita ini dari halaman publik?"))return;try{await adminRequest("/api/admin",{method:"POST",body:{action:"archive_article",id:article.id}});await refreshView("articles");}catch(err){setMessage(alert,err.message,"error");}};item.appendChild(archive);
-      }
+      var actions = node("div", null, "redaksi-item-actions");
+      if (has("content_editor")) actions.appendChild(articleButton(article.status === "published" ? "Edit (revisi)" : "Edit", "site-button-outline", function () { fillArticle(article, false); }));
+      actions.appendChild(articleButton("Preview", "site-button-outline", function () { openPreview(article); }));
       if (article.status === "submitted" && has("publisher")) {
-        var publish = node("button", "Terbitkan", "site-button site-button-primary");
-        publish.type = "button";
-        publish.addEventListener("click", async function () {
+        var publish = articleButton("Terbitkan", "site-button-primary", async function () {
+          if (!window.confirm("Terbitkan “" + article.title + "” ke situs publik sekarang?")) return;
+          publish.disabled = true;
           try {
             await adminRequest("/api/admin", { method: "POST", body: { action: "publish_article", id: article.id } });
             setMessage(alert, "Berita diterbitkan.", "success");
-            await renderArticles(await adminRequest("/api/admin?view=articles"));
-          } catch (error) { setMessage(alert, error.message, "error"); }
+            await reloadArticles();
+          } catch (error) { publish.disabled = false; setMessage(alert, error.message, "error"); }
         });
-        item.appendChild(publish);
+        actions.appendChild(publish);
       }
+      if (has("publisher") && article.status !== "archived") {
+        actions.appendChild(articleButton("Arsipkan", "site-button-outline", async function () {
+          if (!window.confirm("Arsipkan berita ini dari halaman publik?")) return;
+          try { await adminRequest("/api/admin", { method: "POST", body: { action: "archive_article", id: article.id } }); await refreshView("articles"); }
+          catch (err) { setMessage(alert, err.message, "error"); }
+        }));
+      }
+      item.appendChild(actions);
       list.appendChild(item);
     });
     (result.revisions || []).forEach(function (revision) {
-      var item = node("article", null, "site-admin-item");
-      var meta = node("div");
+      var item = node("article", null, "site-admin-item redaksi-item");
+      var meta = node("div", null, "redaksi-item-main");
       meta.appendChild(node("strong", revision.title));
-      meta.appendChild(node("p", revision.status + " · revisi artikel"));
+      meta.appendChild(node("span", articleStatusLabel(revision.status), "redaksi-badge redaksi-badge-" + revision.status));
+      meta.appendChild(node("p", "Revisi dari artikel terbit"));
       item.appendChild(meta);
-      var load = node("button", "Tinjau", "site-button site-button-outline");
-      load.type = "button";
-      load.addEventListener("click", function () { fillArticle(revision, true); });
-      item.appendChild(load);
+      var actions = node("div", null, "redaksi-item-actions");
+      actions.appendChild(articleButton("Tinjau", "site-button-outline", function () { fillArticle(revision, true); }));
+      actions.appendChild(articleButton("Preview", "site-button-outline", function () { openPreview(revision); }));
       if (revision.status === "draft" && has("content_editor")) {
-        var submit = node("button", "Ajukan", "site-button site-button-outline");
-        submit.type = "button";
-        submit.addEventListener("click", async function () {
+        actions.appendChild(articleButton("Ajukan", "site-button-outline", async function () {
           try {
             await adminRequest("/api/admin", { method: "POST", body: { action: "submit_article", revision_id: revision.id } });
-            await renderArticles(await adminRequest("/api/admin?view=articles"));
+            await reloadArticles();
           } catch (error) { setMessage(alert, error.message, "error"); }
-        });
-        item.appendChild(submit);
+        }));
       }
       if (revision.status === "submitted" && has("publisher")) {
-        var publishRevision = node("button", "Terbitkan revisi", "site-button site-button-primary");
-        publishRevision.type = "button";
-        publishRevision.addEventListener("click", async function () {
+        var publishRevision = articleButton("Terbitkan revisi", "site-button-primary", async function () {
+          if (!window.confirm("Terbitkan revisi “" + revision.title + "”? Versi publik akan diganti.")) return;
+          publishRevision.disabled = true;
           try {
             await adminRequest("/api/admin", { method: "POST", body: { action: "publish_article", id: revision.article_id, revision_id: revision.id } });
             setMessage(alert, "Revisi artikel diterbitkan.", "success");
-            await renderArticles(await adminRequest("/api/admin?view=articles"));
-          } catch (error) { setMessage(alert, error.message, "error"); }
+            await reloadArticles();
+          } catch (error) { publishRevision.disabled = false; setMessage(alert, error.message, "error"); }
         });
-        item.appendChild(publishRevision);
+        actions.appendChild(publishRevision);
       }
+      item.appendChild(actions);
       revisions.appendChild(item);
     });
-    if (!list.childElementCount) list.appendChild(node("p", "Belum ada artikel yang tersimpan."));
+    if (!list.childElementCount) list.appendChild(node("p", "Belum ada artikel yang tersimpan. Klik Artikel baru untuk mulai menulis."));
     if (!revisions.childElementCount) revisions.appendChild(node("p", "Belum ada revisi."));
   }
 
@@ -606,41 +649,72 @@
     return blob;
   }
 
-  async function uploadCover(file, alt) {
-    var status = document.getElementById("article-image-status");
-    status.textContent = "Mengompres gambar…";
-    status.dataset.state = "";
+  var MEDIA_ERRORS = {
+    alt_text_required: "Keterangan gambar wajib diisi (minimal 4 karakter).",
+    payload_too_large: "Ukuran gambar terlalu besar. Pilih gambar yang lebih kecil.",
+    forbidden: "Akun Anda tidak memiliki izin mengunggah gambar.",
+    unsupported_media_type: "Format gambar tidak didukung. Gunakan JPG, PNG, atau WebP."
+  };
+
+  // Kompres, lalu unggah ke /api/media dengan laporan progres. Mengembalikan { id, url, alt }.
+  async function postMedia(file, alt, onStage) {
+    onStage({ stage: "compress" });
     var blob = await resizeImage(file);
     var bytes = new Uint8Array(await blob.arrayBuffer());
     var binary = "";
     for (var offset = 0; offset < bytes.length; offset += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(offset, offset + 0x8000));
-    var result = await new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var request = new XMLHttpRequest();
       request.open("POST", "/api/media");
       request.setRequestHeader("Authorization", "Bearer " + sessionToken());
       request.setRequestHeader("Content-Type", "application/json");
       request.upload.addEventListener("progress", function (event) {
-        if (event.lengthComputable) status.textContent = "Mengunggah gambar… " + Math.round(event.loaded / event.total * 100) + "%";
+        if (event.lengthComputable) onStage({ stage: "upload", percent: Math.round(event.loaded / event.total * 100) });
       });
       request.addEventListener("load", function () {
         var payload = {};
         try { payload = JSON.parse(request.responseText); } catch (_error) {}
         if (request.status >= 200 && request.status < 300) resolve(payload);
-        else reject(new Error(payload.error === "alt_text_required" ? "Teks alternatif gambar wajib diisi." : "Unggah gagal. Tidak ada referensi gambar yang disimpan."));
+        else reject(new Error(MEDIA_ERRORS[payload.error] || "Unggah gagal. Tidak ada referensi gambar yang disimpan."));
       });
       request.addEventListener("error", function () { reject(new Error("Jaringan gagal. Gambar belum tersimpan.")); });
       request.addEventListener("abort", function () { reject(new Error("Unggah dibatalkan. Gambar belum tersimpan.")); });
-      request.send(JSON.stringify({ data: btoa(binary), alt: alt.trim() }));
+      request.send(JSON.stringify({ data: btoa(binary), alt: String(alt || "").trim() }));
     });
+  }
+
+  function progressReporter(statusEl, progressEl) {
+    return function (info) {
+      if (info.stage === "compress") {
+        progressEl.hidden = false; progressEl.removeAttribute("value");
+        statusEl.textContent = "Mengompres gambar…";
+      } else {
+        progressEl.hidden = false; progressEl.value = info.percent;
+        statusEl.textContent = "Mengunggah gambar… " + info.percent + "%";
+      }
+      statusEl.dataset.state = "";
+    };
+  }
+
+  async function uploadCover(file, alt) {
+    var status = document.getElementById("article-image-status");
+    var progress = document.getElementById("article-upload-progress");
+    try {
+      var result = await postMedia(file, alt, progressReporter(status, progress));
+    } catch (error) {
+      status.textContent = error.message;
+      status.dataset.state = "error";
+      throw error;
+    } finally { progress.hidden = true; }
     articleForm.elements.cover_url.value = result.url;
     articleForm.elements.cover_media_id.value = result.id;
     articleForm.elements.cover_alt.value = result.alt;
-    document.getElementById("article-image-status").textContent = "Gambar tersimpan di Storage. URL sampul telah diisi.";
-    document.getElementById("article-image-status").dataset.state = "success";
+    status.textContent = "Foto sampul tersimpan.";
+    status.dataset.state = "success";
     selectedImage = null;
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     previewUrl = "";
-    document.getElementById("article-image-preview").hidden = true;
+    showCoverPreview(result.url);
     document.getElementById("article-image").value = "";
   }
 
@@ -659,7 +733,7 @@
     var preview = document.getElementById("article-image-preview");
     preview.src = previewUrl;
     preview.hidden = false;
-    status.textContent = file.name + " · " + (file.size / 1024 / 1024).toFixed(1) + " MB. Isi alt text sebelum menyimpan.";
+    status.textContent = file.name + " · " + (file.size / 1024 / 1024).toFixed(1) + " MB. Isi keterangan foto, lalu simpan; foto diunggah saat Anda menyimpan.";
     status.dataset.state = "";
   }
 
@@ -690,24 +764,61 @@
     await establishSession(null);
   });
 
+  // Validasi dengan pesan yang mudah dipahami; membuka Pengaturan Lanjutan bila kolom bermasalah ada di dalamnya.
+  function validateArticle(needsCoverAlt) {
+    var fb = document.getElementById("article-feedback");
+    var fail = function (message, field, advanced) {
+      if (advanced) document.getElementById("article-advanced").open = true;
+      setMessage(fb, message, "error");
+      if (field) field.focus();
+      return false;
+    };
+    var title = articleForm.elements.title.value.trim();
+    if (title.length < 4) return fail("Judul minimal 4 karakter.", articleForm.elements.title);
+    if (editor.textContent.trim().length < 20) return fail("Isi artikel minimal 20 karakter.", editor);
+    if (needsCoverAlt && articleForm.elements.cover_alt.value.trim().length < 4) return fail("Isi keterangan foto sampul (minimal 4 karakter) agar foto dapat diunggah.", articleForm.elements.cover_alt);
+    var slug = articleForm.elements.slug;
+    if (!slug.value) slug.value = slugify(title);
+    if (!slug.checkValidity()) return fail("Alamat artikel (slug) hanya boleh huruf kecil, angka, dan tanda hubung.", slug, true);
+    if (!articleForm.elements.category.value.trim()) return fail("Kategori wajib diisi.", articleForm.elements.category, true);
+    return true;
+  }
+
+  var articleBusy = false;
+  function setArticleBusy(busy, activeId) {
+    articleBusy = busy;
+    ["save-article", "submit-article", "publish-now"].forEach(function (id) {
+      var button = document.getElementById(id);
+      if (busy) { button.disabled = true; if (id === activeId) { button.dataset.label = button.textContent; button.textContent = "Memproses…"; } }
+      else { if (button.dataset.label) { button.textContent = button.dataset.label; delete button.dataset.label; } button.disabled = false; }
+    });
+    if (!busy) syncArticleButtons();
+  }
+
   articleForm.addEventListener("submit", async function (event) {
     event.preventDefault();
+    if (articleBusy) return;
     articleForm.elements.body.value=DDPEEditorial.clean(editor.innerHTML);
-    if (!articleForm.reportValidity()) return;
-    var publishNow = event.submitter && event.submitter.id === "publish-now";
-    var saveButton = articleForm.querySelector('button[type="submit"]');
-    saveButton.disabled = true;
-    document.getElementById("publish-now").disabled=true;
+    var action = event.submitter && event.submitter.id;
+    var publishNow = action === "publish-now";
+    var submitAfter = action === "submit-article";
+    var image = selectedImage;
+    var feedback = document.getElementById("article-feedback");
+    if (!validateArticle(Boolean(image))) return;
+    if (publishNow && !window.confirm("Terbitkan artikel ini ke situs publik sekarang?")) return;
+    if (submitAfter && !window.confirm("Ajukan artikel ini kepada penerbit untuk ditinjau?")) return;
+    setArticleBusy(true, action || "save-article");
     var data = new FormData(articleForm);
     var body = Object.fromEntries(data.entries());
-    var image = selectedImage;
     try {
       if (image) {
-        await uploadCover(image, document.getElementById("article-image-alt").value);
+        setMessage(feedback, "Mengunggah foto sampul…");
+        await uploadCover(image, articleForm.elements.cover_alt.value);
         body.cover_url = articleForm.elements.cover_url.value;
         body.cover_media_id = articleForm.elements.cover_media_id.value;
         body.cover_alt = articleForm.elements.cover_alt.value;
       }
+      setMessage(feedback, "Menyimpan artikel…");
       body.action = "save_article";
       if (articleForm.elements.revision_id.value) {
         body.id = articleForm.elements.id.value;
@@ -715,40 +826,40 @@
       }
       var saved = await adminRequest("/api/admin", { method: "POST", body });
       articleForm.elements.slug.dataset.manual="true";
+      var status = "draft";
       if (saved.article) {
         articleForm.elements.id.value = saved.article.id;
         articleForm.elements.revision_id.value = "";
         articleForm.dataset.revisionArticle = "";
+        status = saved.article.status || "draft";
       }
       if (saved.revision) {
         articleForm.elements.revision_id.value = saved.revision.id;
         articleForm.dataset.revisionArticle = saved.revision.article_id;
+        status = saved.revision.status || "draft";
       }
-      if(publishNow){
-        const id=articleForm.elements.id.value, revision_id=articleForm.elements.revision_id.value || undefined;
-        await adminRequest("/api/admin",{method:"POST",body:{action:"submit_article",id,revision_id}});
-        await adminRequest("/api/admin",{method:"POST",body:{action:"publish_article",id,revision_id}});
-        articleForm.elements.revision_id.value="";
+      var id = articleForm.elements.id.value, revisionId = articleForm.elements.revision_id.value || undefined;
+      if (publishNow) {
+        setMessage(feedback, "Menerbitkan artikel…");
+        await adminRequest("/api/admin", { method: "POST", body: { action: "submit_article", id, revision_id: revisionId } });
+        await adminRequest("/api/admin", { method: "POST", body: { action: "publish_article", id, revision_id: revisionId } });
+        articleForm.elements.revision_id.value = "";
+        status = "published";
+      } else if (submitAfter) {
+        setMessage(feedback, "Mengajukan untuk ditinjau…");
+        await adminRequest("/api/admin", { method: "POST", body: revisionId ? { action: "submit_article", revision_id: revisionId } : { action: "submit_article", id } });
+        status = "submitted";
       }
-      setMessage(document.getElementById("article-feedback"), publishNow ? "Artikel diterbitkan." : "Draf tersimpan di server. Belum diterbitkan.", "success");
-      renderArticles(await adminRequest("/api/admin?view=articles"));
+      setArticleState((publishNow ? "Terbit" : submitAfter ? "Menunggu review" : "Draf tersimpan") + ": " + body.title.trim(), status);
+      setMessage(feedback, publishNow ? "Artikel diterbitkan dan tampil di situs publik."
+        : submitAfter ? "Artikel diajukan kepada penerbit. Versi publik belum berubah."
+        : "Draf tersimpan. Belum diterbitkan.", "success");
+      await reloadArticles();
     } catch (error) {
-      setMessage(document.getElementById("article-feedback"), error.message, "error");
+      setMessage(feedback, error.message, "error");
     } finally {
-      saveButton.disabled = false;
-      document.getElementById("publish-now").disabled=false;
+      setArticleBusy(false);
     }
-  });
-
-  document.getElementById("submit-article").addEventListener("click", async function () {
-    var id = articleForm.elements.id.value;
-    var revisionId = articleForm.elements.revision_id.value;
-    if (!id) return setMessage(document.getElementById("article-feedback"), "Simpan draf terlebih dahulu.", "error");
-    try {
-      await adminRequest("/api/admin", { method: "POST", body: revisionId ? { action: "submit_article", revision_id: revisionId } : { action: "submit_article", id } });
-      setMessage(document.getElementById("article-feedback"), "Diajukan kepada penerbit. Versi publik belum berubah.", "success");
-      renderArticles(await adminRequest("/api/admin?view=articles"));
-    } catch (error) { setMessage(document.getElementById("article-feedback"), error.message, "error"); }
   });
 
   document.getElementById("article-image").addEventListener("change", function () {
@@ -904,24 +1015,29 @@
   document.querySelectorAll('[data-format]').forEach(button=>{button.addEventListener('mousedown',e=>e.preventDefault());button.addEventListener('click',()=>{editor.focus();document.execCommand(button.dataset.format,false,button.dataset.value || null);});});
   document.getElementById('editor-link').onclick=()=>{const link=prompt('Alamat tautan HTTPS:');if(!link)return;const safe=editorial.url(link);if(!safe)return setMessage(document.getElementById('article-feedback'),'Alamat tautan tidak valid.','error');editor.focus();document.execCommand('createLink',false,safe);};
   editor.addEventListener('paste',event=>{event.preventDefault();const data=event.clipboardData;document.execCommand('insertHTML',false,editorial.clean(data.getData('text/html') || data.getData('text/plain')));});
-  document.getElementById('publish-now').type='submit';
-  document.getElementById('new-article').onclick=()=>{articleForm.reset();articleForm.elements.id.value='';articleForm.elements.revision_id.value='';articleForm.elements.cover_media_id.value='';articleForm.elements.slug.dataset.manual='false';editor.replaceChildren();selectedImage=null;document.getElementById('article-image-preview').hidden=true;setMessage(document.getElementById('article-feedback'),'Artikel baru.');};
+  document.getElementById('new-article').onclick=()=>{articleForm.reset();articleForm.elements.id.value='';articleForm.elements.revision_id.value='';articleForm.elements.cover_media_id.value='';articleForm.elements.slug.dataset.manual='false';articleForm.dataset.revisionArticle='';editor.replaceChildren();selectedImage=null;document.getElementById('article-image').value='';showCoverPreview('');document.getElementById('seo-counter').textContent='0 karakter · sasaran 120–160';setArticleState('Artikel baru. Belum disimpan.','');setMessage(document.getElementById('article-feedback'),'');articleForm.elements.title.focus();};
+  function openPreview(row){
+    const a={...row};a.body=row.body===undefined?'':row.body;a.tags=Array.isArray(row.tags)?row.tags:String(row.tags||'').split(',').map(t=>t.trim()).filter(Boolean);a.id=a.id || 'preview';a.title=a.title||'Tanpa judul';
+    const dialog=document.getElementById('article-preview');dialog.querySelector('iframe').srcdoc='<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="'+location.origin+'/css/site.css"><link rel="stylesheet" href="'+location.origin+'/css/editorial.css"><body class="ddpe-reader"><p>Pratinjau — belum dipublikasikan. Tombol interaktif dinonaktifkan.</p><main class="site-container"><article>'+editorial.render(a)+'</article></main></body></html>';dialog.showModal();
+  }
   document.getElementById('preview-article').onclick=()=>{
-    const a=Object.fromEntries(new FormData(articleForm));a.body=editorial.clean(editor.innerHTML);a.tags=a.tags.split(',').map(t=>t.trim()).filter(Boolean);a.id=a.id || 'preview';
-    const dialog=document.getElementById('article-preview');dialog.querySelector('iframe').srcdoc='<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="'+location.origin+'/css/site.css"><link rel="stylesheet" href="'+location.origin+'/css/editorial.css"><body class="ddpe-reader"><p>Pratinjau draf — belum dipublikasikan. Tombol interaktif dinonaktifkan.</p><main class="site-container"><article>'+editorial.render(a)+'</article></main></body></html>';dialog.showModal();
+    const a=Object.fromEntries(new FormData(articleForm));a.body=editorial.clean(editor.innerHTML);openPreview(a);
   };
-  async function uploadImage(file,alt){
-    if(!file)throw Error('Pilih gambar terlebih dahulu.');if(!alt || alt.trim().length<4)throw Error('Isi keterangan foto minimal 4 karakter.');
-    const blob=await resizeImage(file), bytes=new Uint8Array(await blob.arrayBuffer());let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+0x8000));
-    return adminRequest('/api/media',{method:'POST',body:{data:btoa(bin),alt:alt.trim()}});
+  async function uploadImage(file,alt,onStage){
+    if(!file)throw Error('Pilih gambar terlebih dahulu.');if(!alt || alt.trim().length<4)throw Error('Isi keterangan gambar minimal 4 karakter.');
+    return postMedia(file,alt,onStage || function(){});
   }
   let selection=null;
   editor.addEventListener('keyup',captureSelection);editor.addEventListener('mouseup',captureSelection);
   function captureSelection(){const s=window.getSelection();if(s.rangeCount && editor.contains(s.anchorNode))selection=s.getRangeAt(0).cloneRange();}
+  const inlinePanel=document.getElementById('inline-image-panel'),inlineToggle=document.getElementById('toggle-inline-image');
+  inlineToggle.addEventListener('mousedown',e=>e.preventDefault());
+  inlineToggle.onclick=()=>{captureSelection();inlinePanel.hidden=!inlinePanel.hidden;inlineToggle.setAttribute('aria-expanded',String(!inlinePanel.hidden));if(!inlinePanel.hidden)document.getElementById('inline-image').focus();};
   document.getElementById('insert-image').onclick=async function(){
-    this.disabled=true;try{const alt=document.getElementById('inline-alt').value,result=await uploadImage(document.getElementById('inline-image').files[0],alt);editor.focus();if(selection && editor.contains(selection.commonAncestorContainer)){const s=window.getSelection();s.removeAllRanges();s.addRange(selection);}else{const r=document.createRange();r.selectNodeContents(editor);r.collapse(false);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}
-    document.execCommand('insertHTML',false,'<figure><img src="'+editorial.esc(result.url)+'" alt="'+editorial.esc(alt)+'"><figcaption>'+editorial.esc(alt)+'</figcaption></figure><p><br></p>');setMessage(document.getElementById('article-feedback'),'Gambar disisipkan. Simpan artikel untuk menyimpan perubahan.');}
-    catch(err){setMessage(document.getElementById('article-feedback'),err.message,'error');}finally{this.disabled=false;}
+    const status=document.getElementById('inline-image-status'),progress=document.getElementById('inline-progress'),alt=document.getElementById('inline-alt').value;
+    this.disabled=true;try{const result=await uploadImage(document.getElementById('inline-image').files[0],alt,progressReporter(status,progress));editor.focus();if(selection && editor.contains(selection.commonAncestorContainer)){const s=window.getSelection();s.removeAllRanges();s.addRange(selection);}else{const r=document.createRange();r.selectNodeContents(editor);r.collapse(false);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}
+    document.execCommand('insertHTML',false,'<figure><img src="'+editorial.esc(result.url)+'" alt="'+editorial.esc(alt)+'"><figcaption>'+editorial.esc(alt)+'</figcaption></figure><p><br></p>');status.textContent='Gambar disisipkan. Simpan artikel untuk menyimpan perubahan.';status.dataset.state='success';document.getElementById('inline-image').value='';document.getElementById('inline-alt').value='';inlinePanel.hidden=true;inlineToggle.setAttribute('aria-expanded','false');setMessage(document.getElementById('article-feedback'),'Gambar disisipkan. Simpan artikel untuk menyimpan perubahan.','success');}
+    catch(err){status.textContent=err.message;status.dataset.state='error';}finally{progress.hidden=true;this.disabled=false;}
   };
   function button(label,fn){const b=node('button',label);b.type='button';b.onclick=fn;return b;}
   function field(parent,label,value,change,multiline){const wrap=node('label',label),input=node(multiline?'textarea':'input');input.value=value || '';input.maxLength=multiline?5000:1200;input.oninput=()=>change(input.value);wrap.append(input);parent.append(wrap);return input;}

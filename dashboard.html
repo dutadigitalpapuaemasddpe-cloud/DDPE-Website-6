@@ -59,35 +59,78 @@
       <div class="site-dashboard-heading dash-topbar"><button type="button" class="dash-menu-toggle" aria-controls="dash-sidebar" aria-expanded="false">Menu modul</button><div><p class="eyebrow">Ruang kerja pengurus</p><h1>Pengelolaan DDPE</h1></div></div>
       <div id="dashboard-alert" class="site-dashboard-message" role="status" aria-live="polite"></div>
       <section class="site-dashboard-panel" data-panel="articles" hidden>
-        <header class="site-dashboard-panel-head"><div><h2>Berita dan revisi</h2><p>Draf diajukan untuk ditinjau penerbit. Artikel terbit diubah sebagai revisi.</p></div><button type="button" class="site-button site-button-outline" data-refresh="articles">Muat ulang</button></header>
-        <div class="site-dashboard-columns">
-          <form class="site-form site-dashboard-form" id="article-form" novalidate>
+        <header class="site-dashboard-panel-head"><div><h2>Ruang Redaksi</h2><p>Tulis, simpan sebagai draf, ajukan untuk ditinjau, lalu terbitkan. Artikel yang sudah terbit diubah sebagai revisi dan tidak berubah di situs publik sebelum diterbitkan.</p></div><div class="site-dashboard-actions"><button type="button" class="site-button site-button-outline" id="new-article" data-permission="content_editor">Artikel baru</button><button type="button" class="site-button site-button-outline" data-refresh="articles">Muat ulang</button></div></header>
+        <div class="redaksi-layout">
+          <div class="redaksi-main" data-permission="content_editor">
+          <form class="site-form site-dashboard-form redaksi-form" id="article-form" novalidate>
             <input type="hidden" name="id" />
             <input type="hidden" name="revision_id" />
-            <label>Judul<input name="title" minlength="4" maxlength="180" required /></label>
-            <label>Slug<input name="slug" pattern="[a-z0-9]+(-[a-z0-9]+)*" maxlength="100" required /></label>
-            <label>Ringkasan<textarea name="excerpt" rows="3" maxlength="320"></textarea></label>
-            <label>Kategori<input name="category" value="berita" maxlength="50" required /></label>
-            <label>URL sampul HTTPS atau path assets/<input name="cover_url" type="text" maxlength="1200" /></label>
             <input type="hidden" name="cover_media_id" />
-            <label>Teks alternatif sampul<input name="cover_alt" maxlength="220" /></label>
-            <label>Nama penulis<input name="author" maxlength="120" value="Tim Redaksi DDPE"></label>
-<label>Profil singkat penulis<textarea name="author_bio" maxlength="500" rows="2"></textarea></label>
-<label>Keterangan foto / kredit<input name="cover_caption" maxlength="500"></label>
-<label>Tags / kata kunci (pisahkan dengan koma)<input name="tags" maxlength="900"></label>
-<label>Ringkasan SEO<textarea name="meta_description" maxlength="320" rows="3" aria-describedby="seo-counter"></textarea></label><small id="seo-counter">0 karakter · sasaran 120–160</small>
-<div class="cms-toolbar" role="toolbar" aria-label="Format artikel">
-<button type="button" data-format="formatBlock" data-value="p">Paragraf</button><button type="button" data-format="formatBlock" data-value="h2">H2</button><button type="button" data-format="formatBlock" data-value="h3">H3</button><button type="button" data-format="bold">Tebal</button><button type="button" data-format="italic">Miring</button><button type="button" data-format="formatBlock" data-value="blockquote">Kutipan</button><button type="button" data-format="insertUnorderedList">Bullet</button><button type="button" data-format="insertOrderedList">Nomor</button><button type="button" id="editor-link">Tautan</button></div>
-<label id="editor-label">Isi artikel</label><div id="article-editor" class="cms-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="editor-label"></div><textarea name="body" hidden></textarea>
-<label>Gambar sisipan<input type="file" id="inline-image" accept="image/jpeg,image/png,image/webp"></label><label>Keterangan gambar sisipan<input id="inline-alt" maxlength="220"></label><button type="button" id="insert-image">Unggah &amp; sisipkan gambar</button>
-            <label class="site-image-dropzone" id="article-dropzone">Pilih gambar atau tarik ke area ini<input type="file" id="article-image" accept="image/jpeg,image/png,image/webp" /></label>
-            <img id="article-image-preview" class="site-image-preview" src="assets/tim-ddpe-banner.jpg" alt="Pratinjau gambar sampul" width="420" height="280" hidden />
-            <p class="site-form-feedback" id="article-image-status" role="status" aria-live="polite">JPG, PNG, atau WebP; maksimum 12 MB sebelum kompresi.</p>
-            <label>Teks alternatif foto<input id="article-image-alt" maxlength="220" /></label>
-            <div class="site-dashboard-actions"><button type="submit" class="site-button site-button-primary">Simpan draf</button><button type="button" class="site-button site-button-outline" id="submit-article">Ajukan untuk ditinjau</button><button type="button" id="preview-article">Preview</button><button type="button" id="publish-now" data-permission="content_editor" hidden>Terbitkan sekarang</button><button type="button" id="new-article">Artikel baru</button></div>
+            <p class="redaksi-state" id="article-state" role="status" aria-live="polite">Artikel baru. Belum disimpan.</p>
+
+            <label class="redaksi-title">Judul artikel<input name="title" minlength="4" maxlength="180" required placeholder="Tulis judul yang jelas dan singkat" autocomplete="off" /></label>
+
+            <div class="redaksi-field">
+              <span class="redaksi-label" id="editor-label">Isi artikel</span>
+              <div class="cms-toolbar redaksi-toolbar" role="toolbar" aria-label="Format artikel" aria-controls="article-editor">
+                <button type="button" data-format="formatBlock" data-value="h2" aria-label="Judul bagian (heading 2)">Judul bagian</button>
+                <button type="button" data-format="formatBlock" data-value="h3" aria-label="Sub-judul (heading 3)">Sub-judul</button>
+                <button type="button" data-format="formatBlock" data-value="p" aria-label="Paragraf biasa">Paragraf</button>
+                <span class="redaksi-sep" aria-hidden="true"></span>
+                <button type="button" data-format="bold" aria-label="Tebal"><strong>B</strong></button>
+                <button type="button" data-format="italic" aria-label="Miring"><em>I</em></button>
+                <button type="button" data-format="formatBlock" data-value="blockquote" aria-label="Kutipan">Kutipan</button>
+                <span class="redaksi-sep" aria-hidden="true"></span>
+                <button type="button" data-format="insertUnorderedList" aria-label="Daftar berpoin">Daftar</button>
+                <button type="button" data-format="insertOrderedList" aria-label="Daftar bernomor">Nomor</button>
+                <span class="redaksi-sep" aria-hidden="true"></span>
+                <button type="button" id="editor-link" aria-label="Sisipkan tautan">Tautan</button>
+                <button type="button" id="toggle-inline-image" aria-expanded="false" aria-controls="inline-image-panel">Gambar</button>
+              </div>
+              <div class="redaksi-inline-image" id="inline-image-panel" hidden>
+                <label>Pilih gambar<input type="file" id="inline-image" accept="image/jpeg,image/png,image/webp"></label>
+                <label>Keterangan gambar (wajib, min. 4 karakter)<input id="inline-alt" maxlength="220" placeholder="Jelaskan isi gambar"></label>
+                <div class="redaksi-inline-row"><button type="button" id="insert-image">Unggah &amp; sisipkan</button><progress id="inline-progress" max="100" value="0" hidden></progress></div>
+                <p class="site-form-feedback" id="inline-image-status" role="status" aria-live="polite">JPG, PNG, atau WebP hingga 12 MB. Gambar masuk di posisi kursor.</p>
+              </div>
+              <div id="article-editor" class="cms-editor redaksi-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="editor-label" data-placeholder="Mulai menulis di sini…"></div>
+              <textarea name="body" hidden></textarea>
+            </div>
+
+            <fieldset class="redaksi-cover">
+              <legend>Foto sampul</legend>
+              <label class="site-image-dropzone" id="article-dropzone">Pilih foto atau tarik ke area ini<input type="file" id="article-image" accept="image/jpeg,image/png,image/webp" /></label>
+              <img id="article-image-preview" class="site-image-preview" src="assets/tim-ddpe-banner.jpg" alt="Pratinjau foto sampul" width="420" height="280" hidden />
+              <progress id="article-upload-progress" max="100" value="0" hidden></progress>
+              <p class="site-form-feedback" id="article-image-status" role="status" aria-live="polite">JPG, PNG, atau WebP; maksimum 12 MB sebelum kompresi.</p>
+              <label>Keterangan foto (teks alternatif)<input name="cover_alt" id="article-image-alt" maxlength="220" placeholder="Jelaskan isi foto untuk pembaca tunanetra" /></label>
+            </fieldset>
+
+            <details class="redaksi-advanced" id="article-advanced">
+              <summary>Pengaturan Lanjutan <span>Alamat artikel, SEO, penulis, kategori</span></summary>
+              <div class="redaksi-advanced-body">
+                <label>Alamat artikel (slug)<input name="slug" pattern="[a-z0-9]+(-[a-z0-9]+)*" maxlength="100" required /><small>Terisi otomatis dari judul. Hanya huruf kecil, angka, dan tanda hubung.</small></label>
+                <label>Ringkasan<textarea name="excerpt" rows="3" maxlength="320"></textarea><small>Tampil di daftar berita.</small></label>
+                <label>Kategori<input name="category" value="berita" maxlength="50" required /></label>
+                <label>Nama penulis<input name="author" maxlength="120" value="Tim Redaksi DDPE"></label>
+                <label>Profil singkat penulis<textarea name="author_bio" maxlength="500" rows="2"></textarea></label>
+                <label>Keterangan foto / kredit<input name="cover_caption" maxlength="500"></label>
+                <label>Kata kunci (pisahkan dengan koma)<input name="tags" maxlength="900"></label>
+                <label>Ringkasan SEO<textarea name="meta_description" maxlength="320" rows="3" aria-describedby="seo-counter"></textarea></label><small id="seo-counter">0 karakter · sasaran 120–160</small>
+                <label>Alamat foto sampul (teknis)<input name="cover_url" type="text" maxlength="1200" /><small>Terisi otomatis saat Anda mengunggah foto. Ubah manual hanya bila perlu (HTTPS atau assets/).</small></label>
+              </div>
+            </details>
+
             <p class="site-form-feedback" id="article-feedback" role="status" aria-live="polite"></p>
+            <div class="site-dashboard-actions redaksi-actions">
+              <button type="submit" class="site-button site-button-primary" id="save-article">Simpan Draft</button>
+              <button type="submit" class="site-button site-button-outline" id="submit-article" data-permission="content_editor">Ajukan Review</button>
+              <button type="submit" id="publish-now" data-permission="content_editor" hidden>Terbitkan</button>
+              <button type="button" id="preview-article">Preview</button>
+            </div>
           </form>
-          <div><h3>Konten tersimpan</h3><div id="article-list" class="site-admin-list"></div><h3>Revisi menunggu keputusan</h3><div id="revision-list" class="site-admin-list"></div></div>
+          </div>
+          <div class="redaksi-side"><h3>Artikel</h3><div id="article-list" class="site-admin-list"></div><h3>Revisi menunggu keputusan</h3><div id="revision-list" class="site-admin-list"></div></div>
         </div>
       </section>
 

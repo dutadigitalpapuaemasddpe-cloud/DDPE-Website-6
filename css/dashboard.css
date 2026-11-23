@@ -304,3 +304,80 @@
 /* ---------- Usia & wali ---------- */
 .dashboard-body .recruitment-hint { color: var(--d-muted); font-size: 13px; font-weight: 400; }
 .dashboard-body .application-guardian { padding: 8px 12px; border-left: 3px solid var(--d-gold); background: var(--d-paper); color: var(--d-ink); }
+
+/* ---------- Ruang Redaksi ---------- */
+.dashboard-body .redaksi-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; align-items: start; }
+.dashboard-body .redaksi-main { min-width: 0; }
+.dashboard-body .redaksi-form { gap: 26px; padding: 32px; }
+.dashboard-body .redaksi-state { margin: 0; padding: 10px 14px; border-left: 3px solid var(--d-gold); background: var(--d-paper); color: var(--d-ink); font-size: 14px; line-height: 1.5; }
+.dashboard-body .redaksi-title { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--d-muted); }
+.dashboard-body .site-dashboard .redaksi-title input { min-height: 60px; padding: 10px 2px; border: 0; border-bottom: 2px solid var(--d-ink); border-radius: 0; background: transparent; font: 600 clamp(1.5rem, 2.6vw, 2rem)/1.25 var(--d-serif); letter-spacing: 0; text-transform: none; color: var(--d-ink); }
+.dashboard-body .site-dashboard .redaksi-title input:focus { border-bottom-color: var(--d-gold); outline: 0; box-shadow: 0 2px 0 var(--d-gold); }
+.dashboard-body .redaksi-title input::placeholder { color: #8a8f9c; font-weight: 400; }
+.dashboard-body .redaksi-field { display: grid; gap: 0; min-width: 0; }
+.dashboard-body .redaksi-label { margin-bottom: 8px; color: var(--d-ink); font-size: 14px; font-weight: 600; }
+
+.dashboard-body .redaksi-toolbar { position: sticky; top: var(--d-head); z-index: 6; align-items: center; gap: 6px; padding: 8px; border: 1px solid #bdb6a8; border-bottom: 0; border-radius: 2px 2px 0 0; background: var(--d-paper); }
+.dashboard-body .site-dashboard .redaksi-toolbar button { min-height: 38px; min-width: 38px; padding: 0 12px; border-color: #cfc8ba; font-size: 14px; }
+.dashboard-body .site-dashboard .redaksi-toolbar button:hover { background: var(--d-ink); border-color: var(--d-ink); }
+.dashboard-body .site-dashboard .redaksi-toolbar button[aria-expanded="true"] { background: var(--d-ink); color: #fff; }
+.dashboard-body .redaksi-sep { align-self: stretch; width: 1px; margin: 4px 4px; background: #cfc8ba; }
+.dashboard-body .redaksi-editor { min-height: 420px; max-height: none; padding: 24px 26px; border-radius: 0 0 2px 2px; font-size: 18px; line-height: 1.8; }
+.dashboard-body .redaksi-editor:empty::before { content: attr(data-placeholder); color: #8a8f9c; pointer-events: none; }
+.dashboard-body .redaksi-editor:focus { outline: 2px solid rgb(58 42 107 / 25%); outline-offset: 1px; }
+.dashboard-body .redaksi-editor h2 { margin: 1.2em 0 .4em; font: 600 1.45rem/1.3 var(--d-serif); }
+.dashboard-body .redaksi-editor h3 { margin: 1.1em 0 .3em; font: 600 1.2rem/1.3 var(--d-serif); }
+.dashboard-body .redaksi-editor figure { margin: 1em 0; }
+.dashboard-body .redaksi-editor figcaption { color: var(--d-muted); font-size: 14px; }
+.dashboard-body .redaksi-inline-image { display: grid; gap: 14px; padding: 16px; border: 1px solid #bdb6a8; border-top: 0; background: var(--d-white); }
+.dashboard-body .redaksi-inline-row { display: flex; align-items: center; gap: 12px; }
+.dashboard-body .redaksi-inline-row progress { flex: 1; }
+
+.dashboard-body .redaksi-cover { display: grid; gap: 14px; min-width: 0; margin: 0; padding: 18px; border: 1px solid var(--d-line); border-radius: 0; background: var(--d-paper); }
+.dashboard-body .redaksi-cover legend { padding: 0 8px; color: var(--d-ink); font-size: 14px; font-weight: 700; }
+.dashboard-body .redaksi-cover .site-image-dropzone { display: grid; gap: 8px; padding: 22px 16px; border: 2px dashed #bdb6a8; background: var(--d-white); color: var(--d-muted); text-align: center; cursor: pointer; }
+.dashboard-body .redaksi-cover .site-image-dropzone.is-dragging { border-color: var(--d-gold); background: #fbf5e7; }
+.dashboard-body .redaksi-cover .site-image-preview { width: 100%; max-width: 420px; height: auto; max-height: 280px; object-fit: cover; border: 1px solid var(--d-line); }
+.dashboard-body progress { width: 100%; height: 8px; accent-color: var(--d-gold); }
+
+.dashboard-body .redaksi-advanced { border: 1px solid var(--d-line); background: var(--d-paper); }
+.dashboard-body .redaksi-advanced summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 14px 16px; color: var(--d-ink); font-size: 15px; font-weight: 700; cursor: pointer; }
+.dashboard-body .redaksi-advanced summary span { color: var(--d-muted); font-size: 13px; font-weight: 400; }
+.dashboard-body .redaksi-advanced[open] summary { border-bottom: 1px solid var(--d-line); }
+.dashboard-body .redaksi-advanced-body { display: grid; gap: 18px; padding: 18px 16px 20px; }
+.dashboard-body .redaksi-advanced small { color: var(--d-muted); font-size: 13px; font-weight: 400; }
+
+.dashboard-body .redaksi-actions { position: sticky; bottom: 0; z-index: 5; margin: 0 -32px -32px; padding: 14px 32px; border-top: 1px solid var(--d-line); background: var(--d-white); }
+
+.dashboard-body .redaksi-side h3 { margin: 0 0 12px; font: 600 1.15rem/1.3 var(--d-serif); }
+.dashboard-body .redaksi-side h3:not(:first-child) { margin-top: 32px; }
+.dashboard-body .redaksi-item { display: grid; gap: 12px; padding: 16px 2px; }
+.dashboard-body .redaksi-item-main { min-width: 0; }
+.dashboard-body .redaksi-item-main strong { display: block; margin-bottom: 6px; font-size: 15px; line-height: 1.4; }
+.dashboard-body .redaksi-item-main p { margin: 6px 0 0; }
+.dashboard-body .redaksi-item-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.dashboard-body .redaksi-badge { display: inline-block; padding: 2px 8px; border: 1px solid currentColor; border-radius: 2px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.dashboard-body .redaksi-badge-draft, .dashboard-body .redaksi-badge-archived { color: var(--d-muted); }
+.dashboard-body .redaksi-badge-submitted { color: var(--d-gold-text); }
+.dashboard-body .redaksi-badge-published { color: var(--d-success); }
+.dashboard-body .redaksi-badge-rejected { color: var(--d-error); }
+
+@media (max-width: 1100px) {
+  .dashboard-body .redaksi-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+@media (max-width: 900px) {
+  .dashboard-body .redaksi-form { padding: 20px 16px; gap: 22px; }
+  .dashboard-body .redaksi-toolbar { top: var(--d-head); }
+  .dashboard-body .site-dashboard .redaksi-toolbar button { flex: 1 1 auto; }
+  .dashboard-body .redaksi-sep { display: none; }
+  .dashboard-body .redaksi-editor { min-height: 320px; padding: 16px; font-size: 17px; }
+  .dashboard-body .redaksi-actions { position: static; margin: 0; padding: 14px 0 0; }
+  .dashboard-body .redaksi-cover { padding: 14px; }
+}
+
+/* Hierarki aksi Ruang Redaksi: Simpan Draft = emas (utama), Ajukan Review = garis, Terbitkan = navy. */
+.dashboard-body .site-dashboard .redaksi-actions #submit-article { border-color: var(--d-ink); background: var(--d-white); color: var(--d-ink) !important; }
+.dashboard-body .site-dashboard .redaksi-actions #submit-article:hover:not(:disabled) { background: var(--d-ink); color: #fff !important; }
+.dashboard-body .site-dashboard .redaksi-actions #publish-now { border-color: var(--d-ink); background: var(--d-ink); color: #fff !important; }
+.dashboard-body .site-dashboard .redaksi-actions #publish-now:hover:not(:disabled) { border-color: var(--d-gold); background: var(--d-gold); color: var(--d-ink) !important; }
+.dashboard-body .site-dashboard .redaksi-actions button:disabled { opacity: .5; cursor: not-allowed; }
