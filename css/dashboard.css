@@ -459,3 +459,28 @@
 @media (max-width: 1100px) {
   .dashboard-body .cms-outline { max-height: 380px; }
 }
+
+/* Kemitraan: tab Daftar Mitra / Pengajuan, daftar mitra, dan formulir */
+.dashboard-body .dash-tabs { display: flex; gap: 4px; margin: 0 0 18px; border-bottom: 1px solid var(--d-line); }
+.dashboard-body .dash-tabs button { min-height: 44px; padding: 0 18px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: var(--d-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.dashboard-body .dash-tabs button[aria-selected="true"] { border-bottom-color: var(--d-gold); }
+.dashboard-body .dash-tabs button:focus-visible { outline: 2px solid var(--d-gold); outline-offset: -2px; }
+.dashboard-body .dash-toolbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.dashboard-body .partner-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; }
+.dashboard-body .partner-item .partner-thumb { width: 64px; height: 64px; display: grid; place-items: center; border: 1px solid var(--d-line); background: #fff; color: var(--d-ink); font-weight: 700; overflow: hidden; }
+.dashboard-body .partner-item .partner-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.dashboard-body .partner-item .partner-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.dashboard-body .partner-badge { padding: 2px 10px; border: 1px solid var(--d-line); font-size: 12px; font-weight: 600; }
+.dashboard-body .partner-badge[data-status="published"] { border-color: var(--d-gold); background: var(--d-paper); }
+.dashboard-body .partner-form { display: grid; gap: 14px; max-width: 720px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--d-line); }
+.dashboard-body .partner-form label { display: grid; gap: 6px; }
+.dashboard-body .partner-logo { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--d-line); }
+.dashboard-body .partner-logo img { border: 1px solid var(--d-line); background: #fff; object-fit: contain; }
+.dashboard-body .partner-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: end; }
+.dashboard-body .partner-row .partner-check { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+@media (max-width: 720px) {
+  .dashboard-body .partner-item { grid-template-columns: 56px 1fr; }
+  .dashboard-body .partner-item .site-admin-actions { grid-column: 1 / -1; }
+  .dashboard-body .partner-row { grid-template-columns: 1fr; }
+  .dashboard-body .dash-tabs button { flex: 1; padding: 0 8px; }
+}

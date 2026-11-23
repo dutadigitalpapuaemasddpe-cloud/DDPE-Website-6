@@ -39,7 +39,7 @@ test("public site content returns only whitelisted page copy from a public setti
     await handler({ method: "GET" }, res);
     assert.equal(res.statusCode, 200);
     assert.deepEqual(JSON.parse(res.body), {
-      pages: { "index.html": { title: "DDPE", intro: "Pengantar publik yang sudah diperiksa." } }, events:[], leadership:require("../data/leadership.json")
+      pages: { "index.html": { title: "DDPE", intro: "Pengantar publik yang sudah diperiksa." } }, events:[], leadership:require("../data/leadership.json"), partners:[], partners_managed:false
     });
   } finally {
     global.fetch = originalFetch;

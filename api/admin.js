@@ -6,6 +6,7 @@ const leadership = require("./_lib/leadership");
 const { programMinAge } = require("./_lib/age");
 const editorial = require("../js/editorial");
 const cms = require("./_lib/cms");
+const partners = require("./_lib/partners");
 const EDITABLE_SITE_PAGES = new Set([
   "index.html", "tentang.html", "struktur.html", "program.html", "kegiatan.html",
   "berita.html", "terlibat.html", "kemitraan.html", "kontak.html", "konsultasi.html",
@@ -311,6 +312,10 @@ module.exports = async function admin(req, res) {
       if (req.query && req.query.view === "recruitments") return await getRecruitments(grants, res);
       if (req.query && req.query.view === "permissions") return await getPermissions(user, grants, res);
       if (req.query && req.query.view === "partnerships") return await getPartnerships(grants, res);
+      if (req.query && req.query.view === "partners") {
+        if (!hasPermission(grants, "content_editor") && !hasPermission(grants, "publisher")) return send(res, 403, { error: "forbidden" });
+        return send(res, 200, { partners: await partners.readAll() });
+      }
       return send(res, 400, { error: "unknown_view" });
     }
 
@@ -349,6 +354,8 @@ module.exports = async function admin(req, res) {
         if(!hasPermission(grants,"content_editor"))return send(res,403,{error:"forbidden"});
         result=await leadership.save(input,user);
       }
+      else if (input.action === "save_partner") result = await partners.save(input, user, grants, hasPermission);
+      else if (["archive_partner", "delete_partner"].includes(input.action)) result = await partners.remove(input, user, grants, hasPermission);
       else if(input.action === "save_event")result=await saveEvent(input,user,grants);
       else if(["archive_article","delete_event"].includes(input.action))result=await removeContent(input,user,grants);
       else if(input.action === "moderate_comment") {

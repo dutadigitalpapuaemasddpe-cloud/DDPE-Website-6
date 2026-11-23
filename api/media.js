@@ -32,12 +32,13 @@ module.exports = async function media(req, res) {
     if (typeof input.data !== "string" || input.data.length > 7 * 1024 * 1024) return send(res, 413, { error: "image_too_large" });
     const bytes = Buffer.from(input.data, "base64");
     const type = imageType(bytes);
-    if (!type || bytes.length > 5 * 1024 * 1024) return send(res, 415, { error: "unsupported_image" });
+    const logo = input.purpose === "partner_logo";
+    if (!type || bytes.length > (logo ? 2 : 5) * 1024 * 1024) return send(res, logo && type ? 413 : 415, { error: logo && type ? "image_too_large" : "unsupported_image" });
     const bucket = process.env.DDPE_PUBLIC_MEDIA_BUCKET;
     if (!bucket || !/^[a-z0-9][a-z0-9_-]{1,62}$/.test(bucket)) return send(res, 503, { error: "media_bucket_not_configured" });
 
     const settings = config();
-    const path = "editorial/" + new Date().toISOString().slice(0, 10) + "/" + crypto.randomUUID() + "." + type.split("/")[1].replace("jpeg", "jpg");
+    const path = (logo ? "partners/" : "editorial/") + new Date().toISOString().slice(0, 10) + "/" + crypto.randomUUID() + "." + type.split("/")[1].replace("jpeg", "jpg");
     const response = await fetch(settings.base + "/storage/v1/object/" + encodeURIComponent(bucket) + "/" + path.split("/").map(encodeURIComponent).join("/"), {
       method: "POST",
       headers: {

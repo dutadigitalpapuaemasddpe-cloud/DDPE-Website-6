@@ -552,7 +552,8 @@
       if (view === "site_content") await window.DDPEContent.render(await adminRequest("/api/admin?view=site_content"));
       if (view === "recruitments") renderRecruitments((await adminRequest("/api/admin?view=recruitments")).recruitments);
       if (view === "applications") renderApplications((await adminRequest("/api/admin?view=applications")).applications);
-      if (view === "partnerships") renderPartnerships((await adminRequest("/api/admin?view=partnerships")).inquiries);
+      if (view === "partnerships" && window.DDPEPartners) await window.DDPEPartners.render(has("partnership_reviewer") ? (await adminRequest("/api/admin?view=partnerships")).inquiries : null, renderPartnerships);
+      else if (view === "partnerships") renderPartnerships((await adminRequest("/api/admin?view=partnerships")).inquiries);
       if (view === "permissions") await renderPermissionsView();
       setMessage(alert, "Data dimuat dari server.", "success");
     } catch (error) { setMessage(alert, error.message, "error"); }
@@ -604,10 +605,10 @@
     }
   }
 
-  async function resizeImage(file) {
+  async function resizeImage(file, maxSide) {
     if (!/^image\/(jpeg|png|webp)$/.test(file.type) || file.size > 12 * 1024 * 1024) throw new Error("Pilih JPG, PNG, atau WebP hingga 12 MB.");
     var image = await createImageBitmap(file);
-    var scale = Math.min(1, 1800 / image.width, 1800 / image.height);
+    var scale = Math.min(1, (maxSide || 1800) / image.width, (maxSide || 1800) / image.height);
     var canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(image.width * scale));
     canvas.height = Math.max(1, Math.round(image.height * scale));
@@ -622,13 +623,14 @@
     alt_text_required: "Keterangan gambar wajib diisi (minimal 4 karakter).",
     payload_too_large: "Ukuran gambar terlalu besar. Pilih gambar yang lebih kecil.",
     forbidden: "Akun Anda tidak memiliki izin mengunggah gambar.",
+    image_too_large: "Logo terlalu besar. Gunakan gambar maksimal 2 MB.",
     unsupported_media_type: "Format gambar tidak didukung. Gunakan JPG, PNG, atau WebP."
   };
 
   // Kompres, lalu unggah ke /api/media dengan laporan progres. Mengembalikan { id, url, alt }.
-  async function postMedia(file, alt, onStage) {
+  async function postMedia(file, alt, onStage, purpose) {
     onStage({ stage: "compress" });
-    var blob = await resizeImage(file);
+    var blob = await resizeImage(file, purpose === "partner_logo" ? 800 : 1800);
     var bytes = new Uint8Array(await blob.arrayBuffer());
     var binary = "";
     for (var offset = 0; offset < bytes.length; offset += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(offset, offset + 0x8000));
@@ -648,7 +650,7 @@
       });
       request.addEventListener("error", function () { reject(new Error("Jaringan gagal. Gambar belum tersimpan.")); });
       request.addEventListener("abort", function () { reject(new Error("Unggah dibatalkan. Gambar belum tersimpan.")); });
-      request.send(JSON.stringify({ data: btoa(binary), alt: String(alt || "").trim() }));
+      request.send(JSON.stringify({ data: btoa(binary), alt: String(alt || "").trim(), purpose: purpose || undefined }));
     });
   }
 
@@ -969,9 +971,9 @@
   document.getElementById('preview-article').onclick=()=>{
     const a=Object.fromEntries(new FormData(articleForm));a.body=editorial.clean(editor.innerHTML);openPreview(a);
   };
-  async function uploadImage(file,alt,onStage){
+  async function uploadImage(file,alt,onStage,purpose){
     if(!file)throw Error('Pilih gambar terlebih dahulu.');if(!alt || alt.trim().length<4)throw Error('Isi keterangan gambar minimal 4 karakter.');
-    return postMedia(file,alt,onStage || function(){});
+    return postMedia(file,alt,onStage || function(){},purpose);
   }
   let selection=null;
   editor.addEventListener('keyup',captureSelection);editor.addEventListener('mouseup',captureSelection);

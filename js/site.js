@@ -499,43 +499,100 @@
     });
   }
 
-  function renderPartnerCards() {
-    var listTargets = document.querySelectorAll("[data-partner-list]");
-    if (!listTargets.length) return;
+  // Daftar mitra: sumber utama /api/public-site-content (mitra Terbit dari dashboard).
+  // partnerSeed hanya cadangan bila API gagal atau belum ada data CMS sama sekali.
+  var partnerItems = partnerSeed.map(function (p) {
+    return { name: p.name, category: "Mitra", summary: p.summaryId, summary_en: p.summaryEn, logo: p.logo, logo_alt: "Logo " + p.name, website: "", featured: p.featured };
+  });
 
-    listTargets.forEach(function (target) {
+  function safePartnerUrl(value, allowRelative) {
+    if (!value) return "";
+    try {
+      var u = new URL(value, window.location.href);
+      if (u.protocol !== "https:" && !(allowRelative && u.origin === window.location.origin)) return "";
+      return u.href;
+    } catch (error) { return ""; }
+  }
+
+  function partnerCard(partner, showAll, lang) {
+    var card = document.createElement("article");
+    card.className = "site-partner-card";
+    var mark = document.createElement("div");
+    mark.className = "site-partner-mark";
+    var logo = safePartnerUrl(partner.logo, true);
+    if (logo) {
+      var img = document.createElement("img");
+      img.src = logo;
+      img.alt = partner.logo_alt || "";
+      img.loading = "lazy";
+      mark.appendChild(img);
+    } else {
+      mark.setAttribute("aria-hidden", "true");
+      mark.textContent = String(partner.name).replace(/[^A-Za-z0-9 ]/g, "").split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase();
+    }
+    var copy = document.createElement("div");
+    copy.className = "site-partner-copy";
+    var eyebrow = document.createElement("p");
+    eyebrow.className = "eyebrow";
+    eyebrow.textContent = showAll ? (partner.category || "Mitra") : "Mitra unggulan";
+    var title = document.createElement("h3");
+    var site = safePartnerUrl(partner.website, false);
+    if (site) {
+      var link = document.createElement("a");
+      link.href = site;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = partner.name;
+      title.appendChild(link);
+    } else title.textContent = partner.name;
+    var summary = document.createElement("p");
+    summary.setAttribute("data-partner-summary", "");
+    summary.textContent = lang === "en" && partner.summary_en ? partner.summary_en : partner.summary;
+    copy.append(eyebrow, title, summary);
+    card.append(mark, copy);
+    card._partner = partner;
+    return card;
+  }
+
+  function paintPartners() {
+    var lang = readLangFromStorage();
+    document.querySelectorAll("[data-partner-list]").forEach(function (target) {
       var showAll = target.getAttribute("data-partner-list") === "all";
-      var items = showAll ? partnerSeed : partnerSeed.filter(function (item) { return item.featured; });
-      if (!items.length) return;
-
-      target.innerHTML = items.map(function (partner) {
-        var description = partner.summaryId;
-        var mark = partner.logo ? '<img src="' + partner.logo + '" alt="" loading="lazy" />' : partner.initials;
-        return [
-          '<article class="site-partner-card">',
-          '  <div class="site-partner-mark" aria-hidden="true">' + mark + '</div>',
-          '  <div class="site-partner-copy">',
-          '    <p class="eyebrow">' + (showAll ? 'Mitra' : 'Mitra unggulan') + '</p>',
-          '    <h3>' + partner.name + '</h3>',
-          '    <p>' + description + '</p>',
-          '  </div>',
-          '</article>'
-        ].join("");
-      }).join("");
+      var items = showAll ? partnerItems : partnerItems.filter(function (item) { return item.featured; });
+      target.replaceChildren.apply(target, items.map(function (p) { return partnerCard(p, showAll, lang); }));
+      target.hidden = false;
     });
   }
 
-  function applyPartnerCopy(lang) {
-    var partnerCards = document.querySelectorAll(".site-partner-card");
-    if (!partnerCards.length) return;
+  function renderPartnerCards() {
+    if (!document.querySelector("[data-partner-list]")) return;
+    var done = false;
+    function finish(items) {
+      if (done) return;
+      done = true;
+      if (items) partnerItems = items;
+      paintPartners();
+    }
+    var timer = window.setTimeout(function () { finish(null); }, 4000);
+    fetch("/api/public-site-content", { headers: { Accept: "application/json" } })
+      .then(function (r) { if (!r.ok) throw new Error("partners"); return r.json(); })
+      .then(function (data) {
+        window.clearTimeout(timer);
+        // Ada data CMS -> pakai (termasuk daftar kosong bila semua diarsipkan); belum ada -> daftar bawaan.
+        finish(data && data.partners_managed && Array.isArray(data.partners) ? data.partners : null);
+      })
+      .catch(function () { window.clearTimeout(timer); finish(null); });
+  }
 
-    partnerCards.forEach(function (card, index) {
-      var partner = partnerSeed[index];
+  function applyPartnerCopy(lang) {
+    document.querySelectorAll(".site-partner-card").forEach(function (card) {
+      var partner = card._partner;
       if (!partner) return;
-      var copy = card.querySelector(".site-partner-copy p:not(.eyebrow)");
-      if (copy) copy.textContent = lang === "en" ? partner.summaryEn : partner.summaryId;
+      var copy = card.querySelector("[data-partner-summary]");
+      if (copy) copy.textContent = lang === "en" && partner.summary_en ? partner.summary_en : partner.summary;
       var eyebrow = card.querySelector(".site-partner-copy .eyebrow");
-      if (eyebrow) eyebrow.textContent = lang === "en" ? "Partner" : "Mitra";
+      var showAll = card.parentNode && card.parentNode.getAttribute("data-partner-list") === "all";
+      if (eyebrow) eyebrow.textContent = showAll ? (lang === "en" && (partner.category === "Mitra" || !partner.category) ? "Partner" : partner.category || "Mitra") : (lang === "en" ? "Featured partner" : "Mitra unggulan");
     });
   }
 
