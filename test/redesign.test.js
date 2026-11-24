@@ -6,7 +6,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname,'..');
 const read = n => fs.readFileSync(path.join(root,n),'utf8');
-const pages = fs.readdirSync(root).filter(n=>n.endsWith('.html'));
+const pages = fs.readdirSync(root).filter(n=>n.endsWith('.html') && !/^google[0-9a-f]+\.html$/.test(n));
 test('all local HTML asset, page, and anchor destinations exist',()=>{
  for(const name of pages){
   const html=read(name);
