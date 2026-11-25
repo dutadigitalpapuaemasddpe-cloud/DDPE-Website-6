@@ -156,3 +156,70 @@ summary:focus-visible { outline: 3px solid var(--f-gold); outline-offset: 2px; }
   .portal-quick > a:first-child,
   .portal-quick > a:last-child { border-radius: 0; }
 }
+
+/* =====================================================================
+   Penyempurnaan lanjutan — hanya tampilan (jarak, huruf, interaksi).
+   Tidak mengubah struktur, formulir, atau skrip.
+   ===================================================================== */
+
+/* Dasar: teks lebih halus dan pilihan teks senada dengan merek. */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; scroll-padding-top: 24px; }
+::selection { background: var(--f-gold-soft); color: var(--f-indigo); }
+.portal-main h1, .portal-main h2, .portal-main h3,
+.ddpe-interior main h1, .ddpe-interior main h2 { text-wrap: balance; }
+.portal-main p, .ddpe-interior main p { text-wrap: pretty; }
+
+/* Irama bagian: lebih lega di layar lebar supaya setiap bagian terbaca sebagai satu kesatuan. */
+@media (min-width: 1024px) {
+  .portal-main .portal-section { padding-top: 76px; padding-bottom: 76px; }
+  .ddpe-interior .ip-body > section + section { margin-top: 56px; }
+}
+
+/* Tautan kartu dan tombol: umpan balik yang jelas tanpa gerakan berlebihan. */
+.rd-card,
+.portal-pillar,
+.portal-event,
+.site-partner-card,
+.portal-main .portal-quick > a,
+.ddpe-interior .ip-card { transition: border-color .2s ease, background-color .2s ease; }
+.rd-card:hover,
+.portal-pillar:hover,
+.portal-event:hover,
+.site-partner-card:hover,
+.ddpe-interior .ip-card:hover { border-color: #c9c2d6; }
+.portal-pillar:hover { border-top-color: var(--f-gold); }
+.portal-main .portal-quick > a:hover { background: var(--f-mist); }
+.site-button, .portal-button { transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.portal-card-link, .portal-text-link, .site-text-link { text-decoration-color: var(--f-gold); text-underline-offset: 4px; }
+.portal-card-link:hover, .portal-text-link:hover, .site-text-link:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+
+/* Bilah atas: garis tipis pemisah agar tidak menyatu dengan isi halaman putih. */
+.site-header { border-bottom: 1px solid var(--f-line); }
+
+/* Formulir publik: bentuk dan fokus yang seragam dengan bagian lain. */
+.site-main input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.site-main select,
+.site-main textarea,
+main input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+main select,
+main textarea { border-radius: 6px; border-color: #cfcad9; }
+main input:focus-visible,
+main select:focus-visible,
+main textarea:focus-visible { border-color: var(--f-gold-ink); }
+
+/* Foto dan gambar isi: sudut seragam, tanpa bayangan. */
+.ddpe-interior main figure img,
+.portal-main figure img { border-radius: 6px; }
+.ddpe-interior main figcaption { color: #5c5870; font-size: 13px; }
+
+/* Bilah bawah: jarak rapat antara merek dan deskripsi, kolom tautan sejajar di atas. */
+.site-footer-main { grid-template-rows: auto 1fr; align-content: start; row-gap: 14px; padding-bottom: 24px; }
+.site-footer-main > .site-footer-links { align-self: start; }
+.site-footer-main > p { align-self: start; }
+.site-footer .site-container > p { margin: 0 0 20px; }
+.site-footer .site-container > p a { color: var(--f-gold-soft); text-underline-offset: 4px; }
+.site-footer .site-container > p a:hover { color: #fff; }
+
+/* Sisa ornamen dan teks terlalu kecil di halaman dalam. */
+.ddpe-interior .ip-support a span[aria-hidden="true"] { display: none; }
+.ddpe-interior .ip-identity-copy p { font-size: 13px; letter-spacing: .04em; font-weight: 600; }

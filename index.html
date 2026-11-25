@@ -23,18 +23,19 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://www.ddpe.my.id/#organization","name":"Duta Digital Papua Emas","alternateName":["DDPE","Duta Digital Papua Emas (DDPE)"],"url":"https://www.ddpe.my.id/","logo":{"@type":"ImageObject","url":"https://www.ddpe.my.id/assets/ddpe_logo_web.png","width":512,"height":512},"image":"https://www.ddpe.my.id/assets/ddpe-01-web.jpg","description":"Organisasi pemuda yang menghubungkan literasi digital, inovasi, dan pengabdian, berangkat dari Mimika, Papua Tengah.","email":"info@ddpe.my.id","address":{"@type":"PostalAddress","addressLocality":"Mimika","addressRegion":"Papua Tengah","addressCountry":"ID"},"areaServed":"Papua Tengah, Indonesia"},
+{"@type":"Organization","@id":"https://www.ddpe.my.id/#organization","name":"Duta Digital Papua Emas","alternateName":["DDPE","Duta Digital Papua Emas (DDPE)"],"url":"https://www.ddpe.my.id/","logo":{"@type":"ImageObject","url":"https://www.ddpe.my.id/assets/ddpe_logo_web.png","width":512,"height":512},"image":"https://www.ddpe.my.id/assets/ddpe-01-web.jpg","description":"Organisasi pemuda yang menghubungkan literasi digital, inovasi, dan pengabdian, berangkat dari Mimika, Papua Tengah.","email":"info@ddpe.my.id","parentOrganization":{"@type":"Organization","name":"Karsa Muda Indonesia","alternateName":"KAMI","url":"https://karsamuda.my.id/"},"address":{"@type":"PostalAddress","addressLocality":"Mimika","addressRegion":"Papua Tengah","addressCountry":"ID"},"areaServed":"Papua Tengah, Indonesia"},
 {"@type":"WebSite","@id":"https://www.ddpe.my.id/#website","url":"https://www.ddpe.my.id/","name":"Duta Digital Papua Emas","alternateName":"DDPE","inLanguage":"id-ID","publisher":{"@id":"https://www.ddpe.my.id/#organization"}}
 ]}
 </script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Lora:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Kaushan+Script&amp;display=swap" rel="stylesheet"/>
 <link href="css/site.css" rel="stylesheet"/>
 <script src="js/legacy-routes.js">
 </script>
 <link href="css/institutional.css" rel="stylesheet"/>
 <link href="css/cms.css" rel="stylesheet"/><link href="css/ddpe-final.css" rel="stylesheet"/>
+<link href="css/ddpe-v8.css" rel="stylesheet"/>
 </head>
 <body class="site-home ddpe-portal">
 <a class="skip-link" href="#konten">
@@ -45,7 +46,7 @@
 <div class="site-utility-bar portal-utility">
 <div class="site-utility-inner">
 <span class="portal-location" lang="id">
-       Mimika, Papua Tengah
+       <a class="kami-induk-link" href="https://karsamuda.my.id" rel="noopener" target="_blank"><span class="kami-teks-panjang">Unit Khusus Papua · Karsa Muda Indonesia (KAMI)</span><span class="kami-teks-pendek">Bagian dari KAMI</span> ↗</a><span aria-hidden="true" class="kami-induk-sep">|</span><span class="kami-induk-lokasi">Mimika, Papua Tengah</span>
       </span>
 <div aria-label="Tautan utilitas" class="site-quick-links">
 <a data-i18n="nav.consultation" href="konsultasi.html">
@@ -68,6 +69,7 @@
       </small>
 </span>
 </a>
+<a class="v8-mini-login" href="masuk.html"><span data-i18n="nav.appShort">Masuk</span></a>
 <button aria-controls="site-nav" aria-expanded="false" aria-label="Buka menu" class="site-menu-toggle" type="button">
 <span>
 </span>
@@ -109,6 +111,9 @@
            </a>
 <a data-i18n="mega.aboutPillars" href="program.html">
             Dua Pilar DDPE
+           </a>
+<a href="makna-logo.html">
+            Makna Logo
            </a>
 </section>
 <section class="site-mega-group">
@@ -344,504 +349,323 @@
 </section>
 </div>
 </div>
-<a class="portal-button portal-button-gold portal-nav-cta" href="terlibat.html">
-<span data-i18n="nav.join">
-       Terlibat
-      </span>
-<span aria-hidden="true">
-       ↗
-      </span>
-</a>
+<div aria-label="Gabung dan masuk aplikasi" class="v8-cta" role="group">
+<a class="v8-cta-join" href="terlibat.html"><span data-i18n="nav.joinDdpe">Gabung DDPE</span></a>
+<a class="v8-cta-app" href="masuk.html"><span data-i18n="nav.app">Masuk Aplikasi</span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></a>
+</div>
 </nav>
 </div>
 </header>
 <main class="portal-main" id="konten" lang="id">
+<svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0">
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect height="18" rx="2" width="18" x="3" y="4"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect height="16" rx="2" width="20" x="2" y="4"/><path d="m22 7-10 6L2 7"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="5"/><circle cx="8" cy="12" r="2"/><path d="M14 10h4M14 14h4M5 17c.5-1.5 1.7-2 3-2s2.5.5 3 2"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24"><rect height="12" rx="2" width="18" x="3" y="4"/><path d="M2 20h20"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 21v-2a6 6 0 0 1 12 0v2M19 8v6M16 11h6"/></symbol>
+<symbol id="i-login" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5M15 12H3"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+</svg>
 <p class="site-container rd-language-note" hidden="" lang="en">
     Navigation is available in English. Page content remains in Indonesian until an official translation is available.
    </p>
-<section aria-labelledby="hero-title" class="portal-hero">
-<div class="site-container portal-hero-grid">
-<div class="site-home-welcome portal-hero-copy">
-<p class="portal-location-badge">
-<span aria-hidden="true">
-</span>
-       MIMIKA · PAPUA TENGAH
-      </p>
-<h1 id="hero-title">
-       Duta Digital Papua Emas
-      </h1>
-<p class="site-home-welcome-copy">
-       Ruang belajar, berkarya, dan berkolaborasi bagi pemuda melalui teknologi digital. Menghubungkan literasi dan inovasi yang berangkat dari kebutuhan masyarakat.
-      </p>
-<div class="portal-actions">
-<a class="portal-button portal-button-gold" href="program.html">
-        Jelajahi Program
-        <span aria-hidden="true">
-         →
-        </span>
-</a>
-<a class="portal-button portal-button-outline" href="tentang.html">
-        Kenali DDPE
-        <span aria-hidden="true">
-         →
-        </span>
-</a>
+
+<section aria-labelledby="hero-title" class="v8-hero">
+<div class="site-home-welcome v8-hero-copy">
+<p class="v8-kicker">Unit Khusus Papua · Karsa Muda Indonesia</p>
+<h1 id="hero-title">Duta Digital Papua Emas</h1>
+<p class="site-home-welcome-copy">Ruang belajar, berkarya, dan berkolaborasi bagi pemuda melalui teknologi digital. Menghubungkan literasi dan inovasi yang berangkat dari kebutuhan masyarakat.</p>
+<div class="v8-actions">
+<a class="v8-btn v8-btn-gold" href="terlibat.html">Gabung sebagai Duta</a>
+<a class="v8-textlink" href="masuk.html">Masuk Ruang Kerja</a>
 </div>
-<p class="portal-hero-footnote">
-       Dua pilar. Satu semangat untuk bertumbuh.
-      </p>
+<ul class="v8-facts"><li>Bagian dari KAMI</li><li>Berpusat di Mimika</li><li>Dua pilar, satu semangat</li><li>Aplikasi kerja milik sendiri</li></ul>
 </div>
-<figure class="portal-hero-photo">
-<img alt="Kebersamaan pengurus Duta Digital Papua Emas" fetchpriority="high" height="1333" loading="eager" src="assets/ddpe-01-web.jpg" width="2000"/>
-<figcaption>
-<span aria-hidden="true" class="portal-caption-mark">
-        ↗
-       </span>
-<span>
-<strong>
-         Bergerak bersama, mulai dari Mimika.
-        </strong>
-<small>
-         Pengurus Duta Digital Papua Emas
-        </small>
-</span>
-</figcaption>
+<figure class="v8-hero-photo v9-slides" data-v9-slides="">
+<img alt="Kebersamaan pengurus Duta Digital Papua Emas" class="is-active" data-caption="Pengurus Duta Digital Papua Emas" fetchpriority="high" height="1333" loading="eager" src="assets/ddpe-01-web.jpg" width="2000"/>
+<img alt="Relawan DDPE bersama warga di lokasi pengabdian" data-caption="DDPE Volunteer di lapangan" height="1350" loading="lazy" src="assets/nmp-dokumentasi-1-web.jpg" width="1800"/>
+<img alt="Tim DDPE dalam kegiatan bersama" data-caption="Tim DDPE dalam kegiatan bersama" height="1200" loading="lazy" src="assets/tim-ddpe-1.jpg" width="1800"/>
+<img alt="Duta DDPE belajar dan berkarya" data-caption="Belajar dan berkarya bersama" height="1000" loading="lazy" src="assets/ddpe-03-web.jpg" width="1500"/>
+<figcaption><span data-v9-caption="">Pengurus Duta Digital Papua Emas</span><span aria-label="Pilih foto" class="v9-dots" role="group"></span></figcaption>
 </figure>
+</section>
+
+<nav aria-label="Akses cepat program dan kemitraan" class="site-container portal-quick">
+<a href="program-dldpe.html"><span class="portal-quick-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><use href="#i-book"/></svg></span><span class="portal-quick-copy"><small>Pilar literasi</small><strong>DLDPE</strong></span><span aria-hidden="true" class="portal-arrow">↗</span></a>
+<a href="program-didpe.html"><span class="portal-quick-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 .8-1 1.5-1 2H9c0-.5 0-1.2-1-2Z"/></svg></span><span class="portal-quick-copy"><small>Pilar inovasi</small><strong>DIDPE</strong></span><span aria-hidden="true" class="portal-arrow">↗</span></a>
+<a href="program-amex.html"><span class="portal-quick-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5L16 8Z"/></svg></span><span class="portal-quick-copy"><small>Ekspedisi</small><strong>AMEX</strong></span><span aria-hidden="true" class="portal-arrow">↗</span></a>
+<a href="program-volunteer.html"><span class="portal-quick-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2"/></svg></span><span class="portal-quick-copy"><small>Ruang kontribusi</small><strong>DDPE Volunteer</strong></span><span aria-hidden="true" class="portal-arrow">↗</span></a>
+<a href="kemitraan.html"><span class="portal-quick-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><path d="m10 13 4-4m-6 7-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 10a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-1 1" transform="translate(1 -1)"/></svg></span><span class="portal-quick-copy"><small>Tumbuh bersama</small><strong>Mitra &amp; Kolaborasi</strong></span><span aria-hidden="true" class="portal-arrow">↗</span></a>
+</nav>
+
+<section aria-labelledby="angka-title" class="v9-impact">
+<div class="site-container">
+<div class="v9-impact-head"><p class="portal-eyebrow">DDPE dalam angka</p><h2 id="angka-title">Bergerak terarah, tumbuh bertahap.</h2></div>
+<ul class="v9-impact-list">
+<li><strong data-v9-count="2">2</strong><span>Pilar program</span><small>Literasi (DLDPE) dan Inovasi (DIDPE)</small></li>
+<li><strong data-v9-count="4">4</strong><span>Unit kerja</span><small>Induk, DLDPE, DIDPE, dan AMEX</small></li>
+<li><strong data-v9-live="articles">–</strong><span>Kabar &amp; publikasi</span><small>Terbit di ddpe.my.id, diperbarui otomatis</small></li>
+<li><strong>2026–2028</strong><span>Periode kepengurusan</span><small>Berpusat di Mimika, Papua Tengah</small></li>
+</ul>
 </div>
 </section>
-<nav aria-label="Akses cepat program dan kemitraan" class="site-container portal-quick">
-<a href="program-dldpe.html">
-<span class="portal-quick-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14">
-</path>
-</svg>
-</span>
-<span class="portal-quick-copy">
-<small>
-       Pilar literasi
-      </small>
-<strong>
-       DLDPE
-      </strong>
-</span>
-<span aria-hidden="true" class="portal-arrow">
-      ↗
-     </span>
-</a>
-<a href="program-didpe.html">
-<span class="portal-quick-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 .8-1 1.5-1 2H9c0-.5 0-1.2-1-2Z">
-</path>
-</svg>
-</span>
-<span class="portal-quick-copy">
-<small>
-       Pilar inovasi
-      </small>
-<strong>
-       DIDPE
-      </strong>
-</span>
-<span aria-hidden="true" class="portal-arrow">
-      ↗
-     </span>
-</a>
-<a href="program-amex.html">
-<span class="portal-quick-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<circle cx="12" cy="12" r="9">
-</circle>
-<path d="m16 8-2.5 5.5L8 16l2.5-5.5L16 8Z">
-</path>
-</svg>
-</span>
-<span class="portal-quick-copy">
-<small>
-       Ekspedisi
-      </small>
-<strong>
-       AMEX
-      </strong>
-</span>
-<span aria-hidden="true" class="portal-arrow">
-      ↗
-     </span>
-</a>
-<a href="program-volunteer.html">
-<span class="portal-quick-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<circle cx="9" cy="8" r="3">
-</circle>
-<path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2">
-</path>
-</svg>
-</span>
-<span class="portal-quick-copy">
-<small>
-       Ruang kontribusi
-      </small>
-<strong>
-       DDPE Volunteer
-      </strong>
-</span>
-<span aria-hidden="true" class="portal-arrow">
-      ↗
-     </span>
-</a>
-<a href="kemitraan.html">
-<span class="portal-quick-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<path d="m10 13 4-4m-6 7-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 10a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-1 1" transform="translate(1 -1)">
-</path>
-</svg>
-</span>
-<span class="portal-quick-copy">
-<small>
-       Tumbuh bersama
-      </small>
-<strong>
-       Mitra &amp; Kolaborasi
-      </strong>
-</span>
-<span aria-hidden="true" class="portal-arrow">
-      ↗
-     </span>
-</a>
-</nav>
+
+<section aria-labelledby="finder-title" class="v8-paths" id="peran">
+<div class="site-container portal-section">
+<div class="v8-paths-grid">
+<div class="v8-paths-intro">
+<p class="portal-eyebrow">Jalur bergabung</p>
+<h2 id="finder-title">Pilih cara kamu ingin berperan.</h2>
+<p>Setiap jalur punya fokus dan cara bergabung sendiri. Mulai dari yang paling dekat dengan minatmu.</p>
+</div>
+<div class="v8-path-list">
+<a class="v8-path" href="program-dldpe.html"><span class="v8-path-n">01</span><img alt="" height="1000" loading="lazy" src="assets/ddpe-03-web.jpg" width="1500"/><span><h3>Literasi digital</h3><p>DLDPE — belajar berpikir kritis, menjaga keamanan digital, dan membagikannya ke sekitar.</p></span><span aria-hidden="true" class="v8-path-go">→</span></a>
+<a class="v8-path" href="program-didpe.html"><span class="v8-path-n">02</span><img alt="" height="1000" loading="lazy" src="assets/ddpe-04-web.jpg" width="1500"/><span><h3>Inovasi digital</h3><p>DIDPE — mengubah ide menjadi gagasan dan karya yang menjawab kebutuhan lokal.</p></span><span aria-hidden="true" class="v8-path-go">→</span></a>
+<a class="v8-path" href="program-amex.html"><span class="v8-path-n">03</span><img alt="" height="1350" loading="lazy" src="assets/nmp-dokumentasi-1-web.jpg" width="1800"/><span><h3>Ekspedisi &amp; relawan</h3><p>AMEX dan DDPE Volunteer — belajar bersama dan mengabdi langsung di lapangan.</p></span><span aria-hidden="true" class="v8-path-go">→</span></a>
+<a class="v8-path" href="kemitraan.html"><span class="v8-path-n">04</span><img alt="" height="1200" loading="lazy" src="assets/tim-ddpe-1.jpg" width="1800"/><span><h3>Mitra &amp; kolaborasi</h3><p>Untuk organisasi dan komunitas yang ingin bekerja sama dengan DDPE.</p></span><span aria-hidden="true" class="v8-path-go">→</span></a>
+</div>
+</div>
+</div>
+</section>
+
 <section aria-labelledby="pilar-title" class="site-container portal-section" data-cms-section="section-1" id="pilar">
 <div class="portal-section-heading rd-section-title">
 <div>
-<p class="portal-eyebrow">
-       Dua pilar utama
-      </p>
-<h2 id="pilar-title">
-       Belajar hari ini.
-       <br/>
-       Berkarya untuk masa depan.
-      </h2>
+<p class="portal-eyebrow">Dua pilar utama</p>
+<h2 id="pilar-title">Belajar hari ini.<br/>Berkarya untuk masa depan.</h2>
 </div>
-<p>
-      Dua ruang tumbuh yang saling melengkapi: kecakapan digital dan keberanian mengembangkan gagasan.
-     </p>
+<p>Dua ruang tumbuh yang saling melengkapi: kecakapan digital dan keberanian mengembangkan gagasan.</p>
 </div>
 <div class="portal-pillars">
 <article class="portal-pillar portal-pillar-literacy rd-card">
-<header class="portal-pillar-header">
-<span class="portal-badge">
-        Pilar Literasi
-       </span>
-<span aria-hidden="true" class="portal-pillar-number">
-        01
-       </span>
-</header>
+<header class="portal-pillar-header"><span class="portal-badge">Pilar Literasi</span><span aria-hidden="true" class="portal-pillar-number">01</span></header>
 <div class="portal-pillar-body">
 <div class="portal-pillar-title">
 <img alt="Logo DLDPE" height="450" loading="lazy" src="assets/logo-pilar1-literasi.jpg" width="450"/>
-<div>
-<p class="portal-acronym">
-          DLDPE
-         </p>
-<h3>
-          Duta Literasi Digital Papua Emas
-         </h3>
+<div><p class="portal-acronym">DLDPE</p><h3>Duta Literasi Digital Papua Emas</h3></div>
 </div>
-</div>
-<p>
-        Membangun kecakapan untuk menggunakan teknologi secara kritis, aman, dan bertanggung jawab.
-       </p>
-<ul class="portal-focus">
-<li>
-         Mengenali informasi dan berpikir kritis
-        </li>
-<li>
-         Menjaga privasi dan keamanan digital
-        </li>
-<li>
-         Membangun etika serta budaya digital
-        </li>
-</ul>
-<a class="portal-card-link" href="program-dldpe.html">
-        Kenali Pilar Literasi
-        <span aria-hidden="true">
-         →
-        </span>
-</a>
+<p>Membangun kecakapan untuk menggunakan teknologi secara kritis, aman, dan bertanggung jawab.</p>
+<ul class="portal-focus"><li>Mengenali informasi dan berpikir kritis</li><li>Menjaga privasi dan keamanan digital</li><li>Membangun etika serta budaya digital</li></ul>
+<a class="portal-card-link" href="program-dldpe.html">Kenali Pilar Literasi <span aria-hidden="true">→</span></a>
 </div>
 </article>
 <article class="portal-pillar portal-pillar-innovation rd-card">
-<header class="portal-pillar-header">
-<span class="portal-badge">
-        Pilar Inovasi
-       </span>
-<span aria-hidden="true" class="portal-pillar-number">
-        02
-       </span>
-</header>
+<header class="portal-pillar-header"><span class="portal-badge">Pilar Inovasi</span><span aria-hidden="true" class="portal-pillar-number">02</span></header>
 <div class="portal-pillar-body">
 <div class="portal-pillar-title">
 <img alt="Logo DIDPE" height="640" loading="lazy" src="assets/logo-pilar2-inovasi.jpg" width="512"/>
-<div>
-<p class="portal-acronym">
-          DIDPE
-         </p>
-<h3>
-          Duta Inovasi Digital Papua Emas
-         </h3>
+<div><p class="portal-acronym">DIDPE</p><h3>Duta Inovasi Digital Papua Emas</h3></div>
 </div>
-</div>
-<p>
-        Mengubah rasa ingin tahu menjadi gagasan dan karya yang relevan dengan kebutuhan masyarakat.
-       </p>
-<ul class="portal-focus">
-<li>
-         Memahami persoalan dan kebutuhan lokal
-        </li>
-<li>
-         Mengembangkan gagasan serta prototipe
-        </li>
-<li>
-         Berkolaborasi dan belajar dari masukan
-        </li>
-</ul>
-<a class="portal-card-link" href="program-didpe.html">
-        Kenali Pilar Inovasi
-        <span aria-hidden="true">
-         →
-        </span>
-</a>
+<p>Mengubah rasa ingin tahu menjadi gagasan dan karya yang relevan dengan kebutuhan masyarakat.</p>
+<ul class="portal-focus"><li>Memahami persoalan dan kebutuhan lokal</li><li>Mengembangkan gagasan serta prototipe</li><li>Berkolaborasi dan belajar dari masukan</li></ul>
+<a class="portal-card-link" href="program-didpe.html">Kenali Pilar Inovasi <span aria-hidden="true">→</span></a>
 </div>
 </article>
 </div>
 </section>
+
+<section aria-labelledby="app-title" class="v8-app" id="ruang-kerja">
+<div class="site-container portal-section v8-app-grid">
+<div>
+<p class="portal-eyebrow">Ruang Kerja DDPE</p>
+<h2 id="app-title">Aplikasi kerja untuk pengurus dan duta.</h2>
+<p class="lead">Semua urusan organisasi dalam satu tempat, dari program kerja sampai laporan akhir masa jabatan, dibantu Asisten EMAS, asisten AI yang dikembangkan DDPE untuk menyusun surat, notulen, dan laporan. Hanya anggota yang sudah resmi tercatat yang dapat membuka modul kerja.</p>
+<ul class="v8-features">
+<li>Program kerja &amp; tugas</li><li>Rapat &amp; absensi</li><li>Laporan kegiatan</li><li>Keuangan &amp; uang kas</li><li>Surat &amp; dokumen</li><li>Kartu anggota digital</li><li>Asisten AI EMAS</li><li>Template &amp; kalender</li>
+</ul>
+<div class="v8-actions">
+<a class="v8-btn v8-btn-gold" href="masuk.html">Masuk Aplikasi</a>
+<a class="v8-btn v8-btn-ghost" href="masuk.html#calon">Saya calon pendaftar</a>
+</div>
+<p class="v8-app-note">Belum punya akun? Lihat <a href="masuk.html">siapa yang bisa masuk dan apa yang akan Anda lihat</a>.</p>
+</div>
+<ul class="v8-roles">
+<li><strong>Calon pendaftar</strong><span>Dasbor berisi pengumuman, informasi program, dan halaman pendaftaran, sampai pengurus selesai memverifikasi.</span></li>
+<li><strong>Duta &amp; relawan</strong><span>Tugas, rapat dan absensi, laporan kegiatan, serta kartu anggota selama masa jabatan.</span></li>
+<li><strong>Pengurus</strong><span>Semua modul sesuai peran, termasuk keuangan, surat dan dokumen, serta peninjauan laporan.</span></li>
+</ul>
+</div>
+</section>
+
+<section aria-labelledby="alur-title" class="site-container portal-section" id="alur">
+<div class="portal-section-heading rd-section-title">
+<div>
+<p class="portal-eyebrow">Alur bergabung</p>
+<h2 id="alur-title">Empat langkah menjadi bagian dari DDPE.</h2>
+</div>
+<p>Calon pendaftar bisa mulai dari akun sendiri dan memantau prosesnya sampai pengurus menyelesaikan verifikasi.</p>
+</div>
+<ol class="v8-steps">
+<li><h3>Buat akun calon</h3><p>Daftar dengan email aktif dan masuk ke dasbor calon yang berisi pengumuman dan informasi pendaftaran.</p></li>
+<li><h3>Isi pendaftaran</h3><p>Pilih jalur DLDPE, DIDPE, atau AMEX, lalu lengkapi formulir saat periode rekrutmen dibuka.</p></li>
+<li><h3>Verifikasi pengurus</h3><p>Pengurus memeriksa pendaftaran dan memberi kabar hasilnya. Selama proses ini, dasbor tetap berupa ruang calon.</p></li>
+<li><h3>Resmi bergabung</h3><p>Jika lolos, akunmu diaktifkan penuh: ID anggota, kartu anggota, dan seluruh modul Ruang Kerja.</p></li>
+</ol>
+</section>
+
 <section aria-labelledby="agenda-title" class="portal-agenda-band" id="unggulan">
 <div class="site-container portal-section">
 <div class="portal-section-heading rd-section-title">
 <div>
-<p class="portal-eyebrow">
-        Program &amp; agenda
-       </p>
-<h2 id="agenda-title">
-        Dari gagasan, menjadi kontribusi.
-       </h2>
+<p class="portal-eyebrow">Program &amp; agenda</p>
+<h2 id="agenda-title">Dari gagasan, menjadi kontribusi.</h2>
 </div>
-<a class="portal-text-link" href="agenda.html">
-       Lihat Semua Agenda
-       <span aria-hidden="true">
-        →
-       </span>
-</a>
+<a class="portal-text-link" href="agenda.html">Lihat Semua Agenda <span aria-hidden="true">→</span></a>
+</div>
+<div class="v8-next" data-next-event="" hidden="">
+<span aria-hidden="true" class="v8-next-ico"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><use href="#i-cal"/></svg></span>
+<div><p class="v8-eyebrow">Agenda terdekat</p><h3 data-next-title="">—</h3><p data-next-meta=""></p></div>
+<div aria-live="off" class="v8-count" data-next-count=""><div><strong data-u="d">0</strong><span>hari</span></div><div><strong data-u="h">0</strong><span>jam</span></div><div><strong data-u="m">0</strong><span>menit</span></div><div><strong data-u="s">0</strong><span>detik</span></div></div>
 </div>
 <div class="portal-agenda-grid">
 <article class="portal-event rd-card" id="agenda">
 <div class="portal-event-visual">
 <img alt="Dokumentasi kebersamaan DDPE di Naena Muktipura" class="portal-event-photo" height="1333" loading="lazy" src="assets/nmp-dokumentasi-3-web.jpg" width="2000"/>
-<span class="portal-event-label">
-         Program unggulan · AMEX
-        </span>
+<span class="portal-event-label">Program unggulan · AMEX</span>
 </div>
 <div class="portal-event-body">
-<div aria-label="14 sampai 15 November 2026" class="portal-date">
-<span>
-          November
-         </span>
-<strong>
-          14–15
-         </strong>
-<span>
-          2026
-         </span>
-</div>
+<div aria-label="14 sampai 15 November 2026" class="portal-date"><span>November</span><strong>14–15</strong><span>2026</span></div>
 <div class="portal-event-copy">
 <img alt="Logo AMEX" class="portal-amex-logo" height="360" loading="lazy" src="assets/logo_amex_sdg.jpeg" width="640"/>
-<h3>
-          Asa Mimika Expedition
-         </h3>
-<p>
-          Belajar bersama dan mengabdi melalui program yang berangkat dari konteks masyarakat. Dijadwalkan pada 14–15 November 2026.
-         </p>
-<a class="portal-text-link" href="program-amex.html">
-          Jelajahi AMEX
-          <span aria-hidden="true">
-           →
-          </span>
-</a>
+<h3>Asa Mimika Expedition</h3>
+<p>Belajar bersama dan mengabdi melalui program yang berangkat dari konteks masyarakat. Edisi 14–15 November 2026.</p>
+<a class="portal-text-link" href="program-amex.html">Jelajahi AMEX <span aria-hidden="true">→</span></a>
 </div>
 </div>
 </article>
 <div class="portal-involvement" id="bergabung">
 <article class="portal-invite portal-invite-volunteer rd-card">
-<span class="portal-invite-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<circle cx="9" cy="8" r="3">
-</circle>
-<path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2">
-</path>
-</svg>
-</span>
-<p class="portal-eyebrow">
-         DDPE Volunteer
-        </p>
-<h3>
-         Ambil peran.
-         <br/>
-         Berikan kontribusi.
-        </h3>
-<p>
-         Temukan ruang kontribusi sesuai minat, waktu, dan kebutuhan program.
-        </p>
-<a class="portal-card-link" href="program-volunteer.html">
-         Kenali Jalur Relawan
-         <span aria-hidden="true">
-          →
-         </span>
-</a>
+<span class="portal-invite-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2"/></svg></span>
+<p class="portal-eyebrow">DDPE Volunteer</p>
+<h3>Ambil peran.<br/>Berikan kontribusi.</h3>
+<p>Temukan ruang kontribusi sesuai minat, waktu, dan kebutuhan program.</p>
+<a class="portal-card-link" href="program-volunteer.html">Kenali Jalur Relawan <span aria-hidden="true">→</span></a>
 </article>
 <article class="portal-invite portal-invite-partner rd-card">
-<span class="portal-invite-icon">
-<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="24">
-<path d="m10 13 4-4m-6 7-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 10a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-1 1" transform="translate(1 -1)">
-</path>
-</svg>
-</span>
-<p class="portal-eyebrow">
-         Mitra &amp; kolaborasi
-        </p>
-<h3>
-         Tumbuh lewat kerja sama.
-        </h3>
-<p>
-         Hubungkan ide, keahlian, dan dukungan organisasi Anda dengan program DDPE.
-        </p>
-<a class="portal-card-link" href="kemitraan.html">
-         Mulai Kolaborasi
-         <span aria-hidden="true">
-          →
-         </span>
-</a>
+<span class="portal-invite-icon"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="24"><path d="m10 13 4-4m-6 7-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 10a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-1 1" transform="translate(1 -1)"/></svg></span>
+<p class="portal-eyebrow">Mitra &amp; kolaborasi</p>
+<h3>Tumbuh lewat kerja sama.</h3>
+<p>Hubungkan ide, keahlian, dan dukungan organisasi Anda dengan program DDPE.</p>
+<a class="portal-card-link" href="kemitraan.html">Mulai Kolaborasi <span aria-hidden="true">→</span></a>
 </article>
 </div>
 </div>
 </div>
-</section><section aria-label="Agenda dan kegiatan" class="cms-events site-container" data-cms-events=""><h2>Agenda &amp; kegiatan DDPE</h2><p role="status">Memuat agenda…</p></section>
+</section>
+<section aria-labelledby="cerita-title" class="v9-story">
+<img alt="" class="v9-story-bg" height="1200" loading="lazy" src="assets/tim-ddpe-banner.jpg" width="1800"/>
+<div class="site-container v9-story-inner">
+<p class="portal-eyebrow">Arah kami</p>
+<h2 id="cerita-title">Dari Mimika, untuk generasi digital Papua.</h2>
+<blockquote>Terwujudnya generasi muda Papua yang berdaya, cakap digital, dan berintegritas untuk berkontribusi bagi kemajuan masyarakat menuju Indonesia Emas 2045.</blockquote>
+<p class="v9-story-cite">Visi Duta Digital Papua Emas</p>
+<div class="v8-actions"><a class="v8-btn v8-btn-gold" href="visi-misi.html">Visi, misi, dan nilai</a><a class="v8-textlink v9-light" href="makna-logo.html">Makna logo DDPE →</a></div>
+</div>
+</section>
+
+<section aria-labelledby="kami-title" class="kami-induk-band" id="kami">
+<div class="site-container portal-section">
+<div class="kami-induk-grid">
+<div class="kami-induk-copy">
+<p class="portal-eyebrow">Bagian dari gerakan nasional</p>
+<h2 id="kami-title">DDPE adalah Unit Khusus Papua dari Karsa Muda Indonesia.</h2>
+<p>Karsa Muda Indonesia (KAMI) adalah gerakan pemuda lintas bidang yang lahir di Tanah Papua dan kini bergerak di berbagai regional Indonesia. Pergerakan KAMI di Papua dijalankan oleh Duta Digital Papua Emas, yang memiliki struktur kepengurusan, program, pendaftaran, dan ruang kerja sendiri di ddpe.my.id.</p>
+<ul class="kami-induk-poin"><li>Program DLDPE, DIDPE, AMEX, dan DDPE Volunteer dikelola langsung oleh DDPE.</li><li>DDPE berkoordinasi dengan Pengurus Pusat KAMI dalam arah gerak dan pelaporan.</li><li>Pemuda di luar Papua dapat bergabung melalui regional KAMI di daerahnya.</li></ul>
+<div class="v8-actions"><a class="v8-btn v8-btn-gold" href="https://karsamuda.my.id" rel="noopener" target="_blank">Kunjungi karsamuda.my.id ↗</a><a class="v8-textlink" href="https://karsamuda.my.id/regional.html" rel="noopener" target="_blank">Jaringan Regional KAMI ↗</a></div>
+</div>
+<div aria-label="Kedudukan DDPE dalam Karsa Muda Indonesia" class="kami-bagan" role="group">
+<a class="kami-node kami-node-induk" href="https://karsamuda.my.id" rel="noopener" target="_blank"><img alt="Karsa Muda Indonesia (KAMI)" height="44" loading="lazy" src="assets/kami/kami-logo-horizontal-warna-rapat.svg" width="195"/><span>Portal induk nasional · karsamuda.my.id</span></a>
+<div class="kami-cabang">
+<a class="kami-node" href="https://karsamuda.my.id/regional.html" rel="noopener" target="_blank"><strong>Regional KAMI</strong><span>Makassar · Lombok Utara · Nusa Tenggara Timur · Gorontalo · dan regional berikutnya</span></a>
+<a class="kami-node kami-node-ddpe" href="index.html"><img alt="" height="40" loading="lazy" src="assets/ddpe_logo_web.png" width="40"/><span><strong>Duta Digital Papua Emas</strong><span>Unit Khusus Papua · ddpe.my.id</span></span></a>
+</div>
+<div class="kami-program"><span>DLDPE</span><span>DIDPE</span><span>AMEX</span><span>DDPE Volunteer</span></div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Agenda dan kegiatan" class="cms-events site-container" data-cms-events=""><h2>Agenda &amp; kegiatan DDPE</h2><p role="status">Memuat agenda…</p></section>
+
+<section aria-labelledby="galeri-title" class="v8-gallery" id="galeri">
+<div class="site-container portal-section">
+<div class="portal-section-heading rd-section-title">
+<div>
+<p class="portal-eyebrow">Galeri</p>
+<h2 id="galeri-title">Momen bersama DDPE.</h2>
+</div>
+<p>Ketuk foto untuk memperbesar.</p>
+</div>
+<div class="v8-mosaic" aria-label="Galeri foto kegiatan">
+<a class="v8-shot" data-caption="Kebersamaan pengurus Duta Digital Papua Emas" href="assets/ddpe-01-web.jpg"><img alt="Kebersamaan pengurus Duta Digital Papua Emas" height="1333" loading="lazy" src="assets/ddpe-01-web.jpg" width="2000"/><span class="v8-cap">Kebersamaan pengurus<small>Duta Digital Papua Emas</small></span></a>
+<a class="v8-shot" data-caption="Kebersamaan DDPE di Naena Muktipura" href="assets/nmp-dokumentasi-1-web.jpg"><img alt="Kebersamaan DDPE di Naena Muktipura" height="1350" loading="lazy" src="assets/nmp-dokumentasi-1-web.jpg" width="1800"/><span class="v8-cap">Naena Muktipura<small>Dokumentasi AMEX</small></span></a>
+<a class="v8-shot" data-caption="Aksi relawan DDPE di lapangan" href="assets/nmp-aksi-volunteer-web.jpg"><img alt="Aksi relawan DDPE di lapangan" height="540" loading="lazy" src="assets/nmp-aksi-volunteer-web.jpg" width="960"/><span class="v8-cap">Aksi relawan<small>DDPE Volunteer</small></span></a>
+<a class="v8-shot" data-caption="Kebersamaan anggota DDPE" href="assets/ddpe-03-web.jpg"><img alt="Kebersamaan anggota DDPE" height="1000" loading="lazy" src="assets/ddpe-03-web.jpg" width="1500"/><span class="v8-cap">Anggota DDPE<small>Potret bersama</small></span></a>
+<a class="v8-shot" data-caption="Asa Mimika Expedition — dokumentasi DDPE" href="assets/nmp-dokumentasi-3-web.jpg"><img alt="Asa Mimika Expedition — dokumentasi DDPE" height="1350" loading="lazy" src="assets/nmp-dokumentasi-3-web.jpg" width="1800"/><span class="v8-cap">Asa Mimika Expedition<small>Dokumentasi</small></span></a>
+<a class="v8-shot" data-caption="Pertemuan pemuda dan pengurus DDPE di Mimika" href="assets/tim-ddpe-1.jpg"><img alt="Pertemuan pemuda dan pengurus DDPE di Mimika" height="1200" loading="lazy" src="assets/tim-ddpe-1.jpg" width="1800"/><span class="v8-cap">Pertemuan di Mimika<small>Pemuda &amp; pengurus</small></span></a>
+<a class="v8-shot" data-caption="Potret anggota Duta Digital Papua Emas" href="assets/ddpe-04-web.jpg"><img alt="Potret anggota Duta Digital Papua Emas" height="1000" loading="lazy" src="assets/ddpe-04-web.jpg" width="1500"/><span class="v8-cap">Potret anggota<small>Duta Digital Papua Emas</small></span></a>
+</div>
+</div>
+</section>
+
 <section aria-labelledby="news-title" class="site-container portal-section portal-news" id="publikasi">
 <div class="portal-section-heading rd-section-title">
 <div>
-<p class="portal-eyebrow">
-       Kabar dari DDPE
-      </p>
-<h2 id="news-title">
-       Berita &amp; Publikasi Terkini
-      </h2>
+<p class="portal-eyebrow">Kabar dari DDPE</p>
+<h2 id="news-title">Berita &amp; Publikasi Terkini</h2>
 </div>
-<a class="portal-text-link" href="berita.html">
-      Lihat Semua Berita
-      <span aria-hidden="true">
-       →
-      </span>
-</a>
+<a class="portal-text-link" href="berita.html">Lihat Semua Berita <span aria-hidden="true">→</span></a>
 </div>
-<div aria-live="polite" class="site-news-state" id="home-news-state" role="status">
-     Memuat berita terbit…
-    </div>
-<div class="site-news-grid" data-news-layout="cards" data-news-limit="3" hidden="" id="home-news">
-</div>
-<noscript>
-<p>
-      Aktifkan JavaScript untuk memuat berita terbaru, atau
-      <a href="berita.html">
-       kunjungi halaman berita
-      </a>
-      .
-     </p>
-</noscript>
+<div aria-live="polite" class="site-news-state" id="home-news-state" role="status">Memuat berita terbit…</div>
+<div class="site-news-grid" data-news-layout="cards" data-news-limit="3" hidden="" id="home-news"></div>
+<noscript><p>Aktifkan JavaScript untuk memuat berita terbaru, atau <a href="berita.html">kunjungi halaman berita</a>.</p></noscript>
 </section>
+
+<section aria-labelledby="faq-title" class="portal-agenda-band" id="tanya">
+<div class="site-container portal-section">
+<div class="portal-section-heading rd-section-title">
+<div>
+<p class="portal-eyebrow">Pertanyaan umum</p>
+<h2 id="faq-title">Sebelum bergabung, mungkin kamu bertanya…</h2>
+</div>
+</div>
+<div class="v8-faq">
+<details><summary>Siapa yang boleh mendaftar?</summary><div>Usia minimum mengikuti program: DLDPE dan DIDPE 14 tahun, AMEX 16 tahun, dihitung dari tanggal lahir pada hari mendaftar. Pendaftar di bawah 18 tahun wajib melengkapi data dan persetujuan wali.</div></details>
+<details><summary>Apa itu Ruang Kerja DDPE?</summary><div>Aplikasi kerja internal DDPE untuk program kerja, rapat dan absensi, laporan, keuangan, serta surat dan dokumen. Akses penuh hanya untuk pengurus dan duta yang sudah resmi tercatat.</div></details>
+<details><summary>Apa yang saya lihat sebagai calon pendaftar?</summary><div>Dasbor calon: pengumuman pendaftaran, informasi program, dan halaman untuk mendaftar. Modul kerja internal tetap terkunci sampai pengurus memverifikasi dan menyatakan Anda lolos.</div></details>
+<details><summary>Berapa lama masa jabatan Duta Aktif?</summary><div>Duta Aktif menjabat selama satu angkatan, yaitu tiga bulan. Setelah masa jabatan berakhir, akun menjadi alumni dan hanya dapat dibaca.</div></details>
+<details><summary>Bagaimana saya tahu pendaftaran dibuka?</summary><div>Periode rekrutmen diumumkan di halaman <a href="terlibat.html">Terlibat</a> dan di dasbor calon. Formulir hanya aktif selama periode pendaftaran berjalan.</div></details>
+</div>
+</div>
+</section>
+
 <section aria-labelledby="partners-title" class="portal-partners-band" id="mitra">
 <div class="site-container portal-section">
 <div class="portal-section-heading rd-section-title">
 <div>
-<p class="portal-eyebrow">
-        Ekosistem DDPE
-       </p>
-<h2 id="partners-title">
-        Bertumbuh bersama mitra.
-       </h2>
+<p class="portal-eyebrow">Ekosistem DDPE</p>
+<h2 id="partners-title">Bertumbuh bersama mitra.</h2>
 </div>
-<a class="portal-text-link" href="mitra.html">
-       Kenali Seluruh Mitra
-       <span aria-hidden="true">
-        →
-       </span>
-</a>
+<a class="portal-text-link" href="mitra.html">Kenali Seluruh Mitra <span aria-hidden="true">→</span></a>
 </div>
-<div class="rd-partners" data-partner-list="featured">
+<div class="rd-partners" data-partner-list="featured"></div>
 </div>
+</section>
+
+<section aria-labelledby="cta-title" class="v8-cta-band">
+<div class="site-container">
+<div><h2 id="cta-title">Siap bergerak bersama DDPE?</h2><p>Mulai dari satu langkah: daftar, masuk, atau berkolaborasi.</p></div>
+<div class="v8-actions"><a class="v8-btn v8-btn-gold" href="terlibat.html">Gabung Sekarang</a><a class="v8-btn v8-btn-ghost" href="masuk.html">Masuk Aplikasi</a></div>
 </div>
 </section>
 <div class="cms-public-sections" data-cms-extra=""></div></main>
-<footer class="site-footer">
-<div class="site-container">
-<div class="site-footer-main">
-<a class="site-brand site-footer-brand" href="index.html">
-<img alt="" height="46" loading="lazy" src="assets/ddpe_logo_web.png" width="46"/>
-<span>
-<strong>
-        Duta Digital
-       </strong>
-<small>
-        Papua Emas
-       </small>
-</span>
-</a>
-<p>
-      Ruang belajar dan kolaborasi pemuda untuk penggunaan teknologi digital yang bertanggung jawab dan produktif.
-     </p>
-<div class="site-footer-links">
-<a href="program.html">
-       Pilar &amp; Program
-      </a>
-<a href="agenda.html">
-       Agenda
-      </a>
-<a href="mitra.html">
-       Mitra
-      </a>
-<a href="konsultasi.html">
-       Konsultasi
-      </a>
-<a href="tentang.html">
-       Tentang
-      </a>
-<a href="berita.html">
-       Berita
-      </a>
-<a href="terlibat.html">
-       Terlibat
-      </a>
-<a href="kontak.html">
-       Kontak
-      </a>
-<a href="privasi.html">
-       Kebijakan privasi
-      </a>
-</div>
-</div>
-<p>
-<a href="mailto:info@ddpe.my.id">
-      info@ddpe.my.id
-     </a>
-</p>
-<div class="site-footer-bottom">
-<span>
-      © 2026 Duta Digital Papua Emas
-     </span>
-<span>
-      Mimika, Papua Tengah
-     </span>
-</div>
-</div>
-</footer>
+<footer class="site-footer"><div class="site-container"><div class="site-footer-main"><a class="site-brand site-footer-brand" href="index.html"><img alt="" height="46" loading="lazy" src="assets/ddpe_logo_web.png" width="46"/><span><strong>Duta Digital</strong><small>Papua Emas</small></span></a><p>Ruang belajar dan kolaborasi pemuda untuk penggunaan teknologi digital yang bertanggung jawab dan produktif.</p><div class="site-footer-links"><a href="program.html">Pilar &amp; Program</a><a href="agenda.html">Agenda</a><a href="mitra.html">Mitra</a><a href="konsultasi.html">Konsultasi</a><a href="tentang.html">Tentang</a><a href="makna-logo.html">Makna Logo</a><a href="berita.html">Berita</a><a href="terlibat.html">Terlibat</a><a href="kontak.html">Kontak</a><a href="masuk.html">Masuk Aplikasi</a><a href="privasi.html">Kebijakan privasi</a></div></div><div class="kami-induk-footer"><a aria-label="Karsa Muda Indonesia (KAMI) — portal induk" class="kami-induk-footer-logo" href="https://karsamuda.my.id" rel="noopener" target="_blank"><img alt="Karsa Muda Indonesia (KAMI)" height="40" loading="lazy" src="assets/kami/kami-logo-horizontal-putih-rapat.svg" width="177"/></a><p>Duta Digital Papua Emas adalah <strong>unit khusus wilayah Papua</strong> dari <strong>Karsa Muda Indonesia (KAMI)</strong>, gerakan pemuda nasional lintas bidang.</p><div class="kami-induk-links"><a href="https://karsamuda.my.id" rel="noopener" target="_blank">Portal KAMI ↗</a><a href="https://karsamuda.my.id/regional.html" rel="noopener" target="_blank">Jaringan Regional KAMI ↗</a><a href="https://karsamuda.my.id/unit-papua.html" rel="noopener" target="_blank">DDPE di karsamuda.my.id ↗</a></div></div><p><a href="mailto:info@ddpe.my.id">info@ddpe.my.id</a></p><div class="site-footer-bottom"><span>© 2026 Duta Digital Papua Emas</span><span>Mimika, Papua Tengah</span></div></div></footer>
 <script defer="" src="js/site.js">
 </script>
 <script src="js/news-config.js">
@@ -850,5 +674,6 @@
 </script>
 <script defer="" src="js/refinement-motion.js">
 </script>
+<script defer="" src="js/v8.js"></script>
 </body>
 </html>

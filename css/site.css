@@ -493,3 +493,62 @@ body.site-home button { font: inherit; }
 .site-guardian legend { padding: 0 8px; color: var(--site-ink); font-size: 15px; font-weight: 700; }
 .site-guardian .site-form-grid { margin-bottom: 16px; }
 .site-form label small { color: var(--site-muted); font-size: 12px; font-weight: 400; }
+
+/* ===== Tautan ke Karsa Muda Indonesia (KAMI) — portal induk ===== */
+.kami-induk-link { color: #f2d48a !important; font-weight: 600; text-decoration: none; }
+.kami-induk-link:hover, .kami-induk-link:focus-visible { color: #fff !important; text-decoration: underline; }
+.kami-induk-sep { margin: 0 8px; opacity: .45; }
+@media (max-width: 640px) { .kami-induk-sep, .kami-induk-lokasi { display: none; } }
+
+.kami-induk-footer { margin: 28px 0 8px; padding: 20px 0; border-top: 1px solid rgb(255 255 255 / 14%); border-bottom: 1px solid rgb(255 255 255 / 14%); display: grid; gap: 10px 28px; grid-template-columns: auto 1fr; align-items: center; }
+.kami-induk-footer-logo img { display: block; height: 40px; width: auto; }
+.kami-induk-footer p { margin: 0; font-size: 14px; line-height: 1.6; color: inherit; opacity: .9; }
+.kami-induk-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.kami-induk-links a { color: #f2d48a; font-size: 13px; font-weight: 600; text-decoration: none; }
+.kami-induk-links a:hover { text-decoration: underline; }
+@media (max-width: 640px) { .kami-induk-footer { grid-template-columns: 1fr; } }
+
+.kami-induk-band { background: #f6f3fb; border-top: 1px solid #e4ddf0; border-bottom: 1px solid #e4ddf0; }
+.kami-induk-grid { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+.kami-induk-copy h2 { margin: 6px 0 14px; }
+.kami-induk-copy > p { color: #4a4a5e; line-height: 1.7; }
+.kami-induk-poin { margin: 16px 0 24px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.kami-induk-poin li { position: relative; padding-left: 24px; color: #34274f; line-height: 1.55; }
+.kami-induk-poin li::before { content: ''; position: absolute; left: 0; top: .55em; width: 12px; height: 3px; background: #c89b3c; }
+@media (max-width: 900px) { .kami-induk-grid { grid-template-columns: 1fr; } }
+
+.kami-bagan { display: grid; gap: 14px; }
+.kami-node { display: flex; gap: 12px; align-items: center; padding: 16px 18px; border: 1px solid #ddd5ec; border-radius: 10px; background: #fff; color: #2b2142; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.kami-node:hover { border-color: #c89b3c; box-shadow: 0 8px 24px rgb(52 39 79 / 10%); }
+.kami-node strong { display: block; font-size: 15px; }
+.kami-node span span, .kami-node > span { font-size: 13px; color: #6a6180; }
+.kami-node-induk { flex-direction: column; align-items: flex-start; border-width: 2px; border-color: #0b2447; }
+.kami-node-induk img { height: 40px; width: auto; }
+.kami-cabang { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; position: relative; padding-top: 14px; }
+.kami-cabang::before { content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 14px; border: 2px solid #c9bfdc; border-bottom: 0; border-radius: 8px 8px 0 0; }
+.kami-node-ddpe { border-color: #514078; background: #34274f; color: #fff; }
+.kami-node-ddpe span span { color: #d9cdf3; }
+.kami-node-ddpe img { border-radius: 6px; background: #fff; }
+.kami-program { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.kami-program span { padding: 6px 12px; border-radius: 6px; background: #ece6f6; color: #34274f; font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+@media (max-width: 560px) { .kami-cabang { grid-template-columns: 1fr; } .kami-cabang::before { display: none; } .kami-program { justify-content: flex-start; } }
+
+.kami-induk-tentang .kami-induk-lead { max-width: 760px; line-height: 1.75; }
+.kami-kartu-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 24px 0 28px; }
+.kami-kartu { padding: 22px; border: 1px solid #ddd5ec; border-radius: 10px; background: #fff; }
+.kami-kartu h3 { margin: 0 0 8px; font-size: 18px; color: #2b2142; }
+.kami-kartu p { margin: 0 0 14px; color: #5a5670; line-height: 1.6; font-size: 14.5px; }
+.kami-kartu a { color: #514078; font-weight: 700; font-size: 14px; }
+.kami-kartu-ddpe { background: #34274f; border-color: #34274f; }
+.kami-kartu-ddpe h3, .kami-kartu-ddpe p { color: #fff; }
+.kami-kartu-ddpe a { color: #f2d48a; }
+@media (max-width: 900px) { .kami-kartu-grid { grid-template-columns: 1fr; } }
+.kami-induk-struktur { max-width: 720px; margin-top: 14px; font-size: 14.5px; line-height: 1.6; opacity: .92; }
+.kami-induk-struktur a { font-weight: 700; }
+.kami-cabang > .kami-node:not(.kami-node-ddpe) { flex-direction: column; align-items: flex-start; gap: 4px; }
+.kami-node-ddpe strong, .kami-node-ddpe:hover strong { color: #fff !important; }
+.kami-node-ddpe span span { color: #d9cdf3 !important; }
+.kami-teks-pendek { display: none; }
+@media (max-width: 640px) { .kami-teks-panjang { display: none; } .kami-teks-pendek { display: inline; } .portal-location { min-width: 0; } }
+.kami-kartu-ddpe h3, .kami-kartu-ddpe p { color: #fff !important; }
+.kami-kartu-ddpe a { color: #f2d48a !important; }
